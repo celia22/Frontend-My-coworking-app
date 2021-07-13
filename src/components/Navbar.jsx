@@ -10,7 +10,7 @@ class Navbar extends Component {
 			<div>
 				{isLoggedIn ? (
 					<>
-						<p>User: {user.firstName}</p>
+						<p> Welcome {user.firstName}</p>
 						<button onClick={logout}>Logout</button>
 					</>
 				) : (

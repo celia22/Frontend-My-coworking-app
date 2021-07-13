@@ -4,10 +4,13 @@ import { Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
-import Private from './pages/Private';
+// import Private from './pages/Private';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { withAuth } from './providers/AuthProvider';
+import NewSpaceForm from './components/space/NewSpaceForm';
+import MainPage from './pages/MainPage';
+import Admin from './pages/Admin';
 
 class App extends Component {
 	render() {
@@ -17,12 +20,14 @@ class App extends Component {
 		}
 		return (
 			<div className="container">
-				<h1>Basic React Authentication</h1>
 				<Navbar />
 				<Switch>
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
-					<PrivateRoute path="/private" component={Private} />
+					<PrivateRoute path="/user/main" component={MainPage} />
+					<PrivateRoute path="/admin" component={Admin} />
+					<PrivateRoute path="/space/new" component={NewSpaceForm} />
+					{/* <PrivateRoute path="/private" component={Private} /> */}
 				</Switch>
 			</div>
 		);
