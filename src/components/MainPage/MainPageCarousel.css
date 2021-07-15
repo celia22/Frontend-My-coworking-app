@@ -1,0 +1,8 @@
+.carousel_container {
+  display: flex;
+  margin: 4vh 35%;
+}
+
+.carousel_container > img {
+  width: 60vh;
+}

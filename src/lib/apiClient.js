@@ -25,13 +25,6 @@ class ApiClient {
 	logout() {
 		return this.apiClient.post('/logout', {}).then(response => response.data);
 	}
-
-	newSpace(space) {
-		const { spaceName, spaceType, imageUrlSpace, services, availableSpots, price } = space;
-		return this.apiClient
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, services, availableSpots, price })
-			.then(({ data }) => data);
-	}
 }
 
 const apiClient = new ApiClient();

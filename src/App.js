@@ -8,7 +8,7 @@ import AnonRoute from './components/AnonRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { withAuth } from './providers/AuthProvider';
-import NewSpaceForm from './components/space/NewSpaceForm';
+import NewSpaceForm from './components/Space/NewSpaceForm';
 import MainPage from './pages/MainPage';
 import Admin from './pages/Admin';
 
