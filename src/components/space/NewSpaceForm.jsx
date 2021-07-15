@@ -33,7 +33,6 @@ class NewSpaceForm extends Component {
 				spaceType: '',
 				imageUrlSpace: '',
 				services: [],
-				availableSpots: 0,
 				price: 0,
 			});
 		} catch (e) {

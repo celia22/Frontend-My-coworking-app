@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -11,6 +11,7 @@ import { withAuth } from './providers/AuthProvider';
 import NewSpaceForm from './components/Space/NewSpaceForm';
 import MainPage from './pages/MainPage';
 import Admin from './pages/Admin';
+import UserMainPage from './pages/UserMainPage';
 
 class App extends Component {
 	render() {
@@ -22,11 +23,12 @@ class App extends Component {
 			<div className="container">
 				<Navbar />
 				<Switch>
+					<PrivateRoute path="/space/new" component={NewSpaceForm} />
+					<PrivateRoute path="/user/main" component={UserMainPage} />
+					<PrivateRoute path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
-					<PrivateRoute path="/user/main" component={MainPage} />
-					<PrivateRoute path="/admin" component={Admin} />
-					<PrivateRoute path="/space/new" component={NewSpaceForm} />
+					<Route path="/" component={MainPage} />
 					{/* <PrivateRoute path="/private" component={Private} /> */}
 				</Switch>
 			</div>

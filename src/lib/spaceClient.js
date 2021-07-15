@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class SpaceClient {
 	constructor() {
-		this.apiClient = axios.create({
+		this.spaceClient = axios.create({
 			baseURL: process.env.REACT_APP_API_URI,
 			withCredentials: true,
 		});
@@ -10,9 +10,13 @@ class SpaceClient {
 
 	newSpace(space) {
 		const { spaceName, spaceType, imageUrlSpace, services, availableSpots, price } = space;
-		return this.apiClient
+		return this.spaceClient
 			.post('/space/new', { spaceName, spaceType, imageUrlSpace, services, availableSpots, price })
 			.then(({ data }) => data);
+	}
+
+	getAllSpaces() {
+		return this.spaceClient.get('/space/all').then(response => response.data);
 	}
 }
 
