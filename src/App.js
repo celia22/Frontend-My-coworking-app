@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
-// import Private from './pages/Private';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { withAuth } from './providers/AuthProvider';
@@ -12,6 +11,9 @@ import NewSpaceForm from './components/Space/NewSpaceForm';
 import MainPage from './pages/MainPage';
 import Admin from './pages/Admin';
 import UserMainPage from './pages/UserMainPage';
+import UserMenu from './pages/UserMenu';
+import EditUserAccount from './components/User/EditUserAccount';
+import SpaceDetails from './pages/SpaceDetails';
 
 class App extends Component {
 	render() {
@@ -23,13 +25,15 @@ class App extends Component {
 			<div className="container">
 				<Navbar />
 				<Switch>
+					<PrivateRoute path="/space/:id/details" component={SpaceDetails} />
 					<PrivateRoute path="/space/new" component={NewSpaceForm} />
-					<PrivateRoute path="/user/main" component={UserMainPage} />
-					<PrivateRoute path="/admin" component={Admin} />
+					<PrivateRoute exact path="/user/:id/update-profile" component={EditUserAccount} />
+					<PrivateRoute exact path="/user/:id/menu" component={UserMenu} />
+					<PrivateRoute exact path="/user/:id/main" component={UserMainPage} />
+					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
 					<Route path="/" component={MainPage} />
-					{/* <PrivateRoute path="/private" component={Private} /> */}
 				</Switch>
 			</div>
 		);

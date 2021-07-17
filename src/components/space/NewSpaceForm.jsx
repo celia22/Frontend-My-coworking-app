@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withAuth } from '../../providers/AuthProvider';
 import spaceClient from '../../lib/spaceClient';
 
 class NewSpaceForm extends Component {
@@ -11,7 +10,9 @@ class NewSpaceForm extends Component {
 			imageUrlSpace: '',
 			services: [],
 			availableSpots: 0,
-			price: 0,
+			daily: 0,
+			weekly: 0,
+			monthly: 0,
 		};
 	}
 
@@ -21,28 +22,38 @@ class NewSpaceForm extends Component {
 		});
 	};
 
-	// refactor hacer un client para cada modelo 
+	// refactor hacer un client para cada modelo
 
-		createSpaceButton = async (space) => {
+	createSpaceButton = async space => {
 		event.preventDefault();
 		try {
-			const newSpace = await spaceClient.newSpace(space)
+			const newSpace = await spaceClient.newSpace(space);
 			await console.log(newSpace);
 			await this.setState({
 				spaceName: '',
 				spaceType: '',
 				imageUrlSpace: '',
-				services: [],
-				price: 0,
+				services: [
+					{
+						product: '',
+						amount: 1,
+					},
+				],
+				price: {
+					daily: 0,
+					weekly: 0,
+					monthly: 0,
+				},
 			});
 		} catch (e) {
 			console.log(e);
-		} finally { // redirect con this.props.history(ruta definida)}. Es para que haga el redirect despues de añadir el form
-	 }
+		} finally {
+			// redirect con this.props.history(ruta definida)}. Es para que haga el redirect despues de añadir el form
+		}
 	};
 
 	render() {
-		const { spaceName, spaceType, imageUrlSpace, services, availableSpots, price } = this.state;
+		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly  }= this.state;
 
 		return (
 			<div>
@@ -62,20 +73,23 @@ class NewSpaceForm extends Component {
 					</label>
 					<input type="text" name="imageUrlSpace" value={imageUrlSpace} onChange={this.handleChange} />
 
-					<label>
+					{/* <label>
 						<strong>Services:</strong>
 					</label>
-					<input type="text" name="services" value={services} onChange={this.handleChange} />
+					<input type="text" name="services" value={services} onChange={this.handleChange} /> */}
 
-					<label>
-						<strong>Free spots:</strong>
-					</label>
-					<input type="number" name="availableSpots" value={availableSpots} onChange={this.handleChange} />
-
-					<label>
-						<strong>Price:</strong>
-					</label>
-					<input type="number" name="price" value={price} onChange={this.handleChange} />
+					<table>
+						<tr>
+							<th>
+								<label>
+									<strong>Price:</strong>
+								</label>
+							</th>
+							<th>Daily: </th> <input type="number" name="daily" value={daily} onChange={this.handleChange} />
+							<th>Weekly: </th> <input type="number" name="weekly" value={weekly} onChange={this.handleChange} />
+							<th>Monthly: </th> <input type="number" name="monthly" value={monthly} onChange={this.handleChange} />
+						</tr>
+					</table>
 
 					<input type="submit" value="Add new space" />
 				</form>
@@ -84,4 +98,4 @@ class NewSpaceForm extends Component {
 	}
 }
 
-export default withAuth(NewSpaceForm);
+export default NewSpaceForm;

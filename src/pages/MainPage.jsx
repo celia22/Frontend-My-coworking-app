@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import MainPageCarousel from "../components/MainPage/MainPageCarousel";
+import MainPageCarousel from "../components/MainPageCarousel/MainPageCarousel";
 
 class MainPage extends Component{
   render(){

@@ -17,7 +17,7 @@ class Navbar extends Component {
 					<>
 						<p> Welcome {user.firstName}</p>
 						<button onClick={logout}>Logout</button>
-						{element}
+						<Link to="/user/:id/menu">{element}</Link>						
 					</>
 				) : (
 					<>

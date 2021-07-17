@@ -1,48 +1,42 @@
 import React, { Component } from 'react';
-import SpacesCards from '../components/UserMainPage/SpacesCards';
+import SpacesCards from '../components/Space/SpacesCards';
 import { withAuth } from '../providers/AuthProvider';
 import spaceClient from '../lib/spaceClient';
 
+class UserMainPage extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			allSpaces: [],
+		};
+	}
 
-
-class UserMainPage extends Component{
-
-  constructor(props){
-    super(props)
-    this.state = {
-      allSpaces: []
-    }
-  }   
-
-
-async componentDidMount()  {
-  console.log("me llaman")
+	async componentDidMount() {
 		try {
-		const allSpaces = await spaceClient.getAllSpaces();
-    console.log("allspaces in CDM", allSpaces)
-    this.setState({
-      allSpaces,
-    })
-     
+			const allSpaces = await spaceClient.getAllSpaces();
+			this.setState({
+				allSpaces,
+			});
 		} catch (e) {
-			console.log(e)
+			console.log(e);
+		}
+	}
+
+	render(props) {
+		console.log('props en user main page', this.props);
+		const { allSpaces } = this.state;
+
+		return (
+			<>
+				<h1>Hello, this is your user main page</h1>
+
+				<div>
+					<p>{`id: ${this.props.match.params.id}`}</p>
+					<SpacesCards allSpaces={allSpaces} />
+				</div>
+			</>
+		);
 	}
 }
 
-  render(){
-    
-    const { allSpaces } = this.state
-    
-    return(
-      <>
-      <h1>Hello, this is your user main page</h1>
-
-      <div>
-        <SpacesCards allSpaces={allSpaces}/>   
-      </div>
-      </>
-    )
-  }
-}
-
-export default withAuth(UserMainPage)
+export default withAuth(UserMainPage);
