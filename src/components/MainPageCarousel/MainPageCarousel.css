@@ -1,8 +1,8 @@
 .carousel_container {
   display: flex;
-  margin: 4vh 35%;
+  margin: 6vh auto;
 }
 
 .carousel_container > img {
-  width: 60vh;
+  width: 80%;
 }

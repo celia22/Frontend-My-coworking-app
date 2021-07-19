@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import "./MainPageCarousel.css"
 
+const right = <FontAwesomeIcon  icon={faChevronRight} color="black" size="2x"/>
+
+const left = <FontAwesomeIcon  icon={faChevronLeft} color="black" size="2x"/>
 class MainPageCarousel extends Component {
   constructor(props){
     super(props)
@@ -31,9 +36,9 @@ class MainPageCarousel extends Component {
 
     return(
       <div className="carousel_container">
-        <button onClick={this.handlerLeft}>{`<`}</button>
+        <button onClick={this.handlerLeft}>{left}</button>
         <img src={`/images/mainpage/main${index}.png`} alt="pictures" />
-        <button onClick={this.handlerRigth}>{`>`}</button>
+        <button onClick={this.handlerRigth}>{right}</button>
       </div>
     )
   }
