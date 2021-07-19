@@ -23,7 +23,6 @@ class UserMainPage extends Component {
 	}
 
 	render() {
-		console.log('props en user main page', this.props);
 		const { allSpaces } = this.state;
 
 		return (

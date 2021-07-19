@@ -27,6 +27,13 @@ class SpaceClient {
 	getSingleSpace(id) {
 		return this.spaceClient.get(`/space/${id}/details`).then(({ data }) => data);
 	}
+
+	// updateSpace(user, id) {
+	// 	const { email, password, firstName, lastName, city } = user;
+	// 	return this.apiClient
+	// 		.put(`/user/${id}/update-profile`, { email, password, firstName, lastName, city })
+	// 		.then(({ data }) => data);
+	// }
 }
 
 const spaceClient = new SpaceClient();

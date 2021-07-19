@@ -15,7 +15,6 @@ const SpacesCards = props => {
 						<>
 							<div key={item._id} className="space_card_item ">
 								<Link to={`/space/${item._id}/details`}>
-								{/* <Link > */}
 									<h4>Name: {item.spaceName}</h4>
 									<h4>Type: {item.spaceType}</h4>
 									<h4>Image: {item.imageUrlSpace}</h4>
