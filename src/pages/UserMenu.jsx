@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ReservationCards from "../components/Reservations/Reservations"
+import ReservationCards from "../components/Reservations/ReservationsCards"
 
 const UserMenu = (props) => {
 console.log("user props", props)

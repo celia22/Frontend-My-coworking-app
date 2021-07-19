@@ -17,8 +17,10 @@ class EditUserAccount extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
+		const { _id } = this.props.user;
 		const { email, password, firstName, lastName, city } = this.state;
-		apiClient.updateProfile({ email, password, firstName, lastName, city });
+		apiClient.updateProfile({ email, password, firstName, lastName, city }, _id);
+		// fer try cathc  + finally con redirect (this.props.history.push y pasar ruta con el redirect que toque)
 	};
 
 	handleChange = event => {

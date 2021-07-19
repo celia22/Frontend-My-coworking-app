@@ -8,11 +8,12 @@ class NewSpaceForm extends Component {
 			spaceName: '',
 			spaceType: '',
 			imageUrlSpace: '',
-			services: [],
-			availableSpots: 0,
-			daily: 0,
-			weekly: 0,
-			monthly: 0,
+			price: {
+				daily: 0,
+				weekly: 0,
+				monthly: 0,
+			},
+			city: ' ',
 		};
 	}
 
@@ -24,7 +25,7 @@ class NewSpaceForm extends Component {
 
 	// refactor hacer un client para cada modelo
 
-	createSpaceButton = async space => {
+	createSpaceHandler = async space => {
 		event.preventDefault();
 		try {
 			const newSpace = await spaceClient.newSpace(space);
@@ -33,17 +34,12 @@ class NewSpaceForm extends Component {
 				spaceName: '',
 				spaceType: '',
 				imageUrlSpace: '',
-				services: [
-					{
-						product: '',
-						amount: 1,
-					},
-				],
 				price: {
 					daily: 0,
 					weekly: 0,
 					monthly: 0,
 				},
+				city: ' ',
 			});
 		} catch (e) {
 			console.log(e);
@@ -53,11 +49,17 @@ class NewSpaceForm extends Component {
 	};
 
 	render() {
-		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly  }= this.state;
+		const {
+			spaceName,
+			spaceType,
+			imageUrlSpace,
+			// price: { daily, weekly, monthly },
+			city,
+		} = this.state;
 
 		return (
 			<div>
-				<form onSubmit={this.createSpaceButton}>
+				<form onSubmit={this.createSpaceHandler}>
 					<label>
 						<strong>Name:</strong>
 					</label>
@@ -72,24 +74,32 @@ class NewSpaceForm extends Component {
 						<strong>Image:</strong>
 					</label>
 					<input type="text" name="imageUrlSpace" value={imageUrlSpace} onChange={this.handleChange} />
-
-					{/* <label>
-						<strong>Services:</strong>
-					</label>
-					<input type="text" name="services" value={services} onChange={this.handleChange} /> */}
-
 					<table>
-						<tr>
-							<th>
-								<label>
-									<strong>Price:</strong>
-								</label>
-							</th>
-							<th>Daily: </th> <input type="number" name="daily" value={daily} onChange={this.handleChange} />
-							<th>Weekly: </th> <input type="number" name="weekly" value={weekly} onChange={this.handleChange} />
-							<th>Monthly: </th> <input type="number" name="monthly" value={monthly} onChange={this.handleChange} />
-						</tr>
+						<tbody>
+							<tr>
+								<th>
+									<label>
+										<strong>Price:</strong>
+									</label>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									Daily: <input type="number" name="this.state.price.daily" value={this.state.price.daily} onChange={this.handleChange} />{' '}
+								</th>
+								<th>
+									Weekly: <input type="number" name="this.state.price.weekly" value={this.state.price.weekly} onChange={this.handleChange} />{' '}
+								</th>
+								<th>
+									Monthly: <input type="number" name="this.state.price.monthly" value={this.state.price.monthly} onChange={this.handleChange} />{' '}
+								</th>
+							</tr>
+						</tbody>
 					</table>
+					<label>
+						<strong>City:</strong>
+					</label>
+					<input type="text" name="city" value={city} onChange={this.handleChange} />
 
 					<input type="submit" value="Add new space" />
 				</form>
