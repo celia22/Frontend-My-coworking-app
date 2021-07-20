@@ -7,11 +7,21 @@
   box-shadow: 6px 7px 15px -2px #727272;
   color: rgb(2, 8, 59);
   border-radius: 5%;
-  margin: 4%;
+  margin:4%;
   margin-bottom: 20px;
   background-color: white;
 }
 
+.space_card_item_title{
+  height: 30%;
+  background-color: black;
+  color: white;
+  margin: none;
+}
+
+.space_card_item_price{
+  display: none;
+}
 .space_card_scroll {
   overflow-x: scroll;
   overflow-y: hidden;
@@ -21,3 +31,12 @@
   white-space: wrap;
   height: 80vh;
 }
+
+/* HACER DISPLAY PARA TABLET Y PC
+.space_card_item_price{
+  display: flex;
+  height: 15%;
+  background-color: black;
+  color: white;
+  margin: none;
+} */

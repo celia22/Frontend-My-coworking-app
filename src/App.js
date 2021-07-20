@@ -27,7 +27,7 @@ class App extends Component {
 				<Switch>
 					<PrivateRoute path="/space/:id/details" component={SpaceDetails} />
 					<PrivateRoute path="/space/new" component={NewSpaceForm} />
-					<PrivateRoute exact path="/user/update-profile" component={EditUserAccount} />
+					<PrivateRoute exact path="/user/:id/update-profile" component={EditUserAccount} />
 					<PrivateRoute exact path="/user/:id/menu" component={UserMenu} />
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
 					<PrivateRoute exact path="/admin" component={Admin} />

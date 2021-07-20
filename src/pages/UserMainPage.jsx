@@ -24,7 +24,7 @@ class UserMainPage extends Component {
 
 	render() {
 		const { allSpaces } = this.state;
-
+		  console.log('usermainpage', this.props);
 		return (
 	
 				<div>

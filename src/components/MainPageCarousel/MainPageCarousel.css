@@ -1,8 +1,13 @@
+
+/* TABLET */
+@media only screen and (min-width: 600px) {
 .carousel_container {
-  display: flex;
-  margin: 6vh auto;
+  height: 20vh;
+}
 }
 
-.carousel_container > img {
-  width: 80%;
+/* DESKTOP */
+@media only screen and (min-width: 768px) {
+.carousel_container {
+  height: 20vh;
 }

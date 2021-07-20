@@ -29,7 +29,7 @@ class Signup extends Component {
 		const { email, password, firstName, lastName, city } = this.state;
 		return (
 			<div className="login_signup_container">
-				<form onSubmit={this.handleFormSubmit} className="login_signup_form">
+				<form onSubmit={this.handleFormSubmit} className="new_edit_form">
 					<label>Email:</label>
 					<input type="text" name="email" value={email} onChange={this.handleChange} />
 					<label>Password:</label>
@@ -40,7 +40,7 @@ class Signup extends Component {
 					<input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
 					<label>City:</label>
 					<input type="text" name="city" value={city} onChange={this.handleChange} />
-					<input className="login_signup_submit" type="submit" value="Signup" />
+					<input className="new_edit_send" type="submit" value="Signup" />
 				</form>
 				<p>
 					Already have account?

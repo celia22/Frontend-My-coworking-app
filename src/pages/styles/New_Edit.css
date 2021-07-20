@@ -1,5 +1,4 @@
-.login_signup_container {
-  /* background-image: url(../images/background-images/pizza-3007395_1280.jpg); */
+.new_edit_form_container{
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -9,24 +8,33 @@
   justify-content: center;
 }
 
-.login_signup_form {
+.new_edit_form {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 1rem 3rem;
 }
 
-.login_signup_form > label {
+.new_edit_form > label {
   font-weight: 800;
 }
-.login_signup_form > input {
+.new_edit_form > input {
   height: 35px;
   margin: 1vh;
   padding-left: 1rem;
   border: 2px solid black;  
 }
 
-.login_signup_submit{
+.new_edit_table_title{
+  text-align: center;
+}
+
+.new_edit_table_input{
+  width: 60%;
+  margin: 2vh 0;
+}
+
+.new_edit_send{
   height: 55px;
   margin-top: 3vh;
   background-color: rgb(223, 86, 76);
@@ -42,7 +50,7 @@
     margin: 5% 0;
   }
 
-  .login_signup_form > input {
+  .new_edit_form > input {
     margin-left: 20%;
     margin-right: 20%;
   }
@@ -63,7 +71,7 @@
     margin-right: 20%;
   }
 
-  .login_signup_form > input {
+  .new_edit_form > input {
     margin-left: 20%;
     margin-right: 20%;
   }

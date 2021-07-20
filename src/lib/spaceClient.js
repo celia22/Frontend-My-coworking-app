@@ -13,10 +13,14 @@ class SpaceClient {
 			spaceName,
 			spaceType,
 			imageUrlSpace,
-			price: [{ daily, weekly, monthly }],
+			daily,
+			weekly,
+			monthly,
+			// price: { daily, weekly, monthly },
 		} = space;
+		console.log(space);
 		return this.spaceClient
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, price: { daily, weekly, monthly } })
+			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly })
 			.then(({ data }) => data);
 	}
 
