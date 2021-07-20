@@ -14,6 +14,7 @@ import UserMainPage from './pages/UserMainPage';
 import UserMenu from './pages/UserMenu';
 import EditUserAccount from './components/User/EditUserAccount';
 import SpaceDetails from './pages/SpaceDetails';
+import NewProductForm from './components/Products/NewProductForm';
 
 class App extends Component {
 	render() {
@@ -30,6 +31,7 @@ class App extends Component {
 					<PrivateRoute exact path="/user/:id/update-profile" component={EditUserAccount} />
 					<PrivateRoute exact path="/user/:id/menu" component={UserMenu} />
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
+					<PrivateRoute exact path="/product/new" component={NewProductForm} />
 					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-class SpaceClient {
+class apiService {
 	constructor() {
-		this.spaceClient = axios.create({
+		this.apiService = axios.create({
 			baseURL: process.env.REACT_APP_API_URI,
 			withCredentials: true,
 		});
@@ -19,32 +19,32 @@ class SpaceClient {
 			// price: { daily, weekly, monthly },
 		} = space;
 		console.log(space);
-		return this.spaceClient
+		return this.apiService
 			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly })
 			.then(({ data }) => data);
 	}
 
 	handleUpload(theFile) {
 		console.log('file in service: ', theFile);
-		return this.spaceClient.post('/space/new', theFile).then(response => response.data);
+		return this.apiService.post('/space/new', theFile).then(response => response.data);
 	}
 
 	getAllSpaces() {
-		return this.spaceClient.get('/space/all').then(response => response.data);
+		return this.apiService.get('/space/all').then(response => response.data);
 	}
 
 	getSingleSpace(id) {
-		return this.spaceClient.get(`/space/${id}/details`).then(({ data }) => data);
+		return this.apiService.get(`/space/${id}/details`).then(({ data }) => data);
 	}
 
 	// updateSpace(user, id) {
 	// 	const { email, password, firstName, lastName, city } = user;
-	// 	return this.apiClient
+	// 	return this.apiService
 	// 		.put(`/user/${id}/update-profile`, { email, password, firstName, lastName, city })
 	// 		.then(({ data }) => data);
 	// }
 }
 
-const spaceClient = new SpaceClient();
+// const apiService = new apiService();
 
-export default spaceClient;
+// export default apiService;

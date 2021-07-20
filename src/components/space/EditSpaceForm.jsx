@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import apiService from '../../lib/apiService';
+import { Link } from 'react-router-dom';
+import { withAuth } from '../../providers/AuthProvider';
+import apiService from "../../lib/apiService";
 
-class NewSpaceForm extends Component {
-	constructor(props) {
+class EditUserSpace extends Component {
+  constructor(props) {
 		super(props);
 		this.state = {
 			spaceName: '',
@@ -57,11 +59,6 @@ class NewSpaceForm extends Component {
 				daily: 0,
 				weekly: 0,
 				monthly: 0,
-				// price: {
-				// 	daily: 0,
-				// 	weekly: 0,
-				// 	monthly: 0,
-				// },
 				city: ' ',
 			});
 		} catch (e) {
@@ -75,11 +72,10 @@ class NewSpaceForm extends Component {
 		const {
 			spaceName,
 			spaceType,
-			// imageUrlSpace,
+			imageUrlSpace,
 			daily,
 			weekly,
 			monthly,
-			// price: { daily, weekly, monthly },
 			city,
 		} = this.state;
 
@@ -151,11 +147,11 @@ class NewSpaceForm extends Component {
 					</label>
 					<input type="text" name="city" value={city} onChange={this.handleChange} />
 
-					<input type="submit" value="Add new space" className="new_edit_send" />
+					<input type="submit" value="Edit space" className="new_edit_send" />
 				</form>
 			</div>
 		);
 	}
 }
 
-export default NewSpaceForm;
+export default withAuth(EditUserSpace);

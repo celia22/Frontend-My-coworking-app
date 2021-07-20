@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import spaceClient from '../lib/spaceClient';
+import apiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import ProductsCard from '../components/Products/ProductsCard';
-import productsClient from "../lib/productsClient"
 
 import "./styles/SpaceDetails.css"
 
@@ -18,8 +17,8 @@ class SpaceDetails extends Component {
 	async componentDidMount() {
 		const id = this.props.match.params.id;
 		try {
-			const singleSpace = await spaceClient.getSingleSpace(id);
-			const getProducts = await productsClient.getAllproducts(id);
+			const singleSpace = await apiService.getSingleSpace(id);
+			const getProducts = await apiService.getAllproducts(id);
 			this.setState({
 				space: singleSpace,
 				products: getProducts,

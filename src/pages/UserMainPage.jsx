@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SpacesCards from '../components/Space/SpacesCards';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
-import spaceClient from '../lib/spaceClient';
+import apiService from '../lib/apiService';
 
 class UserMainPage extends Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class UserMainPage extends Component {
 
 	async componentDidMount() {
 		try {
-			const allSpaces = await spaceClient.getAllSpaces();
+			const allSpaces = await apiService.getAllSpaces();
 			this.setState({
 				allSpaces,
 			});
