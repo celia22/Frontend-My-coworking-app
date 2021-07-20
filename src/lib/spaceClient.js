@@ -24,6 +24,11 @@ class SpaceClient {
 			.then(({ data }) => data);
 	}
 
+	handleUpload(theFile) {
+		console.log('file in service: ', theFile);
+		return this.spaceClient.post('/space/new', theFile).then(response => response.data);
+	}
+
 	getAllSpaces() {
 		return this.spaceClient.get('/space/all').then(response => response.data);
 	}

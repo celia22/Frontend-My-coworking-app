@@ -93,7 +93,7 @@ class AuthProvider extends Component {
     }
   }
 
-  logout = async () => {
+   logout = async () => {
     try {
       await apiClient.logout()
       this.setState({

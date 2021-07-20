@@ -21,12 +21,28 @@ class NewSpaceForm extends Component {
 		};
 	}
 
-	handleChange = event => {
+		handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({
 			[name]: value,
 		});
 	};
+
+	handleFileUpload = e => {
+    console.log('The file to be uploaded is: ', e.target.files[0]); 
+    const uploadData = new FormData();
+    uploadData.append('imageUrlSpace', e.target.files[0]);
+ 
+   spaceClient
+      .handleUpload(e)
+      .then(response => {
+        console.log('response is: ', response);
+        this.setState({ imageUrlSpace: response.secure_url });
+      })
+      .catch(err => {
+        console.log('Error while uploading the file: ', err);
+      });
+  };
 
 	createSpaceHandler = async (event) => {
 		event.preventDefault();
@@ -59,7 +75,7 @@ class NewSpaceForm extends Component {
 		const {
 			spaceName,
 			spaceType,
-			imageUrlSpace,
+			// imageUrlSpace,
 			daily,
 			weekly,
 			monthly,
@@ -83,7 +99,7 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="text" name="imageUrlSpace" value={imageUrlSpace} onChange={this.handleChange} />
+					<input type="file" onChange={this.handleFileUpload} />
 					<div>
 						<table>
 							<tbody>

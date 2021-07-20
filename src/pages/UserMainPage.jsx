@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SpacesCards from '../components/Space/SpacesCards';
 import { withAuth } from '../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 import spaceClient from '../lib/spaceClient';
 
 class UserMainPage extends Component {
@@ -24,13 +25,24 @@ class UserMainPage extends Component {
 
 	render() {
 		const { allSpaces } = this.state;
-		  console.log('usermainpage', this.props);
+		const { user } = this.props;
+		console.log('usermainpage', user.role);
 		return (
-	
+			<>
+				{user.role === 'admin' ? (
+					<div>
+						<button>
+							<Link to={"/admin"}> Admin Options </Link>
+						</button>
+					</div>
+				) : (
+					''
+				)}
+
 				<div>
 					<SpacesCards allSpaces={allSpaces} />
 				</div>
-
+			</>
 		);
 	}
 }

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import ProductsCard from '../components/Products/ProductsCard';
 import productsClient from "../lib/productsClient"
 
+import "./styles/SpaceDetails.css"
+
 class SpaceDetails extends Component {
 	constructor(props) {
 		super(props);
@@ -38,7 +40,7 @@ class SpaceDetails extends Component {
       <div>
 				<h4>Name: {space.spaceName}</h4>
 				<h4>Type: {space.spaceType}</h4>
-				<h4>Image: {space.imageUrlSpace}</h4>
+				<img className="space_details_image" src={space.imageUrlSpace}></img>
 				<h4>Price:</h4>
 				{/* <h5>Daily: {space.price.daily}</h5>
 				<h5>Weekly: {space.price.weekly}</h5>

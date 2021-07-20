@@ -17,7 +17,7 @@ const SpacesCards = props => {
 									<h4>{item.spaceName}</h4>
 									<h4>Type: {item.spaceType}</h4>
 								</div>
-								<img src="{item.imageUrlSpace}"></img>
+								<img className="space_card_item_image" src={item.imageUrlSpace}></img>
 								<div className="space_card_item_price">
 									<h4>Price:</h4>
 									<h5>Daily: {item.daily}</h5>
