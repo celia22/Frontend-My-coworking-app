@@ -53,7 +53,6 @@ class AuthProvider extends Component {
   }
 
   login = async ({ email, password }) => {
-
     try {
       this.setState({
         status: 'loading',

@@ -1,0 +1,25 @@
+.main_page_container > h2{
+  margin-top: 5vh;
+}
+
+.main_page_container > p{
+  margin: 3vh;
+}
+
+.main_page_container{
+  height: 100vh;
+}
+/* TABLET */
+@media only screen and (min-width: 600px) {
+.carousel-root {
+  height: 40vh;
+}
+}
+
+/* DESKTOP */
+@media only screen and (min-width: 768px) {
+.carousel-root {
+  height: 40vh;
+}
+
+}

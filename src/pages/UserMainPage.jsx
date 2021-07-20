@@ -23,18 +23,14 @@ class UserMainPage extends Component {
 	}
 
 	render() {
-		console.log('props en user main page', this.props);
 		const { allSpaces } = this.state;
-
+		  console.log('usermainpage', this.props);
 		return (
-			<>
-				<h1>Hello, this is your user main page</h1>
-
+	
 				<div>
-					<p>{`id: ${this.props.match.params.id}`}</p>
 					<SpacesCards allSpaces={allSpaces} />
 				</div>
-			</>
+
 		);
 	}
 }

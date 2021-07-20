@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
+import './styles/New_Edit.css';
 
 class Login extends Component {
 	constructor(props) {
@@ -25,15 +26,18 @@ class Login extends Component {
 	};
 
 	render() {
+		console.log('user', this.props);
 		const { email, password } = this.state;
 		return (
-			<form onSubmit={this.handleFormSubmit}>
-				<label>Email:</label>
-				<input type="text" name="email" value={email} onChange={this.handleChange} />
-				<label>Password:</label>
-				<input type="password" name="password" value={password} onChange={this.handleChange} />
-				<input type="submit" value="Login" />
-			</form>
+			<div className="login_signup_container">
+				<form onSubmit={this.handleFormSubmit} className="new_edit_form">
+					<label>Email:</label>
+					<input type="text" name="email" value={email} onChange={this.handleChange} />
+					<label>Password:</label>
+					<input type="password" name="password" value={password} onChange={this.handleChange} />
+					<input className="new_edit_send" type="submit" value="Login" />
+				</form>
+			</div>
 		);
 	}
 }

@@ -13,10 +13,14 @@ class SpaceClient {
 			spaceName,
 			spaceType,
 			imageUrlSpace,
-			price: [{ daily, weekly, monthly }],
+			daily,
+			weekly,
+			monthly,
+			// price: { daily, weekly, monthly },
 		} = space;
+		console.log(space);
 		return this.spaceClient
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, price: { daily, weekly, monthly } })
+			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly })
 			.then(({ data }) => data);
 	}
 
@@ -27,6 +31,13 @@ class SpaceClient {
 	getSingleSpace(id) {
 		return this.spaceClient.get(`/space/${id}/details`).then(({ data }) => data);
 	}
+
+	// updateSpace(user, id) {
+	// 	const { email, password, firstName, lastName, city } = user;
+	// 	return this.apiClient
+	// 		.put(`/user/${id}/update-profile`, { email, password, firstName, lastName, city })
+	// 		.then(({ data }) => data);
+	// }
 }
 
 const spaceClient = new SpaceClient();
