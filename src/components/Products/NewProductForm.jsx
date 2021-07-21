@@ -8,7 +8,6 @@ class NewProductForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: " ",
 			description: " ",
 			price: 0,
 		};
@@ -41,7 +40,6 @@ class NewProductForm extends Component {
 
 	render() {
 		const {
-			name,
 			description,
 			price,
 		} = this.state;
@@ -51,11 +49,7 @@ class NewProductForm extends Component {
 				<Link to="/admin"> Back </Link>
 				
 				<form onSubmit={this.createNewProduct} className="new_edit_form">
-					<label>
-						<strong>Name:</strong>
-					</label>
-					<input type="text" name="name" value={name} onChange={this.handleChange} />
-
+	
 					<label>
 						<strong>Description:</strong>
 					</label>

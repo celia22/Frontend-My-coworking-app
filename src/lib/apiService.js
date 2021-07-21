@@ -48,9 +48,9 @@ class ApiService {
 			.then(({ data }) => data);
 	}
 
-	handleUpload(theFile) {
-		console.log('file in service: ', theFile);
-		return this.apiService.post('/upload', theFile).then(({ data }) => data);
+	handleUpload(img) {
+		// console.log('file in service: ', img);
+		return this.apiService.post('/space/new', img).then(({ data }) => data);
 	}
 
 	getAllSpaces() {

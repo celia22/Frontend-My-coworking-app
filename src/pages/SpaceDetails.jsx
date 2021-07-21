@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import apiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import ProductsCard from '../components/Products/ProductsCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import './styles/SpaceDetails.css';
 
-import "./styles/SpaceDetails.css"
+const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
 
 class SpaceDetails extends Component {
 	constructor(props) {
@@ -21,42 +23,67 @@ class SpaceDetails extends Component {
 			const getProducts = await apiService.getAllproducts(id);
 			this.setState({
 				space: singleSpace,
-			 products: getProducts,
+				products: getProducts,
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-
 	render() {
 		const { space, products } = this.state;
-		console.log(space, "products", products)
+		console.log(space, 'products', products);
 		return (
 			<>
-       <Link to={"/user/main"}> Back </Link>
+				<div>
+					<div className="space_details_header">
+						<button className="back_button">
+							<Link to={'/user/main'}> Back </Link>
+						</button>
 
-				<h3>Space details</h3>
-      <div>
-				<h4>{space.spaceName} Type: {space.spaceType}</h4>
-				<img className="space_details_image" src={space.imageUrlSpace}></img>
-				<h4>Price:</h4>
-				<h5>Daily: {space.daily}</h5>
-				<h5>Weekly: {space.weekly}</h5>
-				<h5>Monthly: {space.monthly}</h5> 
-				<h4>Services:</h4>
-				{/* {products.map((item, index) => {
-						return (
-							<div key={index} className="product_card_item ">
-								<h4>description: {item.description}</h4>
-								<h4>price: {item.price}</h4>
-							</div>
-						);
-					})} */}
-			
-			  < ProductsCard products={products}/>  
-			</div>
-      </>
+						<h4>
+							{space.spaceName} Type: {space.spaceType}
+						</h4>
+					</div>
+
+					<img className="space_details_image" src={space.imageUrlSpace}></img>
+
+					<div className="space_details_price_container">
+						<h4 className="space_details_price_title">Price</h4>
+						<div className="space_details_price_details">
+							<h5>Daily: </h5>
+							<p>
+								{space.daily} € {element}
+							</p>
+						</div>
+						<div className="space_details_price_details">
+							<h5>Weekly: </h5>
+							<p>
+								{space.weekly} € {element}
+							</p>
+						</div>
+						<div className="space_details_price_details">
+							<h5>Monthly: </h5>
+							<p>
+								{space.monthly} € {element}
+							</p>
+						</div>
+					</div>
+
+					<h4>Services:</h4>
+					<div className="space_details_services_container">
+						{products.map((item, index) => {
+							return (
+								<div key={index} className="space_details_services_item ">
+									<p>
+										{item.description} {item.price} € {element}
+									</p>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			</>
 		);
 	}
 }
