@@ -11,3 +11,7 @@ body {
   font: 14px;
   font-family: 'Montserrat';
 }
+
+html, body, #root, .App {
+  height: 100vh;
+}

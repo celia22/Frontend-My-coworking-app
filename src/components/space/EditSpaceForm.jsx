@@ -10,16 +10,11 @@ class EditUserSpace extends Component {
 			spaceName: '',
 			spaceType: '',
 			imageUrlSpace: '',
+			product: [],
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
 			city: ' ',
-			// price: {
-			// 	daily: 0,
-			// 	weekly: 0,
-			// 	monthly: 0,
-			// },
-			
 		};
 	}
 
@@ -46,7 +41,7 @@ class EditUserSpace extends Component {
       });
   };
 
-	createSpaceHandler = async (event) => {
+	editSpaceHandler = async (event) => {
 		event.preventDefault();
 		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
 		try {
@@ -81,6 +76,8 @@ class EditUserSpace extends Component {
 
 		return (
 			<div className="new_edit_form_container">
+					<Link to="/admin"> Back </Link>
+
 				<form onSubmit={this.createSpaceHandler} className="new_edit_form">
 					<label>
 						<strong>Name:</strong>
@@ -95,7 +92,7 @@ class EditUserSpace extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" onChange={this.handleFileUpload} />
+					<input type="file" value={imageUrlSpace} onChange={this.handleFileUpload} />
 					<div>
 						<table>
 							<tbody>

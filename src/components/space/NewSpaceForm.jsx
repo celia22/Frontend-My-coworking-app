@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
 
 class NewSpaceForm extends Component {
@@ -7,17 +8,11 @@ class NewSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imageUrlSpace: '',
+			imageUrlSpace: [ ],
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
 			city: ' ',
-			// price: {
-			// 	daily: 0,
-			// 	weekly: 0,
-			// 	monthly: 0,
-			// },
-			
 		};
 	}
 
@@ -29,9 +24,10 @@ class NewSpaceForm extends Component {
 	};
 
 	handleFileUpload = e => {
+
     console.log('The file to be uploaded is: ', e.target.files[0]); 
-    const uploadData = new FormData();
-    uploadData.append('imageUrlSpace', e.target.files[0]);
+    // const uploadData = new FormData();
+    // uploadData.append('imageUrlSpace', e.target.files[0]);
  
    apiService
       .handleUpload(e)
@@ -44,26 +40,13 @@ class NewSpaceForm extends Component {
       });
   };
 
+
 	createSpaceHandler = async (event) => {
 		event.preventDefault();
 		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
 		try {
 			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
-			await console.log(newSpace);
-			await this.setState({
-				spaceName: '',
-				spaceType: '',
-				imageUrlSpace: '',
-				daily: 0,
-				weekly: 0,
-				monthly: 0,
-				// price: {
-				// 	daily: 0,
-				// 	weekly: 0,
-				// 	monthly: 0,
-				// },
-				city: ' ',
-			});
+			console.log("newspace", newSpace);
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -75,16 +58,18 @@ class NewSpaceForm extends Component {
 		const {
 			spaceName,
 			spaceType,
-			// imageUrlSpace,
+			imageUrlSpace,
 			daily,
 			weekly,
 			monthly,
-			// price: { daily, weekly, monthly },
 			city,
 		} = this.state;
 
 		return (
 			<div className="new_edit_form_container">
+
+				<Link to="/admin"> Back </Link>
+
 				<form onSubmit={this.createSpaceHandler} className="new_edit_form">
 					<label>
 						<strong>Name:</strong>
@@ -99,7 +84,7 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" onChange={this.handleFileUpload} />
+					<input type="file" value={imageUrlSpace} onChange={this.handleFileUpload} /> 
 					<div>
 						<table>
 							<tbody>
@@ -144,6 +129,7 @@ class NewSpaceForm extends Component {
 								</tr>
 							</tbody>
 						</table>
+
 					</div>
 
 					<label>
@@ -153,7 +139,8 @@ class NewSpaceForm extends Component {
 
 					<input type="submit" value="Add new space" className="new_edit_send" />
 				</form>
-			</div>
+
+				</div>
 		);
 	}
 }

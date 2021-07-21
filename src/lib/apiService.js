@@ -34,24 +34,23 @@ class ApiService {
 	}
 
 	newSpace(space) {
-		const {
-			spaceName,
-			spaceType,
-			imageUrlSpace,
-			daily,
-			weekly,
-			monthly,
-			// price: { daily, weekly, monthly },
-		} = space;
+		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city } = space;
 		console.log(space);
 		return this.apiService
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly })
+			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city })
+			.then(({ data }) => data);
+	}
+
+	updateSpace(space, id) {
+		const { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city } = space;
+		return this.apiService
+			.put(`/space/${id}/edit`, { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city })
 			.then(({ data }) => data);
 	}
 
 	handleUpload(theFile) {
 		console.log('file in service: ', theFile);
-		return this.apiService.post('/space/new', theFile).then(response => response.data);
+		return this.apiService.post('/upload', theFile).then(({ data }) => data);
 	}
 
 	getAllSpaces() {

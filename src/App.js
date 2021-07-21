@@ -15,6 +15,7 @@ import UserMenu from './pages/UserMenu';
 import EditUserAccount from './components/User/EditUserAccount';
 import SpaceDetails from './pages/SpaceDetails';
 import NewProductForm from './components/Products/NewProductForm';
+import EditSpaceForm from './components/Space/EditSpaceForm';
 
 class App extends Component {
 	render() {
@@ -26,11 +27,12 @@ class App extends Component {
 			<div className="container">
 				<Navbar />
 				<Switch>
+					<PrivateRoute path="/space/:id/edit" component={EditSpaceForm} />
 					<PrivateRoute path="/space/:id/details" component={SpaceDetails} />
-					<PrivateRoute path="/space/new" component={NewSpaceForm} />
 					<PrivateRoute exact path="/user/:id/update-profile" component={EditUserAccount} />
 					<PrivateRoute exact path="/user/:id/menu" component={UserMenu} />
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
+					<PrivateRoute path="/space/new" component={NewSpaceForm} />
 					<PrivateRoute exact path="/product/new" component={NewProductForm} />
 					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />

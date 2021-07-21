@@ -21,31 +21,40 @@ class SpaceDetails extends Component {
 			const getProducts = await apiService.getAllproducts(id);
 			this.setState({
 				space: singleSpace,
-				products: getProducts,
+			 products: getProducts,
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
+
 	render() {
 		const { space, products } = this.state;
-		console.log("space id", space._id, "products", products)
+		console.log(space, "products", products)
 		return (
 			<>
        <Link to={"/user/main"}> Back </Link>
 
-				<h1>Space details</h1>
+				<h3>Space details</h3>
       <div>
-				<h4>Name: {space.spaceName}</h4>
-				<h4>Type: {space.spaceType}</h4>
+				<h4>{space.spaceName} Type: {space.spaceType}</h4>
 				<img className="space_details_image" src={space.imageUrlSpace}></img>
 				<h4>Price:</h4>
-				{/* <h5>Daily: {space.price.daily}</h5>
-				<h5>Weekly: {space.price.weekly}</h5>
-				<h5>Monthly: {space.price.monthly}</h5> */}
-
-			< ProductsCard products={products}/> 
+				<h5>Daily: {space.daily}</h5>
+				<h5>Weekly: {space.weekly}</h5>
+				<h5>Monthly: {space.monthly}</h5> 
+				<h4>Services:</h4>
+				{/* {products.map((item, index) => {
+						return (
+							<div key={index} className="product_card_item ">
+								<h4>description: {item.description}</h4>
+								<h4>price: {item.price}</h4>
+							</div>
+						);
+					})} */}
+			
+			  < ProductsCard products={products}/>  
 			</div>
       </>
 		);
