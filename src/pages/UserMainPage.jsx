@@ -29,6 +29,7 @@ class UserMainPage extends Component {
 		console.log('usermainpage', user.role);
 		return (
 			<>
+			  
 				{user.role === 'admin' ? (
 					<div>
 						<button>
@@ -36,7 +37,7 @@ class UserMainPage extends Component {
 						</button>
 					</div>
 				) : (
-					''
+					" "
 				)}
 
 				<div>

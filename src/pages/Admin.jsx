@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 
-class MainPage extends Component{
+class Admin extends Component{
+  
   render(){
     return(
       <>      
@@ -16,4 +17,4 @@ class MainPage extends Component{
   }
 }
 
-export default withAuth(MainPage);
+export default withAuth(Admin);

@@ -3,6 +3,7 @@ import apiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import  { WithCart } from '../providers/cartProvider';
 import './styles/SpaceDetails.css';
 
 const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
@@ -13,8 +14,7 @@ class SpaceDetails extends Component {
 		this.state = {
 			space: '',
 			products: [],
-			prodCart: [],
-			reservCart: [],
+			cart: [],
 		};
 	}
 
@@ -32,18 +32,22 @@ class SpaceDetails extends Component {
 		}
 	}
 
-	//  addToCart = (item) => {
-
-	// 	const space = this.state.space
-  //  const todayArr = this.state.products
+// pASAR AL PROVIDER, Y AÑADIR VIA PROPS AL ELEMENTO =>  <button onClick={this.this.props.addToCart(item)}>{element}</button>
+// pasar Item para que  envíe el item y sus propiedades como objeto
+	// 	addToCart = (item) => {
 	// 	this.setState({
-
+	// 		cart: [... this.state.cart, item]
 	// 	})
+	// 	// alert("Added to cart")
+	// 	console.log(this.state.prodCart)
   // };
+	
+
 
 
 	render() {
 		const { space, products } = this.state;
+	
 		console.log("space", space, 'products', products);
 		return (
 			<>
@@ -55,6 +59,7 @@ class SpaceDetails extends Component {
 
 						<h4>
 							{space.spaceName} Type: {space.spaceType}
+					
 						</h4>
 					</div>
 
@@ -66,19 +71,20 @@ class SpaceDetails extends Component {
 						<div className="space_details_price_details">
 							<h5>Daily: </h5>
 							<p>
-								{space.daily} €  <button onChange={this.addToCart}>{element}</button>
+								{space.daily} €  <button onClick={this.addToCart}>{element}</button>
+								{/* {console.log("space.daily", space.daily)} */}
 							</p>
 						</div>
 						<div className="space_details_price_details">
 							<h5>Weekly: </h5>
 							<p>
-								{space.weekly} € <button onChange={this.addToCart}>{element}</button>
+								{space.weekly} € <button onClick={this.addToCart}>{element}</button>
 							</p>
 						</div>
 						<div className="space_details_price_details">
 							<h5>Monthly: </h5>
 							<p>
-								{space.monthly} € <button onChange={this.addToCart}>{element}</button>
+								{space.monthly} € <button onClick={this.addToCart}>{element}</button>
 							</p>
 						</div>
 					</div>
@@ -89,7 +95,7 @@ class SpaceDetails extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}:  {item.price} € <button onChange={this.addToCart}>{element}</button>
+										{item.description}:  {item.price} € <button onClick={this.props.addToCart(item)}>{element}</button>
 									</p>
 								</div>
 							);
@@ -99,6 +105,7 @@ class SpaceDetails extends Component {
 			</>
 		);
 	}
+	 
 }
 
-export default SpaceDetails;
+export default WithCart(SpaceDetails);

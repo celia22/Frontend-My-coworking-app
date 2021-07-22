@@ -47,8 +47,7 @@ class NewSpaceForm extends Component {
 	createSpaceHandler = async (event) => {
 		event.preventDefault();
 		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
-		try {
-	
+		try {	
 			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
 			console.log("newspace", newSpace);
 			const uploadData = new FormData();
