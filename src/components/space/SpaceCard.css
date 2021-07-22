@@ -12,6 +12,11 @@
   background-color: white;
 }
 
+.space_card_item_image{
+  width: 100%;
+  height: 60%;
+}
+
 .space_card_item_title{
   height: 30%;
   background-color: black;

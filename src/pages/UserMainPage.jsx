@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SpacesCards from '../components/Space/SpacesCards';
 import { withAuth } from '../providers/AuthProvider';
-import spaceClient from '../lib/spaceClient';
+import { Link } from 'react-router-dom';
+import apiService from '../lib/apiService';
 
 class UserMainPage extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class UserMainPage extends Component {
 
 	async componentDidMount() {
 		try {
-			const allSpaces = await spaceClient.getAllSpaces();
+			const allSpaces = await apiService.getAllSpaces();
 			this.setState({
 				allSpaces,
 			});
@@ -24,13 +25,24 @@ class UserMainPage extends Component {
 
 	render() {
 		const { allSpaces } = this.state;
-		  console.log('usermainpage', this.props);
+		const { user } = this.props;
+		console.log('usermainpage', user.role);
 		return (
-	
+			<>
+				{user.role === 'admin' ? (
+					<div>
+						<button>
+							<Link to={"/admin"}> Admin Options </Link>
+						</button>
+					</div>
+				) : (
+					''
+				)}
+
 				<div>
 					<SpacesCards allSpaces={allSpaces} />
 				</div>
-
+			</>
 		);
 	}
 }

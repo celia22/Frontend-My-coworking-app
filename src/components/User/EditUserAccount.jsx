@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../../providers/AuthProvider';
-import apiClient from "../../lib/apiClient";
+import apiService from "../../lib/apiService";
 
 class EditUserAccount extends Component {
   // hay que pillar los datos del user de algun sitio para poner en el estado inicial
@@ -22,7 +22,7 @@ class EditUserAccount extends Component {
 		const { _id } = this.props.user;
 		const { email, password, firstName, lastName, city } = this.state;
 		try{
-			apiClient.updateProfile({ email, password, firstName, lastName, city }, _id);
+			apiService.updateProfile({ email, password, firstName, lastName, city }, _id);
 		}  catch (e) {
 			console.log(e);
 		} finally {
@@ -42,7 +42,7 @@ class EditUserAccount extends Component {
 		const { email, password, firstName, lastName, city } = this.state;
 		return (
 			<div>
-				 <Link to={"/user/main"}> Back </Link>
+				 	<Link to="/admin"> Back </Link>
       
 				<div className="new_edit_form_container">
 					<h2>Update your data! </h2>

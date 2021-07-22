@@ -28,10 +28,8 @@ class ProductsCard extends Component {
 					{products.map((item, index) => {
 						return (
 							<div key={index} className="product_card_item ">
-								<h4>SpaceName: {item.spaceName}</h4>
 								<h4>Description: {item.description}</h4>
 								<h5>Price: {item.price}</h5>
-								<h5>Amount: {item.amount}</h5>
 							</div>
 						);
 					})}

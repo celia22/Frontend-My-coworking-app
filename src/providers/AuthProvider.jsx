@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import apiClient from "../lib/apiClient";
+import apiService from "../lib/apiService";
 
 const { Consumer, Provider } = React.createContext();
 
@@ -37,7 +37,7 @@ class AuthProvider extends Component {
 
   async componentDidMount() {
     try {
-      const user = await apiClient.me()
+      const user = await apiService.me()
       this.setState({
         status: 'loggedIn',
         user,
@@ -58,7 +58,7 @@ class AuthProvider extends Component {
         status: 'loading',
         user: null,
       })
-      const user = await apiClient.login({ email, password })
+      const user = await apiService.login({ email, password })
       this.setState({
         status: 'loggedIn',
         user,
@@ -78,7 +78,7 @@ class AuthProvider extends Component {
         status: 'loading',
         user: null,
       })
-      const user = await apiClient.signup({ email, password, firstName, lastName, city})
+      const user = await apiService.signup({ email, password, firstName, lastName, city})
       console.log(user)
       this.setState({
         status: 'loggedIn',
@@ -93,9 +93,9 @@ class AuthProvider extends Component {
     }
   }
 
-  logout = async () => {
+   logout = async () => {
     try {
-      await apiClient.logout()
+      await apiService.logout()
       this.setState({
         status: 'loggedOut',
         user: null,

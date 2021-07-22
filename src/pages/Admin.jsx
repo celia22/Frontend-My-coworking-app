@@ -7,7 +7,10 @@ class MainPage extends Component{
     return(
       <>      
       <h1>Welcome to your admin page</h1>
-      <Link to="/space/new"> Create a new space </Link>
+       <button> <Link to="/product/new"> Add new product </Link> </button>
+      <button> <Link to="/user/:id/update-profile"> Edit account </Link> </button>
+      <button> <Link to="/space/new"> Add a new space </Link> </button>
+       <button> <Link to="/space/:id/edit"> Edit space </Link> </button>
       </>
     )
   }
