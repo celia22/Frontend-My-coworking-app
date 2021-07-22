@@ -9,7 +9,7 @@
 
 .space_details_header{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .space_details_image{
@@ -17,25 +17,29 @@
   height: 30%;
 }
 
-.space_details_price_title{
-  text-align: left;
-
+.space_details_content_title{
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  padding: 3vh 15vh;
+  -webkit-box-shadow: 6px 7px 15px -2px rgb(223, 86, 76);
+  box-shadow: 6px 7px 15px -2px rgb(223, 86, 76);
 }
+
 
 .space_details_price_container{
   display: flex;
-  border: 1px solid black;
-  border-radius: 3%;
+  /* border: 1px solid black;
+  border-radius: 3%; */
   margin: 0 3vh;
 }
 
 .space_details_price_details{
-  margin: 1vh 2vh;
+  margin: 0 2vh;
 }
 
 .space_details_services_container{
-  margin: 1vh 3vh;
-  border: 1px solid black;
-  border-radius: 3%;
   margin: 0 3vh;
+  /* border: 1px solid black;
+  border-radius: 3%; */
 }

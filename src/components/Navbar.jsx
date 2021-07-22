@@ -18,7 +18,7 @@ class Navbar extends Component {
 				{isLoggedIn ? (
 					<div className="navbar_buttons_container">
 						<button onClick={logout} className="navbar_button_logout">Logout</button>
-						<p> Welcome {user.firstName}</p>						
+						<p> Hi {user.firstName}!</p>						
 						<Link to="/user/:id/menu" className="navbar_burguer">{element}</Link>						
 					</div>
 				) : (

@@ -23,21 +23,24 @@ class NewSpaceForm extends Component {
 		});
 	};
 
-	handleFileUpload = e => {
+	handleFileUpload = event => {
+		this.setState({
+			imageUrlSpace: event.target.files[0]
+		})
 
-  console.log('The file to be uploaded is: ', e.target.files[0]); 
-    const uploadData = new FormData();
-    uploadData.append('imageUrlSpace', e.target.files[0]);
+  console.log('The file to be uploaded is: ', typeof event.target.files[0]); 
+  //   const uploadData = new FormData();
+  //   uploadData.append('imageUrlSpace', e.target.files[0]);
  
-   apiService
-      .handleUpload(e)
-      .then(response => {
-      // console.log('response is: ', response);
-        this.setState({ imageUrlSpace: response.secure_url });
-      })
-      .catch(err => {
-        console.log('Error while uploading the file: ', err);
-      });
+  //  apiService
+  //     .handleUpload(e)
+  //     .then(response => {
+  //      console.log('response is: ', response);
+  //       this.setState({ imageUrlSpace: response.secure_url });
+  //     })
+  //     .catch(err => {
+  //       console.log('Error while uploading the file: ', err);
+  //     });
   };
 
 
@@ -45,8 +48,16 @@ class NewSpaceForm extends Component {
 		event.preventDefault();
 		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
 		try {
+	
 			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
 			console.log("newspace", newSpace);
+			const uploadData = new FormData();
+    	uploadData.append('imageUrlSpace', event.target.files[0]);
+			const uploadImg = await apiService.handleUpload(event)
+			this.setState({
+				imageUrlSpace: JSON.stringify(uploadImg.secure_url)
+			})
+			console.log(uploadImg)
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -58,7 +69,6 @@ class NewSpaceForm extends Component {
 		const {
 			spaceName,
 			spaceType,
-			imageUrlSpace,
 			daily,
 			weekly,
 			monthly,
@@ -84,7 +94,7 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" value={imageUrlSpace} onChange={this.handleFileUpload} /> 
+					<input type="file"  onChange={event => this.handleFileUpload(event)} /> 
 					<div>
 						<table>
 							<tbody>
