@@ -28,7 +28,7 @@ class NewSpaceForm extends Component {
 			imageUrlSpace: event.target.files[0]
 		})
 
-  console.log('The file to be uploaded is: ', typeof event.target.files[0]); 
+  console.log('The file to be uploaded is: ', event.target.files[0]); 
   //   const uploadData = new FormData();
   //   uploadData.append('imageUrlSpace', e.target.files[0]);
  
@@ -55,7 +55,7 @@ class NewSpaceForm extends Component {
     	uploadData.append('imageUrlSpace', event.target.files[0]);
 			const uploadImg = await apiService.handleUpload(event)
 			this.setState({
-				imageUrlSpace: JSON.stringify(uploadImg.secure_url)
+				imageUrlSpace: uploadImg.secure_url
 			})
 			console.log(uploadImg)
 		} catch (e) {

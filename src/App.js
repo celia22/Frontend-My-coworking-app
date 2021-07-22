@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -16,6 +16,7 @@ import EditUserAccount from './components/User/EditUserAccount';
 import SpaceDetails from './pages/SpaceDetails';
 import NewProductForm from './components/Products/NewProductForm';
 import EditSpaceForm from './components/Space/EditSpaceForm';
+import NotFound from './pages/NotFound';
 
 class App extends Component {
 	render() {
@@ -37,6 +38,8 @@ class App extends Component {
 					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
+					<Route path="/404" component={NotFound} />
+					<Redirect to="/404" />
 					<Route path="/" component={MainPage} />
 				</Switch>
 			</div>
