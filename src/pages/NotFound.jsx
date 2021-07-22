@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./styles/Errors.css"
 
 export default function NotFound() {
+  console.log("404 called")
     return (
         <div >
           <Link to="/">

@@ -23,10 +23,12 @@ class UserMainPage extends Component {
 		}
 	}
 
+	
+
 	render() {
 		const { allSpaces } = this.state;
 		const { user } = this.props;
-		console.log('usermainpage', user.role);
+		console.log('user', user.role);
 		return (
 			<>
 			  

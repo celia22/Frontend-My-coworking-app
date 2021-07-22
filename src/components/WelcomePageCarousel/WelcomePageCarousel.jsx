@@ -3,7 +3,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 
-class MainPageCarousel extends Component {
+class WelcomePageCarousel extends Component {
   render() {
         return (
         <div className="carousel_container">   
@@ -16,19 +16,19 @@ class MainPageCarousel extends Component {
           showIndicators={true}>
            
                 <div>
-                    <img src="/images/mainpage/main1.png" />
+                    <img src="/images/WelcomePage/main1.png" />
                     <p className="legend">Barcelona</p>
                 </div>
                 <div>
-                    <img src="/images/mainpage/main2.png" />
+                    <img src="/images/WelcomePage/main2.png" />
                     <p className="legend">Lisbon</p>
                 </div>
                 <div>
-                    <img src="/images/mainpage/main3.png" />
+                    <img src="/images/WelcomePage/main3.png" />
                     <p className="legend">Lyon</p>
                 </div>
                 <div>
-                    <img src="/images/mainpage/main4.png" />
+                    <img src="/images/WelcomePage/main4.png" />
                     <p className="legend">Bilbao</p>
                 </div>
 
@@ -38,25 +38,25 @@ class MainPageCarousel extends Component {
     }
 }
 
-export default MainPageCarousel; 
+export default WelcomePageCarousel; 
 
 // import React, { Component } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-// import "./MainPageCarousel.css"
+// import "./WelcomePageCarousel.css"
 
 // const right = <FontAwesomeIcon  icon={faChevronRight} color="black" size="2x"/>
 
 // const left = <FontAwesomeIcon  icon={faChevronLeft} color="black" size="2x"/>
-// class MainPageCarousel extends Component {
+// class WelcomePageCarousel extends Component {
 //   constructor(props){
 //     super(props)
 //     this.state = {
 //       imgs:[
-//             <img key={0} src="/images/mainpage/main1.png" alt="coworking open space" />,
-//             <img key={1} src="/images/mainpage/main2.png" alt="coworking open space" />,
-//             <img key={2} src="/images/mainpage/main3.png" alt="coworking open space" />,
-//             <img key={3} src="/images/mainpage/main4.png" alt="coworking open space" />,
+//             <img key={0} src="/images/WelcomePage/main1.png" alt="coworking open space" />,
+//             <img key={1} src="/images/WelcomePage/main2.png" alt="coworking open space" />,
+//             <img key={2} src="/images/WelcomePage/main3.png" alt="coworking open space" />,
+//             <img key={3} src="/images/WelcomePage/main4.png" alt="coworking open space" />,
 //           ],
 //       index: 1,
 //     }
@@ -79,11 +79,11 @@ export default MainPageCarousel;
 //     return(
 //       <div className="carousel_container">
 //         <button onClick={this.handlerLeft}>{left}</button>
-//         <img src={`/images/mainpage/main${index}.png`} alt="pictures" />
+//         <img src={`/images/WelcomePage/main${index}.png`} alt="pictures" />
 //         <button onClick={this.handlerRigth}>{right}</button>
 //       </div>
 //     )
 //   }
 // }
 
-// export default MainPageCarousel; 
+// export default WelcomePageCarousel; 

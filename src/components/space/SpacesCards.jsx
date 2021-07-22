@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './SpaceCard.css';
 
 const SpacesCards = props => {
+
+	
 	const allSpaces = props.allSpaces;
 	console.log("allspaces space card", allSpaces)
 

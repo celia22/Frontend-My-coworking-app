@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -8,7 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { withAuth } from './providers/AuthProvider';
 import NewSpaceForm from './components/Space/NewSpaceForm';
-import MainPage from './pages/MainPage';
+import WelcomePage from './pages/WelcomePage';
 import Admin from './pages/Admin';
 import UserMainPage from './pages/UserMainPage';
 import UserMenu from './pages/UserMenu';
@@ -38,9 +38,8 @@ class App extends Component {
 					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
-					<Route path="/" component={MainPage} />
-					<Route component={NotFound} />
-					<Redirect to="/404" />
+					<Route path="/" component={WelcomePage} />
+					<Route path="*" component={NotFound} />
 				</Switch>
 			</div>
 		);
