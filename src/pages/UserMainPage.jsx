@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SpacesCards from '../components/Space/SpacesCards';
+import SearchBar from '../components/Space/SearchBar';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import apiService from '../lib/apiService';
@@ -12,10 +13,14 @@ class UserMainPage extends Component {
 		};
 	}
 
-	async componentDidMount() {
+	async componentDidMount(value) {
 		try {
 			const allSpaces = await apiService.getAllSpaces();
+			// const searchSpace = [...allSpaces].filter((item) =>
+      // item.city.toLowerCase().includes(value)
+    // );
 			this.setState({
+				// allSpaces: searchSpace
 				allSpaces,
 			});
 		} catch (e) {
@@ -23,13 +28,26 @@ class UserMainPage extends Component {
 		}
 	}
 
+	  searchProductQuery = (value) => {
+    
+    const { allSpaces } = this.state;
+    const searchSpace = [...allSpaces].filter((item) =>
+      item.city.toLowerCase().includes(value)
+    );
+
+    return this.setState({
+      allSpaces: searchSpace,
+    });
+  };
+
+
 	render() {
 		const { allSpaces } = this.state;
 		const { user } = this.props;
 		console.log('usermainpage', user.role);
 		return (
 			<>
-			  
+					  
 				{user.role === 'admin' ? (
 					<div>
 						<button>
@@ -39,6 +57,8 @@ class UserMainPage extends Component {
 				) : (
 					" "
 				)}
+
+				< SearchBar search={this.searchProductQuery}/>
 
 				<div>
 					<SpacesCards allSpaces={allSpaces} />

@@ -3,7 +3,7 @@ import apiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
-import  { WithCart } from '../providers/cartProvider';
+// import  { WithCart } from '../providers/cartProvider';
 import './styles/SpaceDetails.css';
 
 const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
@@ -95,7 +95,8 @@ class SpaceDetails extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}:  {item.price} € <button onClick={this.props.addToCart(item)}>{element}</button>
+										{item.description}:  {item.price} € <button >{element}</button>
+										{/* {item.description}:  {item.price} € <button onClick={this.props.addToCart(item)}>{element}</button> */}
 									</p>
 								</div>
 							);
@@ -108,4 +109,6 @@ class SpaceDetails extends Component {
 	 
 }
 
-export default WithCart(SpaceDetails);
+
+// export default WithCart(SpaceDetails);
+export default SpaceDetails;

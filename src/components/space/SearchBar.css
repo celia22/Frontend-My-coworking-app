@@ -1,0 +1,17 @@
+.searchbar_container {
+}
+
+.searchbar {
+  width: 40%;
+  height: 4vh;
+  margin: 2vh 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.checkbox_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
