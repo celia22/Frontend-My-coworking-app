@@ -19,15 +19,22 @@ class UserMainPage extends Component {
 			const allSpaces = await apiService.getAllSpaces();
 			this.setState({
 				allSpaces,
+			
 			});
+			console.log("didmount")
 		} catch (e) {
 			console.log(e);
 		}
 	}
 
-	  searchProductQuery = (value) => {
-    
-    const { allSpaces } = this.state;
+  searchProductQuery = ( value) => {
+			const { allSpaces } = this.state;
+			if(!value){
+				return this.setState({
+					searchSpaces: allSpaces
+				})
+			}
+			console.log("query")
     const searchSpace = [...allSpaces].filter((item) =>
       item.city.toLowerCase().includes(value)
     );
@@ -42,7 +49,7 @@ class UserMainPage extends Component {
 		const {  searchSpaces } = this.state;
 		const { user } = this.props;
 		console.log('usermainpage', user.role);
-		console.log("spaces", this.state.allSpaces)
+		console.log("spaces", this.state.searchSpaces)
 		return (
 			<>
 					  
@@ -59,7 +66,7 @@ class UserMainPage extends Component {
 				< SearchBar search={this.searchProductQuery}/>
 
 				<div>
-					<SpacesCards allSpaces={searchSpaces} />
+					<SpacesCards searchSpaces={searchSpaces} />
 				</div>
 			</>
 		);
