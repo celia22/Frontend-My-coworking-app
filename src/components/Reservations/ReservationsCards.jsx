@@ -16,7 +16,7 @@ const ReservationCards = props => {
 		// 				<div key={item._id} className="space_card_item ">
 		// 					<h4>Name: {item.spaceName}</h4>
 		// 					<h4>Type: {item.spaceType}</h4>
-		// 					<h4>Image: {item.imageUrlSpace}</h4>
+		// 					<h4>Image: {item.imgUrl}</h4>
 		// 					{item.services.map(item => {
 		// 						return (
 		// 							<>

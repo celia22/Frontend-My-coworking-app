@@ -10,7 +10,7 @@ class UserMainPage extends Component {
 		super(props);
 		this.state = {
 			allSpaces: [],
-			searchSpaces: []
+			searchSpaces: [],
 		};
 	}
 
@@ -19,51 +19,47 @@ class UserMainPage extends Component {
 			const allSpaces = await apiService.getAllSpaces();
 			this.setState({
 				allSpaces,
-			
 			});
-			console.log("didmount")
+			console.log('didmount');
 		} catch (e) {
 			console.log(e);
 		}
 	}
 
-  searchProductQuery = ( value) => {
-			const { allSpaces } = this.state;
-			if(!value){
-				return this.setState({
-					searchSpaces: allSpaces
-				})
-			}
-			console.log("query")
-    const searchSpace = [...allSpaces].filter((item) =>
-      item.city.toLowerCase().includes(value)
-    );
-
-    return this.setState({
-      searchSpaces: searchSpace,
-    });
-  };
-
+	searchProductQuery = value => {
+		const { allSpaces } = this.state;
+		console.log("allspaces", allSpaces)
+		const searchSpace = [...allSpaces].filter(item => item.city.toLowerCase().includes(value));
+			console.log("serachquery")
+		if (value.length === 0) {
+			return this.setState({
+				searchSpace: allSpaces,
+			});
+		} else {
+			return this.setState({
+				searchSpaces: searchSpace,
+			});
+		}
+	};
 
 	render() {
-		const {  searchSpaces } = this.state;
+		const { searchSpaces } = this.state;
 		const { user } = this.props;
 		console.log('usermainpage', user.role);
-		console.log("spaces", this.state.searchSpaces)
+		console.log('spaces', this.state.searchSpaces);
 		return (
 			<>
-					  
 				{user.role === 'admin' ? (
 					<div>
 						<button>
-							<Link to={"/admin"}> Admin Options </Link>
+							<Link to={'/admin'}> Admin Options </Link>
 						</button>
 					</div>
 				) : (
-					" "
+					' '
 				)}
 
-				< SearchBar search={this.searchProductQuery}/>
+				<SearchBar search={this.searchProductQuery} />
 
 				<div>
 					<SpacesCards searchSpaces={searchSpaces} />
