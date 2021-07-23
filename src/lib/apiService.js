@@ -34,17 +34,29 @@ class ApiService {
 	}
 
 	newSpace(space) {
-		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city } = space;
+		const {
+			spaceName,
+			spaceType,
+			imgUrl,
+			price: { daily, weekly, monthly },
+			city,
+		} = space;
 		console.log(space);
 		return this.apiService
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city })
+			.post('/space/new', { spaceName, spaceType, imgUrl, price: { daily, weekly, monthly }, city })
 			.then(({ data }) => data);
 	}
 
 	updateSpace(space, id) {
-		const { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city } = space;
+		const {
+			spaceName,
+			spaceType,
+			imgUrl,
+			price: { daily, weekly, monthly },
+			city,
+		} = space;
 		return this.apiService
-			.put(`/space/${id}/edit`, { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city })
+			.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, price: { daily, weekly, monthly }, city })
 			.then(({ data }) => data);
 	}
 

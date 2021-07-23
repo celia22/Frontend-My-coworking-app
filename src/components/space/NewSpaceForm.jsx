@@ -8,10 +8,12 @@ class NewSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imageUrlSpace: [ ],
-			daily: 0,
-			weekly: 0,
-			monthly: 0,
+			imgUrl: [ ],
+			price: { 
+				daily: 0,
+				weekly: 0,
+				monthly: 0
+			},
 			city: ' ',
 		};
 	}
@@ -25,18 +27,18 @@ class NewSpaceForm extends Component {
 
 	handleFileUpload = event => {
 		this.setState({
-			imageUrlSpace: event.target.files[0]
+			imgUrl: event.target.files[0]
 		})
 
   console.log('The file to be uploaded is: ', event.target.files[0]); 
   //   const uploadData = new FormData();
-  //   uploadData.append('imageUrlSpace', e.target.files[0]);
+  //   uploadData.append('imgUrl', e.target.files[0]);
  
   //  apiService
   //     .handleUpload(e)
   //     .then(response => {
   //      console.log('response is: ', response);
-  //       this.setState({ imageUrlSpace: response.secure_url });
+  //       this.setState({ imgUrl: response.secure_url });
   //     })
   //     .catch(err => {
   //       console.log('Error while uploading the file: ', err);
@@ -46,15 +48,15 @@ class NewSpaceForm extends Component {
 
 	createSpaceHandler = async (event) => {
 		event.preventDefault();
-		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType,imgUrl, price:{daily, weekly, monthly}, city } = this.state;
 		try {	
-			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
+			const newSpace = await apiService.newSpace({spaceName, spaceType,imgUrl, price:{daily, weekly, monthly}, city });
 			console.log("newspace", newSpace);
 			const uploadData = new FormData();
-    	uploadData.append('imageUrlSpace', event.target.files[0]);
+    	uploadData.append('imgUrl', event.target.files[0]);
 			const uploadImg = await apiService.handleUpload(event)
 			this.setState({
-				imageUrlSpace: uploadImg.secure_url
+				imgUrl: uploadImg.secure_url
 			})
 			console.log(uploadImg)
 		} catch (e) {
@@ -68,9 +70,7 @@ class NewSpaceForm extends Component {
 		const {
 			spaceName,
 			spaceType,
-			daily,
-			weekly,
-			monthly,
+			price,
 			city,
 		} = this.state;
 
@@ -110,8 +110,8 @@ class NewSpaceForm extends Component {
 										<input
 											className="new_edit_table_input"
 											type="number"
-											name="daily"
-											value={daily}
+											name="price.daily"
+											value={price.daily}
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -120,8 +120,8 @@ class NewSpaceForm extends Component {
 										<input
 											className="new_edit_table_input"
 											type="number"
-											name="weekly"
-											value={weekly}
+											name="price.weekly"
+											value={price.weekly}
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -130,8 +130,8 @@ class NewSpaceForm extends Component {
 										<input
 											className="new_edit_table_input"
 											type="number"
-											name="monthly"
-											value={monthly}
+											name="price.monthly"
+											value={price.monthly}
 											onChange={this.handleChange}
 										/>
 									</th>

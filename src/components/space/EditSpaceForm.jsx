@@ -9,7 +9,7 @@ class EditUserSpace extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imageUrlSpace: '',
+			imgUrl: '',
 			product: [],
 			daily: 0,
 			weekly: 0,
@@ -28,13 +28,13 @@ class EditUserSpace extends Component {
 	handleFileUpload = e => {
     console.log('The file to be uploaded is: ', e.target.files[0]); 
     const uploadData = new FormData();
-    uploadData.append('imageUrlSpace', e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
  
    apiService
       .handleUpload(e)
       .then(response => {
         console.log('response is: ', response);
-        this.setState({ imageUrlSpace: response.secure_url });
+        this.setState({ imgUrl: response.secure_url });
       })
       .catch(err => {
         console.log('Error while uploading the file: ', err);
@@ -43,14 +43,14 @@ class EditUserSpace extends Component {
 
 	editSpaceHandler = async (event) => {
 		event.preventDefault();
-		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType,imgUrl, daily, weekly, monthly, city } = this.state;
 		try {
-			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
+			const newSpace = await apiService.newSpace({spaceName, spaceType,imgUrl, daily, weekly, monthly, city });
 			await console.log(newSpace);
 			await this.setState({
 				spaceName: '',
 				spaceType: '',
-				imageUrlSpace: '',
+				imgUrl: '',
 				daily: 0,
 				weekly: 0,
 				monthly: 0,
@@ -67,7 +67,7 @@ class EditUserSpace extends Component {
 		const {
 			spaceName,
 			spaceType,
-			imageUrlSpace,
+			imgUrl,
 			daily,
 			weekly,
 			monthly,
@@ -92,7 +92,7 @@ class EditUserSpace extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" value={imageUrlSpace} onChange={this.handleFileUpload} />
+					<input type="file" value={imgUrl} onChange={this.handleFileUpload} />
 					<div>
 						<table>
 							<tbody>

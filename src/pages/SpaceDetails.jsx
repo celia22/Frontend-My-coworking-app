@@ -13,6 +13,7 @@ class SpaceDetails extends Component {
 		super(props);
 		this.state = {
 			space: '',
+			price: { },
 			products: [],
 			cart: [],
 		};
@@ -25,6 +26,7 @@ class SpaceDetails extends Component {
 			const getProducts = await apiService.getAllproducts(id);
 			this.setState({
 				space: singleSpace,
+				price: singleSpace.price,
 				products: getProducts,
 			});
 		} catch (error) {
@@ -46,7 +48,7 @@ class SpaceDetails extends Component {
 
 
 	render() {
-		const { space, products } = this.state;
+		const { space, products, price } = this.state;
 	
 		console.log("space", space, 'products', products);
 		return (
@@ -63,28 +65,28 @@ class SpaceDetails extends Component {
 						</h4>
 					</div>
 
-					<img className="space_details_image" src={space.imageUrlSpace}></img>
+					<img className="space_details_image" src={space.imgUrl}></img>
 
 					<h4 className="space_details_content_title">Price</h4>
 					<div className="space_details_price_container">
 		
 						<div className="space_details_price_details">
 							<h5>Daily: </h5>
+							
 							<p>
-								{space.daily} €  <button onClick={this.addToCart}>{element}</button>
-								{/* {console.log("space.daily", space.daily)} */}
+								{price.daily} €  <button onClick={this.addToCart}>{element}</button>
 							</p>
 						</div>
 						<div className="space_details_price_details">
 							<h5>Weekly: </h5>
 							<p>
-								{space.weekly} € <button onClick={this.addToCart}>{element}</button>
+						{price.weekly} € <button onClick={this.addToCart}>{element}</button> 
 							</p>
 						</div>
 						<div className="space_details_price_details">
 							<h5>Monthly: </h5>
 							<p>
-								{space.monthly} € <button onClick={this.addToCart}>{element}</button>
+								{price.monthly} € <button onClick={this.addToCart}>{element}</button> 
 							</p>
 						</div>
 					</div>
