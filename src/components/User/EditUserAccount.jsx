@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../providers/AuthProvider';
-import apiService from '../lib/apiService';
+import { withAuth } from '../../providers/AuthProvider';
+import apiService from '../../lib/apiService';
 
 class EditUserAccount extends Component {
 	// hay que pillar los datos del user de algun sitio para poner en el estado inicial

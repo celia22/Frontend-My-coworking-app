@@ -64,7 +64,7 @@ class EditSpaceForm extends Component {
 	};
 
 	render() {
-		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 
 		return (
 			<div className="new_edit_form_container">

@@ -25,9 +25,9 @@ class Admin extends Component {
 					</button>
 					<button className="edit_button">
 						{' '}
-						<Link to="/user/:id/update-profile" className="button_link">
+						<Link to="/product/all/edit" className="button_link">
 							{' '}
-							Edit account{' '}
+							Edit product{' '}
 						</Link>{' '}
 					</button>
 					<button className="edit_button">

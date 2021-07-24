@@ -8,6 +8,8 @@ class ApiService {
 		});
 	}
 
+	// USER METHODS
+
 	me() {
 		return this.apiService.get('/whoami').then(response => response.data);
 	}
@@ -36,6 +38,8 @@ class ApiService {
 	deleteAccount(id) {
 		return this.apiService.delete(`/user/${id}/delete`).then(({ data }) => data);
 	}
+
+	// SPACES METHODS
 
 	newSpace(space) {
 		const {
@@ -81,17 +85,28 @@ class ApiService {
 		return this.apiService.delete(`/space/${id}/delete`).then(({ data }) => data);
 	}
 
+	// PRODUCTS METHODS
+
 	newProduct(product) {
-		const { spaceName, price, description } = product;
-		return this.apiService.post('/product/new', { spaceName, price, description }).then(({ data }) => data);
+		const { price, description } = product;
+		return this.apiService.post('/product/new', { price, description }).then(({ data }) => data);
 	}
 
-	getAllproducts(id) {
-		return this.apiService.get(`/product/${id}/all`).then(response => response.data);
+	getAllproducts() {
+		return this.apiService.get(`/product/all`).then(response => response.data);
+	}
+
+	deleteProduct(id) {
+		return this.apiService.delete(`/product/${id}/delete`).then(({ data }) => data);
 	}
 
 	getSingleproduct(id) {
-		return this.apiService.get(`/product/${id}/details`).then(({ data }) => data);
+		return this.apiService.get(`/product/${id}/edit`).then(({ data }) => data);
+	}
+
+	editProduct(product, id) {
+		const { price, description } = product;
+		return this.apiService.put(`/product/${id}/edit`, { price, description }).then(({ data }) => data);
 	}
 }
 
