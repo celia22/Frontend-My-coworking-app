@@ -33,6 +33,10 @@ class ApiService {
 			.then(({ data }) => data);
 	}
 
+	deleteAccount(id) {
+		return this.apiService.delete(`/user/${id}/delete`).then(({ data }) => data);
+	}
+
 	newSpace(space) {
 		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city } = space;
 		console.log(space);

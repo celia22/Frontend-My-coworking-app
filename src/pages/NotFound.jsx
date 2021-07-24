@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "./styles/Errors.css"
 
-export default function NotFound() {
+const NotFound = () => {
   console.log("404 called")
     return (
         <div >
@@ -18,3 +18,5 @@ export default function NotFound() {
         </div>
     )
 }
+
+export default NotFound;

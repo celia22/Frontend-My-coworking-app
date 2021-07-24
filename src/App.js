@@ -12,7 +12,7 @@ import WelcomePage from './pages/WelcomePage';
 import Admin from './pages/Admin';
 import UserMainPage from './pages/UserMainPage';
 import UserMenu from './pages/UserMenu';
-import EditUserAccount from './components/User/EditUserAccount';
+import EditUserAccount from './pages/EditUserAccount';
 import SpaceDetails from './pages/SpaceDetails';
 import NewProductForm from './components/Products/NewProductForm';
 import EditSpaceForm from './components/Space/EditSpaceForm';
@@ -39,7 +39,7 @@ class App extends Component {
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
 					<Route path="/" component={WelcomePage} />
-					<Route path="*" component={NotFound} />
+					<Route path="*" exact={true} component={NotFound} />
 				</Switch>
 			</div>
 		);
