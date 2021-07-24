@@ -13,6 +13,7 @@ class SpaceDetails extends Component {
 		super(props);
 		this.state = {
 			space: '',
+			price: {},
 			products: [],
 			cart: [],
 		};
@@ -25,6 +26,7 @@ class SpaceDetails extends Component {
 			const getProducts = await apiService.getAllproducts(id);
 			this.setState({
 				space: singleSpace,
+				price: singleSpace.price,
 				products: getProducts,
 			});
 		} catch (error) {
@@ -61,12 +63,13 @@ class SpaceDetails extends Component {
 						</h4>
 					</div>
 
-					<img className="space_details_image" src={space.imageUrlSpace}></img>
+					<img className="space_details_image" src={space.imgUrl}></img>
 
 					<h4 className="space_details_content_title">Price</h4>
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<h5>Daily: </h5>
+
 							<p>
 								{space.daily} € <button onClick={this.props.addToCart}>{element}</button>
 								{/* {console.log("space.daily", space.daily)} */}
