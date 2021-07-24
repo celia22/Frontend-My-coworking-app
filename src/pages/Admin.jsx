@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
+import "./styles/buttons.css"
 
 class Admin extends Component{
   
@@ -8,10 +9,12 @@ class Admin extends Component{
     return(
       <>      
       <h1>Welcome to your admin page</h1>
-       <button> <Link to="/product/new"> Add new product </Link> </button>
-      <button> <Link to="/user/:id/update-profile"> Edit account </Link> </button>
-      <button> <Link to="/space/new"> Add a new space </Link> </button>
-       <button> <Link to="/space/:id/edit"> Edit space </Link> </button>
+      <div className="admin_page_button_container">
+        <button className="new_button"> <Link to="/product/new" className="button_link"> Add product </Link> </button>
+        <button className="new_button"> <Link to="/space/new" className="button_link"> Add space </Link> </button>
+        <button className="edit_button"> <Link to="/user/:id/update-profile" className="button_link"> Edit account </Link> </button>
+        <button className="edit_button"> <Link to="/space/:id/edit" className="button_link"> Edit space </Link> </button>
+      </div>
       </>
     )
   }

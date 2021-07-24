@@ -42,7 +42,7 @@ class EditUserAccount extends Component {
 		const { email, password, firstName, lastName, city } = this.state;
 		return (
 			<div>
-				 	<Link to="/admin"> Back </Link>
+				 	<Link to="/admin" className="back_button"> &laquo; Back</Link>
       
 				<div className="new_edit_form_container">
 					<h2>Update your data! </h2>

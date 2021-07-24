@@ -46,7 +46,7 @@ class NewProductForm extends Component {
 
 		return (
 			<div className="new_edit_form_container">
-				<Link to="/admin"> Back </Link>
+				<Link to="/admin" className="back_button"> &laquo; Back</Link>
 				
 				<form onSubmit={this.createNewProduct} className="new_edit_form">
 	
