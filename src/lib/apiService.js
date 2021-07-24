@@ -65,6 +65,10 @@ class ApiService {
 		return this.apiService.get(`/space/${id}/details`).then(({ data }) => data);
 	}
 
+	deleteSpace(id) {
+		return this.apiService.delete(`/space/${id}/delete`).then(({ data }) => data);
+	}
+
 	newProduct(product) {
 		const { spaceName, price, description } = product;
 		return this.apiService.post('/product/new', { spaceName, price, description }).then(({ data }) => data);
