@@ -44,8 +44,8 @@ class App extends Component {
 					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
-					<Route path="/" component={WelcomePage} />
-					<Route path="*" exact={true} component={NotFound} />
+					<Route path="/" exact component={WelcomePage} />
+					<Route path="*" component={NotFound} />
 				</Switch>
 			</div>
 		);

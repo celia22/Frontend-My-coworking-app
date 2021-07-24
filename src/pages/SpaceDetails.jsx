@@ -15,7 +15,7 @@ class SpaceDetails extends Component {
 			space: '',
 			price: {},
 			products: [],
-			cart: [],
+			daily: 0,
 		};
 	}
 
@@ -23,7 +23,7 @@ class SpaceDetails extends Component {
 		const id = this.props.match.params.id;
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const getProducts = await apiService.getAllproducts(id);
+			const getProducts = await apiService.getAllproducts();
 			this.setState({
 				space: singleSpace,
 				price: singleSpace.price,
@@ -34,20 +34,26 @@ class SpaceDetails extends Component {
 		}
 	}
 
-	// pASAR AL PROVIDER, Y AÑADIR VIA PROPS AL ELEMENTO =>  <button onClick={this.this.props.addToCart(item)}>{element}</button>
-	// pasar Item para que  envíe el item y sus propiedades como objeto
-	// 	addToCart = (item) => {
-	// 	this.setState({
-	// 		cart: [... this.state.cart, item]
-	// 	})
-	// 	// alert("Added to cart")
-	// 	console.log(this.state.prodCart)
-	// };
+	handleDailyChange = event => {
+		this.setState({ daily: event.target.value });
+	};
+
+	handleWeeklyChange = event => {
+		this.setState({ weekly: event.target.value });
+	};
+
+	handleMonthlyChange = event => {
+		this.setState({ monthly: event.target.value });
+	};
+
+	handleChange = event => {
+		this.setState({
+			name: event.target.value,
+		});
+	};
 
 	render() {
-		const { space, products } = this.state;
-		// console.log("Props space details", this.props)
-		//	console.log("space", space, 'products', products);
+		const { space, products, price } = this.state;
 		return (
 			<>
 				<div>
@@ -68,24 +74,32 @@ class SpaceDetails extends Component {
 					<h4 className="space_details_content_title">Price</h4>
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
-							<h5>Daily: </h5>
+							<form onSubmit={e => this.props.addToCart(e.target.value)}>
+								<label>
+									<h5>Daily: </h5> {price.daily} €
+								</label>
+								<input type="number" name="daily" value={price.daily} onChange={this.handleDailyChange} />
+								<button>{element}</button>
+							</form>
+						</div>
 
-							<p>
-								{space.daily} € <button onClick={this.props.addToCart}>{element}</button>
-								{/* {console.log("space.daily", space.daily)} */}
-							</p>
+						<div className="space_details_price_details">
+							<form onSubmit={e => this.props.addToCart(e.target.value)}>
+								<label>
+									<h5>Weekly: </h5> {price.weekly} €
+								</label>
+								<input type="number" name="weekly" value={price.weekly} onChange={this.handleWeeklyChange} />
+								<button>{element}</button>
+							</form>
 						</div>
 						<div className="space_details_price_details">
-							<h5>Weekly: </h5>
-							<p>
-								{space.weekly} € <button onClick={this.props.addToCart}>{element}</button>
-							</p>
-						</div>
-						<div className="space_details_price_details">
-							<h5>Monthly: </h5>
-							<p>
-								{space.monthly} € <button onClick={this.props.addToCart}>{element}</button>
-							</p>
+							<form onSubmit={e => this.props.addToCart(e.target.value)}>
+								<label>
+									<h5>Monthly: </h5> {price.monthly} €
+								</label>
+								<input type="number" name="monthly" value={price.monthly} onChange={this.handleMonthlyChange} />
+								<button>{element}</button>
+							</form>
 						</div>
 					</div>
 
@@ -94,10 +108,15 @@ class SpaceDetails extends Component {
 						{products.map((item, index) => {
 							return (
 								<div key={index} className="space_details_services_item ">
-									<p>
-										{item.description}: {item.price} € <button>{element}</button>
-										{/* {item.description}:  {item.price} € <button onClick={this.props.addToCart(item)}>{element}</button> */}
-									</p>
+									<form onSubmit={e => this.props.addToCart(e.target.value)}>
+										<label>
+											<p>
+												{item.description}: {item.price} €
+											</p>
+										</label>
+										<input type="text" name="product" value={item} onChange={this.handleChange} />
+										<button>{element}</button>
+									</form>
 								</div>
 							);
 						})}

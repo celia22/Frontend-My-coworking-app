@@ -36,7 +36,7 @@ class CartProvider extends Component {
 			cart: [...this.state.cart, item],
 		});
 		// alert("Added to cart")
-		console.log(this.state.prodCart);
+		console.log('cart on provider', this.state.cart);
 	};
 
 	render() {

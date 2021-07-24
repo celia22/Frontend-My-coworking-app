@@ -21,13 +21,7 @@ class NewProductForm extends Component {
 		event.preventDefault();
 		const { description, price } = this.state;
 		try {
-			const newSpace = await apiService.newProduct({ description, price });
-			await console.log(newSpace);
-			// await this.setState({
-			// 	spaceName: '',
-			// 	description: '',
-			// 	price: 0,
-			// });
+			await apiService.newProduct({ description, price });
 		} catch (e) {
 			console.log(e);
 		} finally {

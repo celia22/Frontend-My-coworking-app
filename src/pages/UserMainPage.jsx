@@ -28,9 +28,7 @@ class UserMainPage extends Component {
 
 	searchProductQuery = value => {
 		const { allSpaces } = this.state;
-		console.log("allspaces", allSpaces)
 		const searchSpace = [...allSpaces].filter(item => item.city.toLowerCase().includes(value));
-			console.log("serachquery")
 		if (value.length === 0) {
 			return this.setState({
 				searchSpace: allSpaces,
@@ -45,8 +43,8 @@ class UserMainPage extends Component {
 	render() {
 		const { searchSpaces } = this.state;
 		const { user } = this.props;
-		console.log('usermainpage', user.role);
-		console.log('spaces', this.state.searchSpaces);
+		// console.log('usermainpage', user.role);
+		// console.log('spaces', this.state.searchSpaces);
 		return (
 			<>
 				{user.role === 'admin' ? (
