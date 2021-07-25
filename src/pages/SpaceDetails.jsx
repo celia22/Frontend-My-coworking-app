@@ -21,8 +21,8 @@ class SpaceDetails extends Component {
 			imgUrlSpace: '',
 			products: [],
 			// products: {
-			// 	description: ' ',
-			// 	price: ' ',
+			// 	description: [],
+			// 	price: [],
 			// },
 		};
 	}
@@ -33,6 +33,9 @@ class SpaceDetails extends Component {
 			const singleSpace = await apiService.getSingleSpace(id);
 			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
+			// const {
+			// 	products: { description, price },
+			// } = getProducts;
 			this.setState({
 				_id,
 				spaceParams,
@@ -44,6 +47,10 @@ class SpaceDetails extends Component {
 				monthly,
 				imgUrlSpace,
 				products: getProducts,
+				// products: {
+				// 	description,
+				// 	price,
+				// },
 			});
 		} catch (error) {
 			console.log(error);
@@ -55,7 +62,11 @@ class SpaceDetails extends Component {
 		const spaceId = this.props.match.params.id;
 
 		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
-		console.log(products);
+		// const {
+		// 	products: { description, price },
+		// } = this.state;
+		// console.log(description);
+		// console.log(price);
 
 		return (
 			<>
@@ -100,9 +111,7 @@ class SpaceDetails extends Component {
 									<p>
 										{item.description}: {item.price} €
 									</p>
-									<button onClick={() => this.props.addItemToCart(this.state, item.description, item.price)}>
-										{element}
-									</button>
+									<button onClick={() => this.props.addItemToCart(item, item.price)}>{element}</button>
 								</div>
 							);
 						})}
