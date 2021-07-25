@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 import { withAuth } from '../providers/AuthProvider';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
-import "./Navbar.css"
+import './Navbar.css';
 
-const element = <FontAwesomeIcon  icon={faBars} color="white" size="2x"/>
+const burger = <FontAwesomeIcon icon={faBars} color="white" size="2x" />;
+const cart = <FontAwesomeIcon icon={faCartArrowDown} color="white" size="2x" />;
 
 class Navbar extends Component {
 	render() {
@@ -17,16 +18,23 @@ class Navbar extends Component {
 			<div>
 				{isLoggedIn ? (
 					<div className="navbar_buttons_container">
-						<button onClick={logout} className="navbar_button_logout">Logout</button>
-						<p> Hi {user.firstName}!</p>						
-						<Link to="/user/:id/menu" className="navbar_burguer">{element}</Link>						
+						<button onClick={logout} className="navbar_button_logout">
+							Logout
+						</button>
+						<p> Hi {user.firstName}!</p>
+						<Link to="/user/:id/menu" className="navbar_burguer">
+							{burger}
+						</Link>
+						<Link to="/reservations/:id/new">{cart}</Link>
 					</div>
 				) : (
 					<div className="navbar_buttons_container">
-
-						<Link to="/login" className="navbar_button">Login</Link>
-						<Link to="/signup" className="navbar_button">Signup</Link>
-						
+						<Link to="/login" className="navbar_button">
+							Login
+						</Link>
+						<Link to="/signup" className="navbar_button">
+							Signup
+						</Link>
 					</div>
 				)}
 			</div>

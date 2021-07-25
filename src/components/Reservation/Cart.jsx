@@ -1,40 +1,57 @@
-import React from 'react';
-// import './SpaceCard.css';
+import React, { Component } from 'react';
+import { withAuth } from '../../providers/AuthProvider';
+import { withCart } from '../../providers/CartProvider';
+// import { Link } from 'react-router-dom';
+// import apiService from '../lib/apiService';
 
-const ReservationCards = props => {
-	// const allSpaces = props.allSpaces;
+class Cart extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cart: this.props.cart,
+			prices: this.props.prices,
+			totalAmount: this.props.totalAmount,
+		};
+	}
+	// HAY QUE HACER APLI SERVICE PARA PASAR LA NEW RESERVATION AL BACK
 
-	return (
+	render() {
+		const { cart, prices, totalAmount } = this.state;
 
-    <div>
-      	<h2>My reservations</h2>
-    </div>
-		
-		//  <div className="space_card_scroll"> 
-		// 	 {allSpaces.map(item => {
-		// 			return (
-		// 				<div key={item._id} className="space_card_item ">
-		// 					<h4>Name: {item.spaceName}</h4>
-		// 					<h4>Type: {item.spaceType}</h4>
-		// 					<h4>Image: {item.imgUrl}</h4>
-		// 					{item.services.map(item => {
-		// 						return (
-		// 							<>
-		// 								<h4>Services:</h4>
-		// 								<p key={item._id}>{item.product}</p>
-		// 							</>
-		// 						);
-		// 					})}
-		// 					<h4>Price:</h4>
-		// 					<h5>Daily: {item.daily}</h5>
-		// 					<h5>Weekly: {item.weekly}</h5>
-		// 					<h5>Monthly: {item.monthly}</h5>
-		// 				</div>
-		// 			);
-		// 		})} 
-		// 	</div> 
-		// </> 
-	);
-};
+		console.log('cart state', this.state.cart);
 
-export default ReservationCards;
+		return (
+			<div>
+				<h3>Reservation</h3>
+				<tr>
+					<th>Item</th>
+					<th>Price</th>
+				</tr>
+				<tr>
+					<td>
+						{cart.map((item, index) => {
+							if (typeof item[index] === 'string') {
+								return <p key={index}>{item}</p>;
+							} else {
+								return (
+									<p key={index}>
+										{item.spaceName} Type: {item.spaceType}
+									</p>
+								);
+							}
+						})}
+					</td>
+					<td>
+						{prices.map((item, index) => {
+							return <p key={index}>{item}</p>;
+						})}
+					</td>
+				</tr>
+
+				<p>Total Amount: {totalAmount} €</p>
+			</div>
+		);
+	}
+}
+
+export default withAuth(withCart(Cart));

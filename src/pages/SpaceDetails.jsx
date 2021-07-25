@@ -20,6 +20,8 @@ class SpaceDetails extends Component {
 			weekly: '',
 			imgUrlSpace: '',
 			products: [],
+			// productDescription: '',
+			// productPrice: '',
 		};
 	}
 
@@ -28,8 +30,8 @@ class SpaceDetails extends Component {
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
 			const { spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
-			// const getProducts = await apiService.getAllproducts();
-			// console.log(singleSpace);
+			const getProducts = await apiService.getAllproducts();
+			// const { productDescription, productPrice } = getProducts;
 			this.setState({
 				spaceName,
 				spaceType,
@@ -38,6 +40,9 @@ class SpaceDetails extends Component {
 				weekly,
 				monthly,
 				imgUrlSpace,
+				products: getProducts,
+				// productDescription,
+				// productPrice,
 			});
 		} catch (error) {
 			console.log(error);
@@ -66,7 +71,7 @@ class SpaceDetails extends Component {
 	// };
 
 	render() {
-		const { spaceName, spaceType, daily, weekly, monthly } = this.state;
+		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
 		return (
 			<>
 				<div>
@@ -87,61 +92,34 @@ class SpaceDetails extends Component {
 					<h4 className="space_details_content_title">Price</h4>
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
-							{/* <form onSubmit={() => this.props.addItemToCart(this.state, daily)}>
-								<label>
-									<h5>Daily: </h5> {daily} €
-								</label>
-								<input type="number" name="daily" value={daily} onChange={this.handleDailyChange} /> */}
+							<p>Daily:</p>
 							<button onClick={() => this.props.addItemToCart(this.state, daily)}>
-								{daily} {element}
+								{daily} € {element}
 							</button>
+							<p>Weekly:</p>
 							<button onClick={() => this.props.addItemToCart(this.state, weekly)}>
-								{weekly} {element}
+								{weekly} € {element}
 							</button>
+							<p>Monthly:</p>
 							<button onClick={() => this.props.addItemToCart(this.state, monthly)}>
-								{monthly} {element}
+								{monthly} € {element}
 							</button>
-							{/* </form> */}
 						</div>
-
-						{/* <div className="space_details_price_details">
-							<form onSubmit={e => this.props.addItemToCart(e.target.value)}>
-								<label>
-									<h5>Weekly: </h5> {price.weekly} €
-								</label>
-								<input type="number" name="weekly" value={weekly} onChange={this.handleWeeklyChange} />
-								<button>{element}</button>
-							</form>
-						</div>
-						<div className="space_details_price_details">
-							<form onSubmit={this.props.addItemToCart(monthly)}>
-								<label>
-									<h5>Monthly: </h5> {price.monthly} €
-								</label>
-								<input type="number" name="monthly" value={monthly} onChange={this.handleMonthlyChange} />
-								<button>{element}</button>
-							</form>
-						</div> */}
 					</div>
 
 					<h4 className="space_details_content_title">Services:</h4>
-					{/* <div className="space_details_services_container">
+					<div className="space_details_services_container">
 						{products.map((item, index) => {
 							return (
 								<div key={index} className="space_details_services_item ">
-									<form onSubmit={e => this.props.addToCart(e.target.value)}>
-										<label>
-											<p>
-												{item.description}: {item.price} €
-											</p>
-										</label>
-										<input type="text" name="product" value={item} onChange={this.handleChange} />
-										<button>{element}</button>
-									</form>
+									<p>
+										{item.description}: {item.price} €
+									</p>
+									<button onClick={() => this.props.addItemToCart(item.description, item.price)}>{element}</button>
 								</div>
 							);
 						})}
-					</div> */}
+					</div>
 				</div>
 			</>
 		);

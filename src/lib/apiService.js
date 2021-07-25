@@ -42,15 +42,7 @@ class ApiService {
 	// SPACES METHODS
 
 	newSpace(space) {
-		const {
-			spaceName,
-			spaceType,
-			imgUrl,
-			daily, 
-			weekly, 
-			monthly,
-			city,
-		} = space;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = space;
 		console.log(space);
 		return this.apiService
 			.post('/space/new', { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
@@ -58,16 +50,10 @@ class ApiService {
 	}
 
 	updateSpace(space, id) {
-		const {
-			spaceName,
-			spaceType,
-			imgUrl,
-			daily, 
-			weekly, 
-			monthly,
-			city,
-		} = space;
-		return this.apiService.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, daily, weekly, monthly, city }).then(({ data }) => data);
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = space;
+		return this.apiService
+			.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
+			.then(({ data }) => data);
 	}
 
 	handleUpload(img) {
@@ -89,8 +75,8 @@ class ApiService {
 
 	// PRODUCTS METHODS
 	newProduct(product) {
-		const { price, description } = product;
-		return this.apiService.post('/product/new', { price, description }).then(({ data }) => data);
+		const { productPrice, productDescription } = product;
+		return this.apiService.post('/product/new', { productPrice, productDescription }).then(({ data }) => data);
 	}
 
 	getAllproducts() {
@@ -106,8 +92,8 @@ class ApiService {
 	}
 
 	editProduct(product, id) {
-		const { price, description } = product;
-		return this.apiService.put(`/product/${id}/edit`, { price, description }).then(({ data }) => data);
+		const { productPrice, productDescription } = product;
+		return this.apiService.put(`/product/${id}/edit`, { productPrice, productDescription }).then(({ data }) => data);
 	}
 }
 
