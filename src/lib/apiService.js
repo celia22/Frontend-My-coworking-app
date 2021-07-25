@@ -95,6 +95,15 @@ class ApiService {
 		const { productPrice, productDescription } = product;
 		return this.apiService.put(`/product/${id}/edit`, { productPrice, productDescription }).then(({ data }) => data);
 	}
+
+	// RESERVATION METHODS
+	newReservation(reservation, id) {
+		const { space, cart, prices, user, status, totalAmount } = reservation;
+		console.log('id en api', id);
+		return this.apiService
+			.post(`/reservation/${id}/new`, { space, cart, prices, user, status, totalAmount })
+			.then(({ data }) => data);
+	}
 }
 
 const apiService = new ApiService();

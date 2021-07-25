@@ -15,6 +15,7 @@ export const withCart = Comp => {
 							cart={value.cart}
 							quantity={value.quantity}
 							prices={value.prices}
+							_id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
 						/>
@@ -43,6 +44,13 @@ class CartProvider extends Component {
 	componentDidUpdate() {
 		console.log('did update', this.state);
 	}
+
+	// addSpaceId = () => {
+	// 	const spaceId = 0;
+	// 	this.setState({
+	// 		spaceId,
+	// 	});
+	// };
 
 	addItemToCart = (item, price) => {
 		const cartItems = this.state.cart;

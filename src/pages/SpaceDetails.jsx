@@ -20,8 +20,10 @@ class SpaceDetails extends Component {
 			weekly: '',
 			imgUrlSpace: '',
 			products: [],
-			// productDescription: '',
-			// productPrice: '',
+			// products: {
+			// 	description: ' ',
+			// 	price: ' ',
+			// },
 		};
 	}
 
@@ -29,10 +31,11 @@ class SpaceDetails extends Component {
 		const id = this.props.match.params.id;
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const { spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
+			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
-			// const { productDescription, productPrice } = getProducts;
 			this.setState({
+				_id,
+				spaceParams,
 				spaceName,
 				spaceType,
 				city,
@@ -41,37 +44,19 @@ class SpaceDetails extends Component {
 				monthly,
 				imgUrlSpace,
 				products: getProducts,
-				// productDescription,
-				// productPrice,
 			});
 		} catch (error) {
 			console.log(error);
-		} finally {
-			console.log(this.state);
 		}
 	}
 
-	// handleDailyChange = event => {
-	// 	this.setState({ price: { daily: event.target.value } });
-	// 	console.log('state', this.state);
-	// };
-
-	// handleWeeklyChange = event => {
-	// 	this.setState({ weekly: event.target.value });
-	// };
-
-	// handleMonthlyChange = event => {
-	// 	this.setState({ monthly: event.target.value });
-	// };
-
-	// handleChange = event => {
-	// 	this.setState({
-	// 		name: event.target.value,
-	// 	});
-	// };
-
 	render() {
+		console.log('props en details', this.props.match.params.id);
+		const spaceId = this.props.match.params.id;
+
 		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
+		console.log(products);
+
 		return (
 			<>
 				<div>
@@ -93,15 +78,15 @@ class SpaceDetails extends Component {
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, daily)}>
+							<button onClick={() => this.props.addItemToCart(this.state, daily, spaceId)}>
 								{daily} € {element}
 							</button>
 							<p>Weekly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, weekly)}>
+							<button onClick={() => this.props.addItemToCart(this.state, weekly, spaceId)}>
 								{weekly} € {element}
 							</button>
 							<p>Monthly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, monthly)}>
+							<button onClick={() => this.props.addItemToCart(this.state, monthly, spaceId)}>
 								{monthly} € {element}
 							</button>
 						</div>
@@ -115,7 +100,9 @@ class SpaceDetails extends Component {
 									<p>
 										{item.description}: {item.price} €
 									</p>
-									<button onClick={() => this.props.addItemToCart(item.description, item.price)}>{element}</button>
+									<button onClick={() => this.props.addItemToCart(this.state, item.description, item.price)}>
+										{element}
+									</button>
 								</div>
 							);
 						})}
