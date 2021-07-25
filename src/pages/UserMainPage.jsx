@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SpacesCards from '../components/Space/SpacesCards';
-import SearchBar from '../components/Space/SearchBar';
+import SpacesCards from '../components/space/SpacesCards';
+import SearchBar from '../components/space/SearchBar';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import apiService from '../lib/apiService';
@@ -19,8 +19,9 @@ class UserMainPage extends Component {
 			const allSpaces = await apiService.getAllSpaces();
 			this.setState({
 				allSpaces,
+				searchSpaces: allSpaces,
 			});
-			console.log('didmount');
+			console.log('didmount', this.state);
 		} catch (e) {
 			console.log(e);
 		}

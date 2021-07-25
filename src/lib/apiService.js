@@ -46,12 +46,14 @@ class ApiService {
 			spaceName,
 			spaceType,
 			imgUrl,
-			price: { daily, weekly, monthly },
+			daily, 
+			weekly, 
+			monthly,
 			city,
 		} = space;
 		console.log(space);
 		return this.apiService
-			.post('/space/new', { spaceName, spaceType, imgUrl, price: { daily, weekly, monthly }, city })
+			.post('/space/new', { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
 			.then(({ data }) => data);
 	}
 
@@ -60,12 +62,12 @@ class ApiService {
 			spaceName,
 			spaceType,
 			imgUrl,
-			price: { daily, weekly, monthly },
+			daily, 
+			weekly, 
+			monthly,
 			city,
 		} = space;
-		return this.apiService
-			.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, price: { daily, weekly, monthly }, city })
-			.then(({ data }) => data);
+		return this.apiService.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, daily, weekly, monthly, city }).then(({ data }) => data);
 	}
 
 	handleUpload(img) {
@@ -86,7 +88,6 @@ class ApiService {
 	}
 
 	// PRODUCTS METHODS
-
 	newProduct(product) {
 		const { price, description } = product;
 		return this.apiService.post('/product/new', { price, description }).then(({ data }) => data);
