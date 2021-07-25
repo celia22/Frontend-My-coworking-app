@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../../providers/AuthProvider';
-import apiService from "../../lib/apiService";
+import apiService from '../../lib/apiService';
 
-class EditUserSpace extends Component {
-  constructor(props) {
+class EditSpaceForm extends Component {
+	constructor(props) {
 		super(props);
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imageUrlSpace: '',
+			imgUrl: '',
 			product: [],
 			daily: 0,
 			weekly: 0,
@@ -18,7 +18,7 @@ class EditUserSpace extends Component {
 		};
 	}
 
-		handleChange = event => {
+	handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({
 			[name]: value,
@@ -26,31 +26,31 @@ class EditUserSpace extends Component {
 	};
 
 	handleFileUpload = e => {
-    console.log('The file to be uploaded is: ', e.target.files[0]); 
-    const uploadData = new FormData();
-    uploadData.append('imageUrlSpace', e.target.files[0]);
- 
-   apiService
-      .handleUpload(e)
-      .then(response => {
-        console.log('response is: ', response);
-        this.setState({ imageUrlSpace: response.secure_url });
-      })
-      .catch(err => {
-        console.log('Error while uploading the file: ', err);
-      });
-  };
+		console.log('The file to be uploaded is: ', e.target.files[0]);
+		const uploadData = new FormData();
+		uploadData.append('imgUrl', e.target.files[0]);
 
-	editSpaceHandler = async (event) => {
+		apiService
+			.handleUpload(e)
+			.then(response => {
+				console.log('response is: ', response);
+				this.setState({ imgUrl: response.secure_url });
+			})
+			.catch(err => {
+				console.log('Error while uploading the file: ', err);
+			});
+	};
+
+	editSpaceHandler = async event => {
 		event.preventDefault();
-		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 		try {
-			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
+			const newSpace = await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
 			await console.log(newSpace);
 			await this.setState({
 				spaceName: '',
 				spaceType: '',
-				imageUrlSpace: '',
+				imgUrl: '',
 				daily: 0,
 				weekly: 0,
 				monthly: 0,
@@ -59,28 +59,23 @@ class EditUserSpace extends Component {
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.props.history.push({pathname: "/admin"})
+			this.props.history.push({ pathname: '/admin' });
 		}
 	};
 
 	render() {
-		const {
-			spaceName,
-			spaceType,
-			imageUrlSpace,
-			daily,
-			weekly,
-			monthly,
-			city,
-		} = this.state;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 
 		return (
 			<div className="new_edit_form_container">
-					<Link to="/admin"> Back </Link>
+				<Link to="/admin" className="back_button">
+					{' '}
+					&laquo; Back
+				</Link>
 
 				<form onSubmit={this.createSpaceHandler} className="new_edit_form">
 					<label>
-						<strong>Name:</strong>
+						<strong>Name: {spaceName}</strong>
 					</label>
 					<input type="text" name="spaceName" value={spaceName} onChange={this.handleChange} />
 
@@ -92,7 +87,7 @@ class EditUserSpace extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" value={imageUrlSpace} onChange={this.handleFileUpload} />
+					<input type="file" value={imgUrl} onChange={this.handleFileUpload} />
 					<div>
 						<table>
 							<tbody>
@@ -151,4 +146,4 @@ class EditUserSpace extends Component {
 	}
 }
 
-export default withAuth(EditUserSpace);
+export default withAuth(EditSpaceForm);

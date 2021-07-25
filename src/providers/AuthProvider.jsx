@@ -59,6 +59,7 @@ class AuthProvider extends Component {
         user: null,
       })
       const user = await apiService.login({ email, password })
+      console.log("login", user)
       this.setState({
         status: 'loggedIn',
         user,

@@ -3,6 +3,7 @@ import apiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { withCart } from '../providers/CartProvider';
 import './styles/SpaceDetails.css';
 
 const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
@@ -11,10 +12,16 @@ class SpaceDetails extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			space: '',
+			spaceName: '',
+			spaceType: '',
+			city: '',
+			daily: '',
+			monthly: '',
+			weekly: '',
+			imgUrlSpace: '',
 			products: [],
-			prodCart: [],
-			reservCart: [],
+			// productDescription: '',
+			// productPrice: '',
 		};
 	}
 
@@ -22,64 +29,81 @@ class SpaceDetails extends Component {
 		const id = this.props.match.params.id;
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const getProducts = await apiService.getAllproducts(id);
+			const { spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
+			const getProducts = await apiService.getAllproducts();
+			// const { productDescription, productPrice } = getProducts;
 			this.setState({
-				space: singleSpace,
+				spaceName,
+				spaceType,
+				city,
+				daily,
+				weekly,
+				monthly,
+				imgUrlSpace,
 				products: getProducts,
+				// productDescription,
+				// productPrice,
 			});
 		} catch (error) {
 			console.log(error);
+		} finally {
+			console.log(this.state);
 		}
 	}
 
-	//  addToCart = (item) => {
+	// handleDailyChange = event => {
+	// 	this.setState({ price: { daily: event.target.value } });
+	// 	console.log('state', this.state);
+	// };
 
-	// 	const space = this.state.space
-  //  const todayArr = this.state.products
+	// handleWeeklyChange = event => {
+	// 	this.setState({ weekly: event.target.value });
+	// };
+
+	// handleMonthlyChange = event => {
+	// 	this.setState({ monthly: event.target.value });
+	// };
+
+	// handleChange = event => {
 	// 	this.setState({
-
-	// 	})
-  // };
-
+	// 		name: event.target.value,
+	// 	});
+	// };
 
 	render() {
-		const { space, products } = this.state;
-		console.log("space", space, 'products', products);
+		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
 		return (
 			<>
 				<div>
 					<div className="space_details_header">
 						<button className="back_button">
-							<Link to={'/user/main'}> Back </Link>
+							<Link to={'/user/main'} className="back_button">
+								&laquo; Back
+							</Link>
 						</button>
 
 						<h4>
-							{space.spaceName} Type: {space.spaceType}
+							{spaceName} Type: {spaceType}
 						</h4>
 					</div>
 
-					<img className="space_details_image" src={space.imageUrlSpace}></img>
+					{/* <img className="space_details_image" src={}></img> */}
 
 					<h4 className="space_details_content_title">Price</h4>
 					<div className="space_details_price_container">
-		
 						<div className="space_details_price_details">
-							<h5>Daily: </h5>
-							<p>
-								{space.daily} €  <button onChange={this.addToCart}>{element}</button>
-							</p>
-						</div>
-						<div className="space_details_price_details">
-							<h5>Weekly: </h5>
-							<p>
-								{space.weekly} € <button onChange={this.addToCart}>{element}</button>
-							</p>
-						</div>
-						<div className="space_details_price_details">
-							<h5>Monthly: </h5>
-							<p>
-								{space.monthly} € <button onChange={this.addToCart}>{element}</button>
-							</p>
+							<p>Daily:</p>
+							<button onClick={() => this.props.addItemToCart(this.state, daily)}>
+								{daily} € {element}
+							</button>
+							<p>Weekly:</p>
+							<button onClick={() => this.props.addItemToCart(this.state, weekly)}>
+								{weekly} € {element}
+							</button>
+							<p>Monthly:</p>
+							<button onClick={() => this.props.addItemToCart(this.state, monthly)}>
+								{monthly} € {element}
+							</button>
 						</div>
 					</div>
 
@@ -89,8 +113,9 @@ class SpaceDetails extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}:  {item.price} € <button onChange={this.addToCart}>{element}</button>
+										{item.description}: {item.price} €
 									</p>
+									<button onClick={() => this.props.addItemToCart(item.description, item.price)}>{element}</button>
 								</div>
 							);
 						})}
@@ -101,4 +126,4 @@ class SpaceDetails extends Component {
 	}
 }
 
-export default SpaceDetails;
+export default withCart(SpaceDetails);

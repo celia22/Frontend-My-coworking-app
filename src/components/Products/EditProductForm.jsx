@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
-class NewProductForm extends Component {
+
+class EditProductForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -10,23 +11,29 @@ class NewProductForm extends Component {
 		};
 	}
 
-	handleChange = event => {
-		const { name, value } = event.target;
-		this.setState({
-			[name]: value,
-		});
-	};
-
-	createNewProduct = async event => {
+	editProduct = async event => {
 		event.preventDefault();
+		const { id } = this.props.match.params;
 		const { description, price } = this.state;
 		try {
-			await apiService.newProduct({ description, price });
+			const editProduct = await apiService.editProduct({ description, price }, id);
+			this.setState({
+				description,
+				price,
+			});
+			console.log(editProduct);
 		} catch (e) {
 			console.log(e);
 		} finally {
 			this.props.history.push({ pathname: '/admin' });
 		}
+	};
+
+	handleChange = event => {
+		const { name, value } = event.target;
+		this.setState({
+			[name]: value,
+		});
 	};
 
 	render() {
@@ -39,7 +46,7 @@ class NewProductForm extends Component {
 					&laquo; Back
 				</Link>
 
-				<form onSubmit={this.createNewProduct} className="new_edit_form">
+				<form onSubmit={this.editProduct} className="new_edit_form">
 					<label>
 						<strong>Description:</strong>
 					</label>
@@ -50,11 +57,11 @@ class NewProductForm extends Component {
 					</label>
 					<input type="number" name="price" value={price} onChange={this.handleChange} />
 
-					<input type="submit" value="Add new product" className="new_edit_send" />
+					<input type="submit" value="Edit product" className="new_edit_send" />
 				</form>
 			</div>
 		);
 	}
 }
 
-export default NewProductForm;
+export default EditProductForm;

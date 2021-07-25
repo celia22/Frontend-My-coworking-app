@@ -26,7 +26,7 @@ class Login extends Component {
 	};
 
 	render() {
-		console.log('user', this.props);
+		// console.log('user', this.props);
 		const { email, password } = this.state;
 		return (
 			<div className="login_signup_container">

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import "./styles/MainPage.css"
+import "./styles/WelcomePage.css"
 
-import MainPageCarousel from "../components/MainPageCarousel/MainPageCarousel";
+import WelcomePageCarousel from "../components/WelcomePageCarousel/WelcomePageCarousel";
 
-class MainPage extends Component{
+class WelcomePage extends Component{
   render(){
     return(
       <div className="main_page_container">  
         
         <h2>Discover our buildings</h2>
-          <MainPageCarousel />
+          <WelcomePageCarousel />
       
         <p>
           Welcome to My-Coworking, the place to find awesome work spaces and amazing perks.
@@ -20,4 +20,4 @@ class MainPage extends Component{
   }
 }
 
-export default MainPage;
+export default WelcomePage;

@@ -8,6 +8,8 @@ class ApiService {
 		});
 	}
 
+	// USER METHODS
+
 	me() {
 		return this.apiService.get('/whoami').then(response => response.data);
 	}
@@ -33,18 +35,24 @@ class ApiService {
 			.then(({ data }) => data);
 	}
 
+	deleteAccount(id) {
+		return this.apiService.delete(`/user/${id}/delete`).then(({ data }) => data);
+	}
+
+	// SPACES METHODS
+
 	newSpace(space) {
-		const { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city } = space;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = space;
 		console.log(space);
 		return this.apiService
-			.post('/space/new', { spaceName, spaceType, imageUrlSpace, daily, weekly, monthly, city })
+			.post('/space/new', { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
 			.then(({ data }) => data);
 	}
 
 	updateSpace(space, id) {
-		const { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city } = space;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = space;
 		return this.apiService
-			.put(`/space/${id}/edit`, { spaceName, spaceType, imageUrlSpace, product, daily, weekly, monthly, city })
+			.put(`/space/${id}/edit`, { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
 			.then(({ data }) => data);
 	}
 
@@ -61,17 +69,31 @@ class ApiService {
 		return this.apiService.get(`/space/${id}/details`).then(({ data }) => data);
 	}
 
-	newProduct(product) {
-		const { spaceName, price, description } = product;
-		return this.apiService.post('/product/new', { spaceName, price, description }).then(({ data }) => data);
+	deleteSpace(id) {
+		return this.apiService.delete(`/space/${id}/delete`).then(({ data }) => data);
 	}
 
-	getAllproducts(id) {
-		return this.apiService.get(`/product/${id}/all`).then(response => response.data);
+	// PRODUCTS METHODS
+	newProduct(product) {
+		const { productPrice, productDescription } = product;
+		return this.apiService.post('/product/new', { productPrice, productDescription }).then(({ data }) => data);
+	}
+
+	getAllproducts() {
+		return this.apiService.get(`/product/all`).then(response => response.data);
+	}
+
+	deleteProduct(id) {
+		return this.apiService.delete(`/product/${id}/delete`).then(({ data }) => data);
 	}
 
 	getSingleproduct(id) {
-		return this.apiService.get(`/product/${id}/details`).then(({ data }) => data);
+		return this.apiService.get(`/product/${id}/edit`).then(({ data }) => data);
+	}
+
+	editProduct(product, id) {
+		const { productPrice, productDescription } = product;
+		return this.apiService.put(`/product/${id}/edit`, { productPrice, productDescription }).then(({ data }) => data);
 	}
 }
 

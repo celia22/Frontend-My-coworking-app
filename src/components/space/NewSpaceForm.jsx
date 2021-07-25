@@ -8,15 +8,15 @@ class NewSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imageUrlSpace: [ ],
-			daily: 0,
-			weekly: 0,
-			monthly: 0,
+			imgUrl: [],
+			daily: '',
+			weekly: '',
+			monthly: '',
 			city: ' ',
 		};
 	}
 
-		handleChange = event => {
+	handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({
 			[name]: value,
@@ -25,60 +25,60 @@ class NewSpaceForm extends Component {
 
 	handleFileUpload = event => {
 		this.setState({
-			imageUrlSpace: event.target.files[0]
-		})
+			imgUrl: event.target.files[0],
+		});
 
-  console.log('The file to be uploaded is: ', event.target.files[0]); 
-  //   const uploadData = new FormData();
-  //   uploadData.append('imageUrlSpace', e.target.files[0]);
- 
-  //  apiService
-  //     .handleUpload(e)
-  //     .then(response => {
-  //      console.log('response is: ', response);
-  //       this.setState({ imageUrlSpace: response.secure_url });
-  //     })
-  //     .catch(err => {
-  //       console.log('Error while uploading the file: ', err);
-  //     });
-  };
+		console.log('The file to be uploaded is: ', event.target.files[0]);
+		//   const uploadData = new FormData();
+		//   uploadData.append('imgUrl', e.target.files[0]);
 
+		//  apiService
+		//     .handleUpload(e)
+		//     .then(response => {
+		//      console.log('response is: ', response);
+		//       this.setState({ imgUrl: response.secure_url });
+		//     })
+		//     .catch(err => {
+		//       console.log('Error while uploading the file: ', err);
+		//     });
+	};
 
-	createSpaceHandler = async (event) => {
+	createSpaceHandler = async event => {
 		event.preventDefault();
-		const { spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 		try {
-	
-			const newSpace = await apiService.newSpace({spaceName, spaceType,imageUrlSpace, daily, weekly, monthly, city });
-			console.log("newspace", newSpace);
+			const newSpace = await apiService.newSpace({
+				spaceName,
+				spaceType,
+				imgUrl,
+				daily,
+				weekly,
+				monthly,
+				city,
+			});
+			console.log('newspace', newSpace);
 			const uploadData = new FormData();
-    	uploadData.append('imageUrlSpace', event.target.files[0]);
-			const uploadImg = await apiService.handleUpload(event)
+			uploadData.append('imgUrl', event.target.files[0]);
+			const uploadImg = await apiService.handleUpload(event);
 			this.setState({
-				imageUrlSpace: uploadImg.secure_url
-			})
-			console.log(uploadImg)
+				imgUrl: uploadImg.secure_url,
+			});
+			console.log(uploadImg);
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.props.history.push({pathname: "/admin"})
+			this.props.history.push({ pathname: '/admin' });
 		}
 	};
 
 	render() {
-		const {
-			spaceName,
-			spaceType,
-			daily,
-			weekly,
-			monthly,
-			city,
-		} = this.state;
-
+		const { spaceName, spaceType, daily, weekly, monthly, city } = this.state;
 		return (
 			<div className="new_edit_form_container">
-
-				<Link to="/admin"> Back </Link>
+				<Link to="/admin" className="back_button">
+					{' '}
+					&laquo; Back{' '}
+				</Link>
 
 				<form onSubmit={this.createSpaceHandler} className="new_edit_form">
 					<label>
@@ -94,7 +94,7 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file"  onChange={event => this.handleFileUpload(event)} /> 
+					<input type="file" onChange={event => this.handleFileUpload(event)} />
 					<div>
 						<table>
 							<tbody>
@@ -113,6 +113,7 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="daily"
 											value={daily}
+											placeholder="Daily price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -123,6 +124,7 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="weekly"
 											value={weekly}
+											placeholder="Weekly price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -133,13 +135,13 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="monthly"
 											value={monthly}
+											placeholder="Monthly price"
 											onChange={this.handleChange}
 										/>
 									</th>
 								</tr>
 							</tbody>
 						</table>
-
 					</div>
 
 					<label>
@@ -149,8 +151,7 @@ class NewSpaceForm extends Component {
 
 					<input type="submit" value="Add new space" className="new_edit_send" />
 				</form>
-
-				</div>
+			</div>
 		);
 	}
 }
