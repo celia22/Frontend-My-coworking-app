@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import SpacesCards from '../components/Space/SpacesCards';
-import SearchBar from '../components/Space/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import { withAuth } from '../providers/AuthProvider';
-import { Link } from 'react-router-dom';
 import apiService from '../lib/apiService';
 import './styles/UserMainPage.css';
 
@@ -44,22 +43,11 @@ class UserMainPage extends Component {
 
 	render() {
 		const { searchSpaces } = this.state;
-		const { user } = this.props;
+
 		// console.log('usermainpage', user.role);
 		// console.log('spaces', this.state.searchSpaces);
 		return (
 			<div className="user_main_page_container">
-				{user.role === 'admin' ? (
-					<div>
-						<button className="admin_nav">
-							<Link className="admin_nav_link" to={'/admin'}>
-								Admin Options
-							</Link>
-						</button>
-					</div>
-				) : (
-					' '
-				)}
 				<SearchBar search={this.searchProductQuery} />
 
 				<SpacesCards searchSpaces={searchSpaces} />

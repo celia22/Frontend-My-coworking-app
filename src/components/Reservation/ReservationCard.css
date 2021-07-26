@@ -1,5 +1,5 @@
 .reservation_card_item {
-	width: 80%;
+	width: 70%;
 	height: 60%;
 	border: 1px solid rgba(128, 128, 128, 0.119);
 	-webkit-box-shadow: 6px 7px 15px -2px #727272;
@@ -8,6 +8,9 @@
 	margin: 4%;
 	margin-bottom: 20px;
 	background-color: white;
+	font-size: 6px;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .reservation_card_item_image {
@@ -31,5 +34,5 @@
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	height: 80vh;
+	height: 40vh;
 }

@@ -30,10 +30,10 @@ class ReservationCard extends Component {
 		console.log(this.state.reservations);
 		const { reservations } = this.state;
 		return (
-			<>
-				<div className="reservation_card_scroll">
-					<h2>Your reservations</h2>
+			<div className="reservation_container">
+				<h2>Your reservations</h2>
 
+				<div className="reservation_card_scroll">
 					{reservations.map(item => {
 						return (
 							<div key={item._id} className="reservation_card_item ">
@@ -52,7 +52,7 @@ class ReservationCard extends Component {
 						);
 					})}
 				</div>
-			</>
+			</div>
 		);
 	}
 }
