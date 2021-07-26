@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const validateForm = errors => {
 	let valid = true;
@@ -39,21 +41,26 @@ class Signup extends Component {
 
 		switch (name) {
 			case 'fullName':
-				errors.firstName = value.length === 0 ? 'You have to fill all the fields' : '';
+				errors.firstName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				toast.warn('You have to fill all the fields');
 				break;
 			case 'lastName':
-				errors.lastName = value.length === 0 ? 'You have to fill all the fields' : '';
+				errors.lastName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				toast.warn('You have to fill all the fields');
 				break;
 			case 'city':
-				errors.city = value.length === 0 ? 'You have to fill all the fields' : '';
+				errors.city = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				toast.warn('You have to fill all the fields');
 				break;
 			case 'email':
-				errors.email = regexEmail.test(value) ? '' : 'Email is not valid!';
+				errors.email = regexEmail.test(value) ? '' : toast.error('Email is not valid!');
 				break;
 			case 'password':
 				errors.password = regexPassword.test(value)
 					? ''
-					: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.';
+					: toast.error(
+							'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
+					  );
 				break;
 			default:
 				break;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './components/Navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -24,6 +26,7 @@ import EditProductForm from './components/Products/EditProductForm';
 import Cart from './components/Reservation/Cart';
 import AdminReservations from './pages/AdminReservations';
 
+toast.configure();
 class App extends Component {
 	render() {
 		const { isLoading } = this.props;
@@ -32,6 +35,7 @@ class App extends Component {
 		}
 		return (
 			<div className="container">
+				<ToastContainer autoClose={3000} />
 				<Navbar />
 				<Switch>
 					<PrivateRoute path="/reservations/admin/all" component={AdminReservations} />
