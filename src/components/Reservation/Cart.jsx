@@ -23,9 +23,17 @@ class Cart extends Component {
 		} catch (e) {
 			console.log(e);
 		} finally {
+			this.setState({
+				cart: ' ',
+				prices: ' ',
+				totalAmount: ' ',
+			});
 			this.props.history.push({ pathname: '/user/:id/menu' });
 		}
 	};
+
+	// NO BORRA EL CART CUANDO HAGO LA RESERVA, LO MISMO QUE CON UPDATE DELETE COSAS, MIRAR DE
+	// HACER EL COMPONENT DID UPDATE Y PREV PROPS
 
 	render() {
 		const { cart, prices, totalAmount } = this.state;
@@ -42,15 +50,11 @@ class Cart extends Component {
 						<tr>
 							<td>
 								{cart.map((item, index) => {
-									if (typeof item[index] === 'string') {
-										return <p key={index}>{item}</p>;
-									} else {
-										return (
-											<p key={index}>
-												{item.spaceName} Type: {item.spaceType}
-											</p>
-										);
-									}
+									return (
+										<p key={index}>
+											{item.spaceName} Type: {item.spaceType}
+										</p>
+									);
 								})}
 							</td>
 							<td>

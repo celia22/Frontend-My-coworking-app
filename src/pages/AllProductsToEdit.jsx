@@ -28,6 +28,10 @@ class AllProductsToEdit extends Component {
 			console.log('product deleted', id);
 		} catch (e) {
 			console.log(e);
+		} finally {
+			this.setState({
+				products: this.state.products,
+			});
 		}
 	}
 
@@ -43,13 +47,11 @@ class AllProductsToEdit extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}: {item.price}
+										{item.productDescription}: {item.productPrice}
 										<button className="edit_button">
-											{' '}
 											<Link to={`/product/${item._id}/edit`} className="button_link">
-												{' '}
-												Edit product{' '}
-											</Link>{' '}
+												Edit product
+											</Link>
 										</button>
 									</p>
 									<button className="delete_button" onClick={() => this.deleteProduct(item._id)}>

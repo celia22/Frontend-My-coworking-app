@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+// import AdminRoute from './components/AdminRoute';
 import AnonRoute from './components/AnonRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ import AllSpacesToEdit from './pages/AllSpacesToEdit';
 import AllProductsToEdit from './pages/AllProductsToEdit';
 import EditProductForm from './components/Products/EditProductForm';
 import Cart from './components/Reservation/Cart';
+import AdminReservations from './pages/AdminReservations';
 
 class App extends Component {
 	render() {
@@ -32,6 +34,7 @@ class App extends Component {
 			<div className="container">
 				<Navbar />
 				<Switch>
+					<PrivateRoute path="/reservations/admin/all" component={AdminReservations} />
 					<PrivateRoute path="/reservations/:id/new" component={Cart} />
 					<PrivateRoute path="/product/all/edit" component={AllProductsToEdit} />
 					<PrivateRoute path="/space/all/edit" component={AllSpacesToEdit} />

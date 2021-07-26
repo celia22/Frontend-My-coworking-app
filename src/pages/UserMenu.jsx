@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import ReservationCards from '../components/Reservation/Cart';
+import { withAuth } from '../providers/AuthProvider';
+import ReservationCard from '../components/Reservation/ReservationCard';
 import './styles/buttons.css';
 
 const UserMenu = props => {
@@ -22,11 +23,11 @@ const UserMenu = props => {
 				</Link>{' '}
 			</button>
 
-			{/* < ReservationCards /> */}
+			<ReservationCard user={props.user._id} />
 
 			{/* call my payments (BG) */}
 		</>
 	);
 };
 
-export default UserMenu;
+export default withAuth(UserMenu);

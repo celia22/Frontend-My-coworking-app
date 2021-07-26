@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-import { withAuth } from '../providers/AuthProvider';
-
+import { withAuth } from '../../providers/AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 

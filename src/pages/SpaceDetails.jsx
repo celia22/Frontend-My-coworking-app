@@ -20,10 +20,6 @@ class SpaceDetails extends Component {
 			weekly: '',
 			imgUrlSpace: '',
 			products: [],
-			// products: {
-			// 	description: [],
-			// 	price: [],
-			// },
 		};
 	}
 
@@ -33,9 +29,6 @@ class SpaceDetails extends Component {
 			const singleSpace = await apiService.getSingleSpace(id);
 			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
-			// const {
-			// 	products: { description, price },
-			// } = getProducts;
 			this.setState({
 				_id,
 				spaceParams,
@@ -47,10 +40,6 @@ class SpaceDetails extends Component {
 				monthly,
 				imgUrlSpace,
 				products: getProducts,
-				// products: {
-				// 	description,
-				// 	price,
-				// },
 			});
 		} catch (error) {
 			console.log(error);
@@ -59,7 +48,7 @@ class SpaceDetails extends Component {
 
 	render() {
 		console.log('props en details', this.props.match.params.id);
-		const spaceId = this.props.match.params.id;
+		//	const spaceId = this.props.match.params.id;
 
 		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
 		// const {
@@ -89,15 +78,15 @@ class SpaceDetails extends Component {
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, daily, spaceId)}>
+							<button onClick={() => this.props.addItemToCart(this.state, daily)}>
 								{daily} € {element}
 							</button>
 							<p>Weekly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, weekly, spaceId)}>
+							<button onClick={() => this.props.addItemToCart(this.state, weekly)}>
 								{weekly} € {element}
 							</button>
 							<p>Monthly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, monthly, spaceId)}>
+							<button onClick={() => this.props.addItemToCart(this.state, monthly)}>
 								{monthly} € {element}
 							</button>
 						</div>
@@ -109,9 +98,9 @@ class SpaceDetails extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}: {item.price} €
+										{item.productDescription}: {item.productPrice} €
 									</p>
-									<button onClick={() => this.props.addItemToCart(item, item.price)}>{element}</button>
+									<button onClick={() => this.props.addItemToCart(item, item.productPrice)}>{element}</button>
 								</div>
 							);
 						})}

@@ -88,7 +88,7 @@ class ApiService {
 	}
 
 	getSingleproduct(id) {
-		return this.apiService.get(`/product/${id}/edit`).then(({ data }) => data);
+		return this.apiService.get(`/product/${id}/details`).then(({ data }) => data);
 	}
 
 	editProduct(product, id) {
@@ -103,6 +103,14 @@ class ApiService {
 		return this.apiService
 			.post(`/reservation/${id}/new`, { space, cart, prices, user, status, totalAmount })
 			.then(({ data }) => data);
+	}
+
+	getAllreservations(id) {
+		return this.apiService.get(`/reservation/${id}/all`).then(({ data }) => data);
+	}
+
+	getAllReservationsAdmin() {
+		return this.apiService.get(`/reservation/all`).then(({ data }) => data);
 	}
 }
 
