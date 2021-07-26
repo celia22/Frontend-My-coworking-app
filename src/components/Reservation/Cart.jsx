@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withAuth } from '../../providers/AuthProvider';
 import { withCart } from '../../providers/CartProvider';
-// import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import apiService from '../../lib/apiService';
 
 class Cart extends Component {
@@ -20,6 +22,7 @@ class Cart extends Component {
 			const { cart, prices, totalAmount } = this.state;
 			const id = this.props.user._id;
 			apiService.newReservation({ cart, prices, totalAmount }, id);
+			toast.success('Your reservation is confirmed');
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -67,7 +70,7 @@ class Cart extends Component {
 				</table>
 
 				<p>Total Amount: {totalAmount} €</p>
-				<button onClick={this.handleFormSubmit}> Comfirm reservation </button>
+				<button onClick={this.handleFormSubmit}> Confirm reservation </button>
 			</div>
 		);
 	}

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartContext = React.createContext();
 const CartConsumer = CartContext.Consumer;
@@ -58,6 +60,7 @@ class CartProvider extends Component {
 		cartItems.push(item);
 		cartPrices.push(price);
 		const totalAmount = cartPrices.reduce((a, b) => a + b, 0);
+		toast('Item added to cart');
 		this.setState({
 			cart: cartItems,
 			prices: cartPrices,

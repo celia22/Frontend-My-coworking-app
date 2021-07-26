@@ -42,15 +42,12 @@ class Signup extends Component {
 		switch (name) {
 			case 'fullName':
 				errors.firstName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				toast.warn('You have to fill all the fields');
 				break;
 			case 'lastName':
 				errors.lastName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				toast.warn('You have to fill all the fields');
 				break;
 			case 'city':
 				errors.city = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				toast.warn('You have to fill all the fields');
 				break;
 			case 'email':
 				errors.email = regexEmail.test(value) ? '' : toast.error('Email is not valid!');
