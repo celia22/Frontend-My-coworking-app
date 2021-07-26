@@ -5,16 +5,24 @@ import ReservationCard from '../components/Reservation/ReservationCard';
 import './styles/buttons.css';
 
 const UserMenu = props => {
-	console.log('user props', props);
+	console.log('user props', props.user.role);
 
 	return (
-		<>
+		<div className="user_menu_container">
+			{props.user.role === 'admin' ? (
+				<button>
+					<Link className="admin_nav_link" to={'/admin'}>
+						Admin Options
+					</Link>
+				</button>
+			) : (
+				' '
+			)}
+
 			<Link to={'/user/main'} className="back_button">
 				{' '}
 				&laquo; Back{' '}
 			</Link>
-
-			<h1> This is your user menu page</h1>
 
 			<button className="edit_button">
 				{' '}
@@ -26,7 +34,7 @@ const UserMenu = props => {
 			<ReservationCard user={props.user._id} />
 
 			{/* call my payments (BG) */}
-		</>
+		</div>
 	);
 };
 

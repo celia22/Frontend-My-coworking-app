@@ -4,6 +4,7 @@ import SearchBar from '../components/Space/SearchBar';
 import { withAuth } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import apiService from '../lib/apiService';
+import './styles/UserMainPage.css';
 
 class UserMainPage extends Component {
 	constructor(props) {
@@ -47,23 +48,22 @@ class UserMainPage extends Component {
 		// console.log('usermainpage', user.role);
 		// console.log('spaces', this.state.searchSpaces);
 		return (
-			<>
+			<div className="user_main_page_container">
 				{user.role === 'admin' ? (
 					<div>
-						<button>
-							<Link to={'/admin'}> Admin Options </Link>
+						<button className="admin_nav">
+							<Link className="admin_nav_link" to={'/admin'}>
+								Admin Options
+							</Link>
 						</button>
 					</div>
 				) : (
 					' '
 				)}
-
 				<SearchBar search={this.searchProductQuery} />
 
-				<div>
-					<SpacesCards searchSpaces={searchSpaces} />
-				</div>
-			</>
+				<SpacesCards searchSpaces={searchSpaces} />
+			</div>
 		);
 	}
 }

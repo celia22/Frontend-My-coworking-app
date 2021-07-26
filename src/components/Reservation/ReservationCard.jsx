@@ -31,7 +31,7 @@ class ReservationCard extends Component {
 		const { reservations } = this.state;
 		return (
 			<>
-				<div className="space_card_scroll">
+				<div className="reservation_card_scroll">
 					<h2>Your reservations</h2>
 
 					{reservations.map(item => {
