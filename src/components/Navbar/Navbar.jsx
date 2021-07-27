@@ -6,8 +6,8 @@ import { faBars, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import './Navbar.css';
 
-const burger = <FontAwesomeIcon icon={faBars} color="white" size="2x" />;
-const cart = <FontAwesomeIcon icon={faCartArrowDown} color="white" size="2x" />;
+const burger = <FontAwesomeIcon icon={faBars} color="white" />;
+const cart = <FontAwesomeIcon icon={faCartArrowDown} color="white" />;
 
 class Navbar extends Component {
 	render() {

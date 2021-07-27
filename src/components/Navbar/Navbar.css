@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-around;
 	margin: none;
+	height: 7vh;
 	background-color: black;
 	-webkit-box-shadow: 0 8px 6px -6px rgba(204, 200, 200, 0.75);
 	-moz-box-shadow: 0 8px 6px -6px rgba(204, 200, 200, 0.75);
@@ -22,8 +23,8 @@
 }
 
 .navbar_button {
-	margin: 3vh;
-	padding: 2vh 5vh;
+	margin: 1vh;
+	padding: 1.5vh 5vh;
 	background-color: rgb(223, 86, 76);
 	color: white;
 	text-decoration: none;

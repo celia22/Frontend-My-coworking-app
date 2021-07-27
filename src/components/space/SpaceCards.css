@@ -1,5 +1,6 @@
 .space_card_container {
 	margin-bottom: 5vh;
+	background-color: red;
 }
 
 .space_card_item {
@@ -8,10 +9,14 @@
 	border: 1px solid rgba(128, 128, 128, 0.119);
 	-webkit-box-shadow: 6px 7px 15px -2px #727272;
 	box-shadow: 6px 7px 15px -2px #727272;
-	color: rgb(2, 8, 59);
-	margin: 4%;
+	color: rgba(0, 0, 0, 0.37);
+	margin: 0;
 	margin-bottom: 20px;
 	background-color: white;
+}
+
+.space_card_item > a {
+	margin: 0;
 }
 
 .space_card_item_image {
@@ -21,14 +26,11 @@
 
 .space_card_item_title {
 	height: 30%;
-	background-color: black;
+	background-color: red;
 	color: white;
-	margin: none;
+	margin: 0;
 }
 
-.space_card_item_price {
-	display: none;
-}
 .space_card_scroll {
 	overflow-x: scroll;
 	overflow-y: hidden;

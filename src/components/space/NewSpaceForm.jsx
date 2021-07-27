@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class NewSpaceForm extends Component {
 	constructor(props) {
@@ -51,6 +53,7 @@ class NewSpaceForm extends Component {
 				monthly,
 				city,
 			});
+			toast.success('New space created');
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -100,7 +103,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="daily"
 											value={daily}
-											placeholder="Daily price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -111,7 +113,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="weekly"
 											value={weekly}
-											placeholder="Weekly price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -122,7 +123,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="monthly"
 											value={monthly}
-											placeholder="Monthly price"
 											onChange={this.handleChange}
 										/>
 									</th>

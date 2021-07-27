@@ -18,7 +18,7 @@ class SpaceDetails extends Component {
 			daily: '',
 			monthly: '',
 			weekly: '',
-			imgUrlSpace: '',
+			imgUrl: '',
 			products: [],
 		};
 	}
@@ -27,7 +27,7 @@ class SpaceDetails extends Component {
 		const id = this.props.match.params.id;
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
+			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
 			this.setState({
 				_id,
@@ -38,7 +38,7 @@ class SpaceDetails extends Component {
 				daily,
 				weekly,
 				monthly,
-				imgUrlSpace,
+				imgUrl,
 				products: getProducts,
 			});
 		} catch (error) {
@@ -50,16 +50,14 @@ class SpaceDetails extends Component {
 		console.log('props en details', this.props.match.params.id);
 		//	const spaceId = this.props.match.params.id;
 
-		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
+		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
 
 		return (
 			<>
 				<div>
 					<div className="space_details_header">
 						<button className="back_button">
-							<Link to={'/user/main'} className="back_button">
-								&laquo; Back
-							</Link>
+							<Link to={'/user/main'}>&laquo; Back</Link>
 						</button>
 
 						<h4>
@@ -67,9 +65,9 @@ class SpaceDetails extends Component {
 						</h4>
 					</div>
 
-					{/* <img className="space_details_image" src={}></img> */}
+					<img className="space_details_image" src={imgUrl}></img>
 
-					<h4 className="space_details_content_title">Price</h4>
+					{/* <h4 className="space_details_content_title">Price</h4> */}
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
@@ -91,7 +89,7 @@ class SpaceDetails extends Component {
 						</div>
 					</div>
 
-					<h4 className="space_details_content_title">Services:</h4>
+					<h5 className="space_details_services_title">Add your extra services!</h5>
 					<div className="space_details_services_container">
 						{products.map((item, index) => {
 							return (
