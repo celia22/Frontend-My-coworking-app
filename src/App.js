@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './components/Navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
-import AdminRoute from './components/AdminRoute';
+// import AdminRoute from './components/AdminRoute';
 import AnonRoute from './components/AnonRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -50,7 +50,7 @@ class App extends Component {
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
 					<PrivateRoute path="/space/new" component={NewSpaceForm} />
 					<PrivateRoute exact path="/product/new" component={NewProductForm} />
-					<AdminRoute exact path="/admin" component={Admin} />
+					<PrivateRoute exact path="/admin" component={Admin} />
 					<AnonRoute path="/signup" component={Signup} />
 					<AnonRoute path="/login" component={Login} />
 					<Route path="/" exact component={WelcomePage} />

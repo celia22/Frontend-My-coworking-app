@@ -121,6 +121,7 @@ class AuthProvider extends Component {
 					isLoggedIn: status === 'loggedIn',
 					isLoggedOut: status === 'loggedOut',
 					user,
+					// isAdmin,
 					login: this.login,
 					signup: this.signup,
 					logout: this.logout,

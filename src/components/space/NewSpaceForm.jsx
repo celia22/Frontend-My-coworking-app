@@ -8,7 +8,7 @@ class NewSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imgUrl: [],
+			imgUrl: ' ',
 			daily: '',
 			weekly: '',
 			monthly: '',
@@ -24,30 +24,25 @@ class NewSpaceForm extends Component {
 	};
 
 	handleFileUpload = event => {
-		this.setState({
-			imgUrl: event.target.files[0],
-		});
-
 		console.log('The file to be uploaded is: ', event.target.files[0]);
-		//   const uploadData = new FormData();
-		//   uploadData.append('imgUrl', e.target.files[0]);
-
-		//  apiService
-		//     .handleUpload(e)
-		//     .then(response => {
-		//      console.log('response is: ', response);
-		//       this.setState({ imgUrl: response.secure_url });
-		//     })
-		//     .catch(err => {
-		//       console.log('Error while uploading the file: ', err);
-		//     });
+		const uploadData = new FormData();
+		uploadData.append('imgUrl', event.target.files[0]);
+		apiService
+			.handleUpload(uploadData)
+			.then(response => {
+				console.log('response is: ', response);
+				this.setState({ imgUrl: response.secure_url });
+			})
+			.catch(err => {
+				console.log('Error while uploading the file: ', err);
+			});
 	};
 
 	createSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 		try {
-			const newSpace = await apiService.newSpace({
+			await apiService.newSpace({
 				spaceName,
 				spaceType,
 				imgUrl,
@@ -56,14 +51,6 @@ class NewSpaceForm extends Component {
 				monthly,
 				city,
 			});
-			console.log('newspace', newSpace);
-			const uploadData = new FormData();
-			uploadData.append('imgUrl', event.target.files[0]);
-			const uploadImg = await apiService.handleUpload(event);
-			this.setState({
-				imgUrl: uploadImg.secure_url,
-			});
-			console.log(uploadImg);
 		} catch (e) {
 			console.log(e);
 		} finally {
