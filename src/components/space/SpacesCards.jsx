@@ -14,7 +14,7 @@ const SpacesCards = props => {
 					return (
 						<div key={item._id} className="space_card_item ">
 							<Link to={`/space/${item._id}/details`}>
-								<div className="space_card_item_title">
+								<div className="space_card_title">
 									<h4>
 										{item.spaceName} {item.spaceType}
 									</h4>
