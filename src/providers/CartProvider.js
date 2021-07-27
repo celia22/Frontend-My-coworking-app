@@ -47,13 +47,6 @@ class CartProvider extends Component {
 		console.log('did update', this.state);
 	}
 
-	// addSpaceId = () => {
-	// 	const spaceId = 0;
-	// 	this.setState({
-	// 		spaceId,
-	// 	});
-	// };
-
 	addItemToCart = (item, price) => {
 		const cartItems = this.state.cart;
 		const cartPrices = this.state.prices;

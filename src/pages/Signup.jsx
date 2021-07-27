@@ -85,15 +85,33 @@ class Signup extends Component {
 			<div className="login_signup_container">
 				<form onSubmit={this.handleFormSubmit} className="new_edit_form">
 					<label>Email:</label>
-					<input type="text" name="email" value={email} onChange={this.handleChange} />
+					<input type="text" name="email" value={email} onChange={this.handleChange} className="new_edit_form_input" />
 					<label>Password:</label>
-					<input type="password" name="password" value={password} onChange={this.handleChange} />
+					<input
+						type="password"
+						name="password"
+						value={password}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 					<label>Firstname:</label>
-					<input type="text" name="firstName" value={firstName} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="firstName"
+						value={firstName}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 					<label>Lastname:</label>
-					<input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="lastName"
+						value={lastName}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 					<label>City:</label>
-					<input type="text" name="city" value={city} onChange={this.handleChange} />
+					<input type="text" name="city" value={city} onChange={this.handleChange} className="new_edit_form_input" />
 					<input className="new_edit_send" type="submit" value="Signup" />
 				</form>
 				<p>

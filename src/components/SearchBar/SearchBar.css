@@ -12,6 +12,7 @@
 	height: 4vh;
 	margin: 5vh 0;
 	border: 2px solid gray;
+	border-radius: 10px;
 	z-index: 1;
 }
 

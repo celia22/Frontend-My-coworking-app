@@ -24,7 +24,7 @@ class AllProductsToEdit extends Component {
 
 	async deleteProduct(id) {
 		try {
-			apiService.deleteProduct(id);
+			await apiService.deleteProduct(id);
 			console.log('product deleted', id);
 		} catch (e) {
 			console.log(e);

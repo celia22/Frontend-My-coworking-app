@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 import ReservationCard from '../components/Reservation/ReservationCard';
-import './styles/buttons.css';
 import './styles/UserMenu.css';
 
 const UserMenu = props => {
@@ -17,8 +16,8 @@ const UserMenu = props => {
 				</Link>
 
 				{props.user.role === 'admin' ? (
-					<button>
-						<Link className="admin_nav_link" to={'/admin'}>
+					<button className="user_menu_button">
+						<Link className="button_link" to={'/admin'}>
 							Admin Options
 						</Link>
 					</button>
@@ -26,7 +25,7 @@ const UserMenu = props => {
 					' '
 				)}
 
-				<button className="edit_button">
+				<button className="user_menu_button">
 					{' '}
 					<Link to="/user/:id/update-profile" className="button_link">
 						Edit or Delete Account{' '}

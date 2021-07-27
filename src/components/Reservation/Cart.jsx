@@ -3,6 +3,7 @@ import { withAuth } from '../../providers/AuthProvider';
 import { withCart } from '../../providers/CartProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Cart.css';
 
 import apiService from '../../lib/apiService';
 
@@ -42,7 +43,7 @@ class Cart extends Component {
 		const { cart, prices, totalAmount } = this.state;
 		console.log('props en cart', this.props);
 		return (
-			<div>
+			<div className="cart_container">
 				<h3>Reservation</h3>
 				<table>
 					<tbody>
@@ -55,7 +56,7 @@ class Cart extends Component {
 								{cart.map((item, index) => {
 									return (
 										<p key={index}>
-											{item.spaceName} Type: {item.spaceType}
+											{item.spaceName} {item.spaceType} {item.productDescription}
 										</p>
 									);
 								})}
@@ -70,7 +71,10 @@ class Cart extends Component {
 				</table>
 
 				<p>Total Amount: {totalAmount} €</p>
-				<button onClick={this.handleFormSubmit}> Confirm reservation </button>
+				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
+					{' '}
+					Confirm reservation{' '}
+				</button>
 			</div>
 		);
 	}

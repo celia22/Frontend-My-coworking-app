@@ -88,9 +88,15 @@ class Login extends Component {
 			<div className="login_signup_container">
 				<form onSubmit={this.handleFormSubmit} className="new_edit_form">
 					<label>Email:</label>
-					<input type="text" name="email" value={email} onChange={this.handleChange} />
+					<input type="text" name="email" value={email} onChange={this.handleChange} className="new_edit_form_input" />
 					<label>Password:</label>
-					<input type="password" name="password" value={password} onChange={this.handleChange} />
+					<input
+						type="password"
+						name="password"
+						value={password}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 					<input className="new_edit_send" type="submit" value="Login" />
 				</form>
 			</div>
