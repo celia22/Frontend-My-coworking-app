@@ -21,7 +21,8 @@ export const withCart = Comp => {
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
 							resetCart={value.resetCart}
-							updateQuantity={value.updateQuantity}
+							moreQuantity={value.moreQuantity}
+							lessQuantity={value.lessQuantity}
 						/>
 					)}
 				</CartConsumer>
@@ -68,10 +69,25 @@ class CartProvider extends Component {
 		});
 	};
 
-	updateQuantity = item => {
+	moreQuantity = item => {
 		const cartPrices = this.state.prices;
 		const cartItems = this.state.cart;
 		item.quantity = item.quantity + 1;
+
+		const finalPrice = cartPrices.map((item, index) => {
+			return item * cartItems[index].quantity;
+		});
+
+		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
+		this.setState({
+			totalAmount: totalAmountQuantity,
+		});
+	};
+
+	lessQuantity = item => {
+		const cartPrices = this.state.prices;
+		const cartItems = this.state.cart;
+		item.quantity = item.quantity - 1;
 
 		const finalPrice = cartPrices.map((item, index) => {
 			return item * cartItems[index].quantity;
@@ -102,7 +118,8 @@ class CartProvider extends Component {
 					totalAmount,
 					addItemToCart: this.addItemToCart,
 					resetCart: this.resetCart,
-					updateQuantity: this.updateQuantity,
+					moreQuantity: this.moreQuantity,
+					lessQuantity: this.lessQuantity,
 				}}
 			>
 				{this.props.children}

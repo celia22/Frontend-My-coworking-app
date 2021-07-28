@@ -58,11 +58,10 @@ class Cart extends Component {
 											</p>
 										</td>
 										<td>
-											<button type="number" onClick={() => this.props.updateQuantity(item)}>
-												+
-											</button>
+											<button onClick={() => this.props.moreQuantity(item)}>+</button>
 											{item.quantity} - {prices[index] * item.quantity} €{' '}
 										</td>
+										<button onClick={() => this.props.lessQuantity(item)}>-</button>
 									</div>
 								);
 							})}
