@@ -5,8 +5,8 @@ class NewProductForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			description: ' ',
-			price: 0,
+			productDescription: '',
+			productPrice: 0,
 		};
 	}
 
@@ -19,18 +19,18 @@ class NewProductForm extends Component {
 
 	createNewProduct = async event => {
 		event.preventDefault();
-		const { description, price } = this.state;
+		const { productDescription, productPrice } = this.state;
 		try {
-			await apiService.newProduct({ description, price });
+			await apiService.newProduct({ productDescription, productPrice });
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.props.history.push({ pathname: '/admin' });
+			this.props.history.push('/product/all/edit');
 		}
 	};
 
 	render() {
-		const { description, price } = this.state;
+		const { productDescription, productPrice } = this.state;
 
 		return (
 			<div className="new_edit_form_container">
@@ -43,12 +43,12 @@ class NewProductForm extends Component {
 					<label>
 						<strong>Description:</strong>
 					</label>
-					<input type="text" name="description" value={description} onChange={this.handleChange} />
+					<input type="text" name="productDescription" value={productDescription} onChange={this.handleChange} />
 
 					<label>
 						<strong>Price:</strong>
 					</label>
-					<input type="number" name="price" value={price} onChange={this.handleChange} />
+					<input type="number" name="productPrice" value={productPrice} onChange={this.handleChange} />
 
 					<input type="submit" value="Add new product" className="new_edit_send" />
 				</form>

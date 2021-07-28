@@ -24,10 +24,16 @@ class AllProductsToEdit extends Component {
 
 	async deleteProduct(id) {
 		try {
-			apiService.deleteProduct(id);
-			console.log('product deleted', id);
+			await apiService.deleteProduct(id);
 		} catch (e) {
 			console.log(e);
+		} finally {
+			const products = [...this.state.products].filter(item => {
+				return item._id !== id;
+			});
+			this.setState({
+				products,
+			});
 		}
 	}
 
@@ -43,7 +49,7 @@ class AllProductsToEdit extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>
-										{item.description}: {item.price}
+										{item.productDescription}: {item.productPrice}
 										<button className="edit_button">
 											{' '}
 											<Link to={`/product/${item._id}/edit`} className="button_link">
