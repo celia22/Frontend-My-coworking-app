@@ -36,7 +36,6 @@ class CartProvider extends Component {
 		this.state = {
 			cart: [],
 			prices: [],
-			quantity: 1,
 			totalAmount: undefined,
 		};
 	}
@@ -50,7 +49,7 @@ class CartProvider extends Component {
 	}
 
 	addItemToCart = (item, price) => {
-		const cartItems = [...this.state.cart];
+		const cartItems = this.state.cart;
 		const cartPrices = this.state.prices;
 
 		const index = cartItems.findIndex(
@@ -71,11 +70,16 @@ class CartProvider extends Component {
 
 	updateQuantity = item => {
 		const cartPrices = this.state.prices;
+		const cartItems = this.state.cart;
 		item.quantity = item.quantity + 1;
-		console.log('cart', cartPrices, 'quantity', item.quantity);
-		const totalAmount = cartPrices.reduce((a, b) => a + b, 0);
+
+		const finalPrice = cartPrices.map((item, index) => {
+			return item * cartItems[index].quantity;
+		});
+
+		const totalAmount = finalPrice.reduce((a, b) => a + b, 0);
 		this.setState({
-			totalAmount,
+			totalAmount: totalAmount,
 		});
 	};
 
