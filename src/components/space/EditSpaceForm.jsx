@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../../providers/AuthProvider';
 import apiService from '../../lib/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const validateForm = errors => {
+	let valid = true;
+	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
+	return valid;
+};
 
 class EditSpaceForm extends Component {
 	constructor(props) {
@@ -9,62 +17,90 @@ class EditSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imgUrl: '',
-			product: [],
+			// imgUrl: ' ',
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
 			city: ' ',
+			errors: {
+				spaceName: '',
+				spaceType: '',
+				// imgUrl: ' ',
+				daily: '',
+				weekly: '',
+				monthly: '',
+				city: ' ',
+			},
+			formIsValid: false,
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		this.setState({
-			[name]: value,
-		});
+		const errors = this.state.errors;
+		switch (name) {
+			case 'spaceName':
+				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'spaceType':
+				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'imgUrl':
+				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'daily':
+				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'weekly':
+				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'monthly':
+				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			default:
+				break;
+		}
+		// this.setState({ errors, [name]: value }, () => {
+		// 	console.log(errors);
+		// });
+		this.setState({ errors, [name]: value });
 	};
 
-	handleFileUpload = e => {
-		console.log('The file to be uploaded is: ', e.target.files[0]);
-		const uploadData = new FormData();
-		uploadData.append('imgUrl', e.target.files[0]);
-
-		apiService
-			.handleUpload(e)
-			.then(response => {
-				console.log('response is: ', response);
-				this.setState({ imgUrl: response.secure_url });
-			})
-			.catch(err => {
-				console.log('Error while uploading the file: ', err);
-			});
-	};
+	// handleFileUpload = event => {
+	// 	console.log('The file to be uploaded is: ', event.target.files[0]);
+	// 	const uploadData = new FormData();
+	// 	uploadData.append('imgUrl', event.target.files[0]);
+	// 	apiService
+	// 		.handleUpload(uploadData)
+	// 		.then(response => {
+	// 			console.log('response is: ', response);
+	// 			this.setState({ imgUrl: response.secure_url });
+	// 		})
+	// 		.catch(err => {
+	// 			console.log('Error while uploading the file: ', err);
+	// 		});
+	// };
 
 	editSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
-		try {
-			const newSpace = await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
-			await console.log(newSpace);
-			await this.setState({
-				spaceName: '',
-				spaceType: '',
-				imgUrl: '',
-				daily: 0,
-				weekly: 0,
-				monthly: 0,
-				city: ' ',
-			});
-		} catch (e) {
-			console.log(e);
-		} finally {
-			this.props.history.push({ pathname: '/admin' });
+		if (validateForm(this.state.errors)) {
+			try {
+				await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
+				toast.success('Space sucessfully edited');
+			} catch (e) {
+				console.log(e);
+			} finally {
+				this.props.history.push({ pathname: '/admin' });
+			}
+		} else {
+			toast.error('You have to fill all the fields');
 		}
 	};
 
 	render() {
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
+		console.log(this.props);
 
 		return (
 			<div className="new_edit_form_container">

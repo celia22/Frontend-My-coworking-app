@@ -36,6 +36,7 @@ class AllSpacesToEdit extends Component {
 
 	render() {
 		const { allSpaces } = this.state;
+		console.log(this.props);
 		return (
 			<>
 				<div className="all_space_card_scroll">
