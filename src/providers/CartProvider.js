@@ -20,6 +20,7 @@ export const withCart = Comp => {
 							_id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
+							resetCart={value.resetCart}
 						/>
 					)}
 				</CartConsumer>
@@ -61,6 +62,15 @@ class CartProvider extends Component {
 		});
 	};
 
+	resetCart = () => {
+		this.setState({
+			cart: [],
+			prices: [],
+			quantity: 1,
+			totalAmount: undefined,
+		});
+	};
+
 	render() {
 		const { cart, quantity, prices, totalAmount } = this.state;
 		return (
@@ -71,6 +81,7 @@ class CartProvider extends Component {
 					prices,
 					totalAmount,
 					addItemToCart: this.addItemToCart,
+					resetCart: this.resetCart,
 				}}
 			>
 				{this.props.children}

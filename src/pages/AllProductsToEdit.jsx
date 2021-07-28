@@ -39,30 +39,30 @@ class AllProductsToEdit extends Component {
 		const { products } = this.state;
 
 		return (
-			<>
-				<div>
-					<h4 className="space_details_content_title">Services:</h4>
-					<div className="space_details_services_container">
-						{products.map((item, index) => {
-							return (
-								<div key={index} className="space_details_services_item ">
-									<p>
-										{item.productDescription}: {item.productPrice}
-										<button className="edit_button">
-											<Link to={`/product/${item._id}/edit`} className="button_link">
-												Edit product
-											</Link>
-										</button>
-									</p>
-									<button className="delete_button" onClick={() => this.deleteProduct(item._id)}>
-										Delete
+			<div>
+				<Link to={'/admin'}>&laquo; Back</Link>
+
+				<h4 className="space_details_content_title">Services:</h4>
+				<div className="space_details_services_container">
+					{products.map((item, index) => {
+						return (
+							<div key={index} className="space_details_services_item ">
+								<p>
+									{item.productDescription}: {item.productPrice}
+									<button className="edit_button">
+										<Link to={`/product/${item._id}/edit`} className="button_link">
+											Edit product
+										</Link>
 									</button>
-								</div>
-							);
-						})}
-					</div>
+								</p>
+								<button className="delete_button" onClick={() => this.deleteProduct(item._id)}>
+									Delete
+								</button>
+							</div>
+						);
+					})}
 				</div>
-			</>
+			</div>
 		);
 	}
 }

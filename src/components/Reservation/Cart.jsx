@@ -19,19 +19,15 @@ class Cart extends Component {
 
 	handleFormSubmit = async event => {
 		event.preventDefault();
+		const { cart, prices, totalAmount } = this.state;
 		try {
-			const { cart, prices, totalAmount } = this.state;
 			const id = this.props.user._id;
 			apiService.newReservation({ cart, prices, totalAmount }, id);
 			toast.success('Your reservation is confirmed');
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.setState({
-				cart: ' ',
-				prices: ' ',
-				totalAmount: ' ',
-			});
+			this.props.resetCart(cart, prices, totalAmount);
 			this.props.history.push({ pathname: '/user/:id/menu' });
 		}
 	};

@@ -40,6 +40,8 @@ class AllSpacesToEdit extends Component {
 		return (
 			<>
 				<div className="all_space_card_scroll">
+					<Link to={'/admin'}>&laquo; Back</Link>
+
 					{allSpaces.map(item => {
 						return (
 							<div key={item._id} className="all_space_card_item ">
