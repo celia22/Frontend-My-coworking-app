@@ -77,9 +77,9 @@ class CartProvider extends Component {
 			return item * cartItems[index].quantity;
 		});
 
-		const totalAmount = finalPrice.reduce((a, b) => a + b, 0);
+		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
 		this.setState({
-			totalAmount: totalAmount,
+			totalAmount: totalAmountQuantity,
 		});
 	};
 

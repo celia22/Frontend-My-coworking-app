@@ -37,7 +37,7 @@ class Cart extends Component {
 	// HACER EL COMPONENT DID UPDATE Y PREV PROPS
 
 	render() {
-		const { cart, prices, totalAmount } = this.state;
+		const { cart, prices } = this.state;
 		console.log('props en cart', this.props);
 		return (
 			<div className="cart_container">
@@ -70,7 +70,7 @@ class Cart extends Component {
 					</tbody>
 				</table>
 
-				<p>Total Amount: {totalAmount} €</p>
+				<p>Total Amount: {this.props.totalAmount} €</p>
 				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
 					Confirm reservation
 				</button>
