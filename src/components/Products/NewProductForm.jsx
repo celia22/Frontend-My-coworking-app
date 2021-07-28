@@ -15,6 +15,7 @@ class NewProductForm extends Component {
 		this.state = {
 			productDescription: ' ',
 			productPrice: ' ',
+			quantity: 1,
 			errors: {
 				productDescription: ' ',
 				productPrice: ' ',

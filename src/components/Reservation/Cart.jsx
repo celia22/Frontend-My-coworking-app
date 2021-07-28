@@ -14,6 +14,7 @@ class Cart extends Component {
 			cart: this.props.cart,
 			prices: this.props.prices,
 			totalAmount: this.props.totalAmount,
+			quantity: this.props.quantity,
 		};
 	}
 
@@ -48,28 +49,30 @@ class Cart extends Component {
 							<th>Price</th>
 						</tr>
 						<tr>
-							<td>
-								{cart.map((item, index) => {
-									return (
-										<p key={index}>
-											{item.spaceName} {item.spaceType} {item.productDescription}
-										</p>
-									);
-								})}
-							</td>
-							<td>
-								{prices.map((item, index) => {
-									return <p key={index}>{item}</p>;
-								})}
-							</td>
+							{cart.map((item, index) => {
+								return (
+									<div key={index}>
+										<td className="cart_container_name_column">
+											<p>
+												{item.spaceName} {item.spaceType} {item.productDescription}
+											</p>
+										</td>
+										<td>
+											<button type="number" onClick={() => this.props.updateQuantity(item)}>
+												+
+											</button>
+											{item.quantity} - {prices[index] * item.quantity} €{' '}
+										</td>
+									</div>
+								);
+							})}
 						</tr>
 					</tbody>
 				</table>
 
 				<p>Total Amount: {totalAmount} €</p>
 				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
-					{' '}
-					Confirm reservation{' '}
+					Confirm reservation
 				</button>
 			</div>
 		);

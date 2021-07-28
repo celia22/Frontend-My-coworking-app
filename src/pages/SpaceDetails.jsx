@@ -19,6 +19,7 @@ class SpaceDetails extends Component {
 			monthly: '',
 			weekly: '',
 			imgUrl: '',
+			quantity: 1,
 			products: [],
 		};
 	}
