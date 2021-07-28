@@ -16,15 +16,16 @@
 	z-index: 1;
 }
 
-.searchbar_icon {
-	position: absolute;
-	left: 22%;
-	top: 10.5%;
-	z-index: 2;
+.searchbar > input {
+	width: 80%;
+	position: relative;
+	top: 10%;
+	border: transparent;
 }
 
-::placeholder {
+.searchbar_icon {
 	position: absolute;
-	left: 6vh;
-	bottom: 1vh;
+	left: 3%;
+	bottom: -45%;
+	z-index: 2;
 }

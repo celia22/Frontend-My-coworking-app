@@ -22,16 +22,17 @@ class SearchBar extends Component {
 	render() {
 		return (
 			<div className="searchbar_container">
-				<p className="searchbar_icon">{search}</p>
-				<input
-					className="searchbar"
-					type="text"
-					label="text"
-					name="value"
-					placeholder="Search by location"
-					value={this.state.query}
-					onChange={this.handleChange}
-				/>
+				<div className="searchbar">
+					<p className="searchbar_icon">{search}</p>
+					<input
+						type="text"
+						label="text"
+						name="value"
+						placeholder="Search by location"
+						value={this.state.query}
+						onChange={this.handleChange}
+					/>
+				</div>
 			</div>
 		);
 	}
