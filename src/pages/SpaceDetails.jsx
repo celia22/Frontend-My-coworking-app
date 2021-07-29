@@ -57,7 +57,9 @@ class SpaceDetails extends Component {
 			<>
 				<div className="space_details_page">
 					<div className="space_details_header">
-						<Link to={'/user/main'}>&laquo; Back</Link>
+						<Link to={'/user/main'} className="space_details_back">
+							&laquo; Back
+						</Link>
 						<h4>
 							{spaceName} Type: {spaceType}
 						</h4>

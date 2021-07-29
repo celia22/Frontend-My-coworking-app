@@ -7,12 +7,11 @@ import './styles/UserMenu.css';
 const UserMenu = props => {
 	return (
 		<div className="user_menu_container">
+			<Link to={'/user/main'} className="back_button_user_menu">
+				{' '}
+				&laquo; Back{' '}
+			</Link>
 			<div className="user_menu_buttons_container">
-				<Link to={'/user/main'} className="back_button">
-					{' '}
-					&laquo; Back{' '}
-				</Link>
-
 				{props.user.role === 'admin' ? (
 					<button className="user_menu_button">
 						<Link className="button_link" to={'/admin'}>

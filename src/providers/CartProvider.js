@@ -87,6 +87,9 @@ class CartProvider extends Component {
 	lessQuantity = item => {
 		const cartPrices = this.state.prices;
 		const cartItems = this.state.cart;
+		if (item.quantity < 1) {
+			item.quantity = 1;
+		}
 		item.quantity = item.quantity - 1;
 
 		const finalPrice = cartPrices.map((item, index) => {

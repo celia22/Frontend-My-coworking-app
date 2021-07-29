@@ -41,36 +41,38 @@ class Cart extends Component {
 		console.log('props en cart', this.props);
 		return (
 			<div className="cart_container">
-				<h3>Reservation</h3>
+				<h3> Your reservation</h3>
 				<table>
-					<thead>
+					<tbody>
 						<tr>
 							<th>Item</th>
 							<th>Price</th>
+							<th>Quantity</th>
+							<th>Total</th>
 						</tr>
-						<tr>
-							{cart.map((item, index) => {
-								return (
-									<>
-										<tbody>
-											<div key={index}>
-												<td className="cart_container_name_column">
-													<p>
-														{item.spaceName} {item.spaceType} {item.productDescription}
-													</p>
-												</td>
-												<td>
-													<button onClick={() => this.props.moreQuantity(item)}>+</button>
-													{item.quantity} - {prices[index] * item.quantity} €{' '}
-												</td>
-												<button onClick={() => this.props.lessQuantity(item)}>-</button>
-											</div>
-										</tbody>
-									</>
-								);
-							})}
-						</tr>
-					</thead>
+						{cart.map((item, index) => {
+							return (
+								<tr key={index}>
+									<td className="cart_itemname_container">
+										<p>
+											{item.spaceName} {item.spaceType} {item.productDescription}
+										</p>
+									</td>
+									<td>{prices[index]} € </td>
+									<td>
+										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
+											-
+										</button>
+										{item.quantity}
+										<button onClick={() => this.props.moreQuantity(item)} className="cart_more_button">
+											+
+										</button>
+									</td>
+									<td>{prices[index] * item.quantity} € </td>
+								</tr>
+							);
+						})}
+					</tbody>
 				</table>
 
 				<p>Total Amount: {this.props.totalAmount} €</p>
