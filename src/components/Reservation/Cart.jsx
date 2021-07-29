@@ -43,7 +43,7 @@ class Cart extends Component {
 			<div className="cart_container">
 				<h3>Reservation</h3>
 				<table>
-					<tbody>
+					<thead>
 						<tr>
 							<th>Item</th>
 							<th>Price</th>
@@ -51,22 +51,26 @@ class Cart extends Component {
 						<tr>
 							{cart.map((item, index) => {
 								return (
-									<div key={index}>
-										<td className="cart_container_name_column">
-											<p>
-												{item.spaceName} {item.spaceType} {item.productDescription}
-											</p>
-										</td>
-										<td>
-											<button onClick={() => this.props.moreQuantity(item)}>+</button>
-											{item.quantity} - {prices[index] * item.quantity} €{' '}
-										</td>
-										<button onClick={() => this.props.lessQuantity(item)}>-</button>
-									</div>
+									<>
+										<tbody>
+											<div key={index}>
+												<td className="cart_container_name_column">
+													<p>
+														{item.spaceName} {item.spaceType} {item.productDescription}
+													</p>
+												</td>
+												<td>
+													<button onClick={() => this.props.moreQuantity(item)}>+</button>
+													{item.quantity} - {prices[index] * item.quantity} €{' '}
+												</td>
+												<button onClick={() => this.props.lessQuantity(item)}>-</button>
+											</div>
+										</tbody>
+									</>
 								);
 							})}
 						</tr>
-					</tbody>
+					</thead>
 				</table>
 
 				<p>Total Amount: {this.props.totalAmount} €</p>

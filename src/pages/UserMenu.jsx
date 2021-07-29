@@ -5,8 +5,6 @@ import ReservationCard from '../components/Reservation/ReservationCard';
 import './styles/UserMenu.css';
 
 const UserMenu = props => {
-	console.log('user props', props.user.role);
-
 	return (
 		<div className="user_menu_container">
 			<div className="user_menu_buttons_container">
