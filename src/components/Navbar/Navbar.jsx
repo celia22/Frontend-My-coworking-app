@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-import { withAuth } from '../providers/AuthProvider';
-
+import { withAuth } from '../../providers/AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,18 +15,25 @@ class Navbar extends Component {
 		return (
 			<div>
 				{isLoggedIn ? (
-					<div className="navbar_buttons_container">
-						<button onClick={logout} className="navbar_button_logout">
-							Logout
-						</button>
-						<p> Hi {user.firstName}!</p>
-						<Link to="/user/:id/menu" className="navbar_burguer">
-							{burger}
-						</Link>
-						<Link to="/reservations/:id/new">{cart}</Link>
+					<div className="navbar_container">
+						<div className="navbar_top">
+							<Link to="/user/:id/menu" className="navbar_burguer">
+								{burger}
+							</Link>
+							<Link className="navbar_cart" to="/reservations/:id/new">
+								{cart}
+							</Link>
+						</div>
+
+						<div className="navbar_bottom">
+							<button onClick={logout} className="navbar_button_logout">
+								Logout
+							</button>
+							<p> Hi {user.firstName}!</p>
+						</div>
 					</div>
 				) : (
-					<div className="navbar_buttons_container">
+					<div className="navbar_top">
 						<Link to="/login" className="navbar_button">
 							Login
 						</Link>

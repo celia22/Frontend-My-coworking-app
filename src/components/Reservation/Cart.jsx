@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { withAuth } from '../../providers/AuthProvider';
 import { withCart } from '../../providers/CartProvider';
-// import { Link } from 'react-router-dom';
-// import apiService from '../lib/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './Cart.css';
+
+import apiService from '../../lib/apiService';
 
 class Cart extends Component {
 	constructor(props) {
@@ -11,44 +14,65 @@ class Cart extends Component {
 			cart: this.props.cart,
 			prices: this.props.prices,
 			totalAmount: this.props.totalAmount,
+			quantity: this.props.quantity,
 		};
 	}
-	// HAY QUE HACER APLI SERVICE PARA PASAR LA NEW RESERVATION AL BACK
+
+	handleFormSubmit = async event => {
+		event.preventDefault();
+		const { cart, prices, totalAmount } = this.state;
+		try {
+			const id = this.props.user._id;
+			apiService.newReservation({ cart, prices, totalAmount }, id);
+			toast.success('Your reservation is confirmed');
+		} catch (e) {
+			console.log(e);
+		} finally {
+			this.props.resetCart(cart, prices, totalAmount);
+			this.props.history.push({ pathname: '/user/:id/menu' });
+		}
+	};
+
+	// NO BORRA EL CART CUANDO HAGO LA RESERVA, LO MISMO QUE CON UPDATE DELETE COSAS, MIRAR DE
+	// HACER EL COMPONENT DID UPDATE Y PREV PROPS
 
 	render() {
-		const { cart, prices, totalAmount } = this.state;
-
-		console.log('cart state', this.state.cart);
-
+		const { cart, prices } = this.state;
+		console.log('props en cart', this.props);
 		return (
-			<div>
+			<div className="cart_container">
 				<h3>Reservation</h3>
-				<tr>
-					<th>Item</th>
-					<th>Price</th>
-				</tr>
-				<tr>
-					<td>
-						{cart.map((item, index) => {
-							if (typeof item[index] === 'string') {
-								return <p key={index}>{item}</p>;
-							} else {
+				<table>
+					<tbody>
+						<tr>
+							<th>Item</th>
+							<th>Price</th>
+						</tr>
+						<tr>
+							{cart.map((item, index) => {
 								return (
-									<p key={index}>
-										{item.spaceName} Type: {item.spaceType}
-									</p>
+									<div key={index}>
+										<td className="cart_container_name_column">
+											<p>
+												{item.spaceName} {item.spaceType} {item.productDescription}
+											</p>
+										</td>
+										<td>
+											<button onClick={() => this.props.moreQuantity(item)}>+</button>
+											{item.quantity} - {prices[index] * item.quantity} €{' '}
+										</td>
+										<button onClick={() => this.props.lessQuantity(item)}>-</button>
+									</div>
 								);
-							}
-						})}
-					</td>
-					<td>
-						{prices.map((item, index) => {
-							return <p key={index}>{item}</p>;
-						})}
-					</td>
-				</tr>
+							})}
+						</tr>
+					</tbody>
+				</table>
 
-				<p>Total Amount: {totalAmount} €</p>
+				<p>Total Amount: {this.props.totalAmount} €</p>
+				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
+					Confirm reservation
+				</button>
 			</div>
 		);
 	}

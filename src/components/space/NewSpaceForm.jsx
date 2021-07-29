@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const validateForm = errors => {
+	let valid = true;
+	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
+	return valid;
+};
 
 class NewSpaceForm extends Component {
 	constructor(props) {
@@ -8,66 +16,93 @@ class NewSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			imgUrl: [],
+			imgUrl: ' ',
 			daily: '',
 			weekly: '',
 			monthly: '',
 			city: ' ',
+			errors: {
+				spaceName: '',
+				spaceType: '',
+				imgUrl: ' ',
+				daily: '',
+				weekly: '',
+				monthly: '',
+				city: ' ',
+			},
+			formIsValid: false,
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		this.setState({
-			[name]: value,
+		const errors = this.state.errors;
+		switch (name) {
+			case 'spaceName':
+				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'spaceType':
+				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'imgUrl':
+				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'daily':
+				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'weekly':
+				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			case 'monthly':
+				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				break;
+			default:
+				break;
+		}
+
+		this.setState({ errors, [name]: value }, () => {
+			console.log(errors);
 		});
 	};
 
 	handleFileUpload = event => {
-		this.setState({
-			imgUrl: event.target.files[0],
-		});
-
 		console.log('The file to be uploaded is: ', event.target.files[0]);
-		//   const uploadData = new FormData();
-		//   uploadData.append('imgUrl', e.target.files[0]);
-
-		//  apiService
-		//     .handleUpload(e)
-		//     .then(response => {
-		//      console.log('response is: ', response);
-		//       this.setState({ imgUrl: response.secure_url });
-		//     })
-		//     .catch(err => {
-		//       console.log('Error while uploading the file: ', err);
-		//     });
+		const uploadData = new FormData();
+		uploadData.append('imgUrl', event.target.files[0]);
+		apiService
+			.handleUpload(uploadData)
+			.then(response => {
+				console.log('response is: ', response);
+				this.setState({ imgUrl: response.secure_url });
+			})
+			.catch(err => {
+				console.log('Error while uploading the file: ', err);
+			});
 	};
 
 	createSpaceHandler = async event => {
 		event.preventDefault();
+
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
-		try {
-			const newSpace = await apiService.newSpace({
-				spaceName,
-				spaceType,
-				imgUrl,
-				daily,
-				weekly,
-				monthly,
-				city,
-			});
-			console.log('newspace', newSpace);
-			const uploadData = new FormData();
-			uploadData.append('imgUrl', event.target.files[0]);
-			const uploadImg = await apiService.handleUpload(event);
-			this.setState({
-				imgUrl: uploadImg.secure_url,
-			});
-			console.log(uploadImg);
-		} catch (e) {
-			console.log(e);
-		} finally {
-			this.props.history.push({ pathname: '/admin' });
+		if (validateForm(this.state.errors)) {
+			try {
+				await apiService.newSpace({
+					spaceName,
+					spaceType,
+					imgUrl,
+					daily,
+					weekly,
+					monthly,
+					city,
+				});
+				toast.success('New space created');
+			} catch (e) {
+				console.log(e);
+			} finally {
+				this.props.history.push({ pathname: '/admin' });
+			}
+		} else {
+			toast.error('You have to fill all the fields');
 		}
 	};
 
@@ -113,7 +148,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="daily"
 											value={daily}
-											placeholder="Daily price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -124,7 +158,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="weekly"
 											value={weekly}
-											placeholder="Weekly price"
 											onChange={this.handleChange}
 										/>
 									</th>
@@ -135,7 +168,6 @@ class NewSpaceForm extends Component {
 											type="number"
 											name="monthly"
 											value={monthly}
-											placeholder="Monthly price"
 											onChange={this.handleChange}
 										/>
 									</th>

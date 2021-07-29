@@ -1,32 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import ReservationCards from '../components/Reservation/Cart';
-import './styles/buttons.css';
+import { withAuth } from '../providers/AuthProvider';
+import ReservationCard from '../components/Reservation/ReservationCard';
+import './styles/UserMenu.css';
 
 const UserMenu = props => {
-	console.log('user props', props);
+	console.log('user props', props.user.role);
 
 	return (
-		<>
-			<Link to={'/user/main'} className="back_button">
-				{' '}
-				&laquo; Back{' '}
-			</Link>
+		<div className="user_menu_container">
+			<div className="user_menu_buttons_container">
+				<Link to={'/user/main'} className="back_button">
+					{' '}
+					&laquo; Back{' '}
+				</Link>
 
-			<h1> This is your user menu page</h1>
+				{props.user.role === 'admin' ? (
+					<button className="user_menu_button">
+						<Link className="button_link" to={'/admin'}>
+							Admin Options
+						</Link>
+					</button>
+				) : (
+					' '
+				)}
 
-			<button className="edit_button">
-				{' '}
-				<Link to="/user/:id/update-profile" className="button_link">
-					Edit or Delete Account{' '}
-				</Link>{' '}
-			</button>
+				<button className="user_menu_button">
+					{' '}
+					<Link to="/user/:id/update-profile" className="button_link">
+						Edit or Delete Account{' '}
+					</Link>{' '}
+				</button>
+			</div>
 
-			{/* < ReservationCards /> */}
+			<div className="reservation_cards_container">
+				<ReservationCard user={props.user._id} />
+			</div>
 
 			{/* call my payments (BG) */}
-		</>
+		</div>
 	);
 };
 
-export default UserMenu;
+export default withAuth(UserMenu);

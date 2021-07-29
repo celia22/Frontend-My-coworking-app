@@ -1,36 +1,65 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const validateForm = errors => {
+	let valid = true;
+	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
+	return valid;
+};
 class NewProductForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			description: ' ',
-			price: 0,
+			productDescription: ' ',
+			productPrice: ' ',
+			quantity: 1,
+			errors: {
+				productDescription: ' ',
+				productPrice: ' ',
+			},
+			formIsValid: false,
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		this.setState({
-			[name]: value,
-		});
+		const errors = this.state.errors;
+		switch (name) {
+			case 'productDescription':
+				errors.productDescription = value.length === 0;
+				break;
+			case 'productPrice':
+				errors.productPrice = value.length === 0;
+				break;
+			default:
+				break;
+		}
+
+		this.setState({ errors, [name]: value });
 	};
 
 	createNewProduct = async event => {
 		event.preventDefault();
-		const { description, price } = this.state;
-		try {
-			await apiService.newProduct({ description, price });
-		} catch (e) {
-			console.log(e);
-		} finally {
-			this.props.history.push({ pathname: '/admin' });
+		const { productDescription, productPrice } = this.state;
+		if (validateForm(this.state.errors)) {
+			try {
+				await apiService.newProduct({ productDescription, productPrice });
+				toast.success('New product added');
+			} catch (e) {
+				console.log(e);
+			} finally {
+				this.props.history.push({ pathname: '/admin' });
+			}
+		} else {
+			toast.error('You have to fill all the fields');
 		}
 	};
 
 	render() {
-		const { description, price } = this.state;
+		const { productDescription, productPrice } = this.state;
 
 		return (
 			<div className="new_edit_form_container">
@@ -43,12 +72,12 @@ class NewProductForm extends Component {
 					<label>
 						<strong>Description:</strong>
 					</label>
-					<input type="text" name="description" value={description} onChange={this.handleChange} />
+					<input type="text" name="productDescription" value={productDescription} onChange={this.handleChange} />
 
 					<label>
 						<strong>Price:</strong>
 					</label>
-					<input type="number" name="price" value={price} onChange={this.handleChange} />
+					<input type="number" name="productPrice" value={productPrice} onChange={this.handleChange} />
 
 					<input type="submit" value="Add new product" className="new_edit_send" />
 				</form>

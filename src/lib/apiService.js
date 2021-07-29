@@ -57,8 +57,8 @@ class ApiService {
 	}
 
 	handleUpload(img) {
-		// console.log('file in service: ', img);
-		return this.apiService.post('/space/new', img).then(({ data }) => data);
+		console.log('file in service: ', img);
+		return this.apiService.post('/api/upload', img).then(res => res.data);
 	}
 
 	getAllSpaces() {
@@ -88,12 +88,29 @@ class ApiService {
 	}
 
 	getSingleproduct(id) {
-		return this.apiService.get(`/product/${id}/edit`).then(({ data }) => data);
+		return this.apiService.get(`/product/${id}/details`).then(({ data }) => data);
 	}
 
 	editProduct(product, id) {
 		const { productPrice, productDescription } = product;
 		return this.apiService.put(`/product/${id}/edit`, { productPrice, productDescription }).then(({ data }) => data);
+	}
+
+	// RESERVATION METHODS
+	newReservation(reservation, id) {
+		const { space, cart, prices, user, status, totalAmount } = reservation;
+		console.log('id en api', id);
+		return this.apiService
+			.post(`/reservation/${id}/new`, { space, cart, prices, user, status, totalAmount })
+			.then(({ data }) => data);
+	}
+
+	getAllreservations(id) {
+		return this.apiService.get(`/reservation/${id}/all`).then(({ data }) => data);
+	}
+
+	getAllReservationsAdmin() {
+		return this.apiService.get(`/reservation/all`).then(({ data }) => data);
 	}
 }
 

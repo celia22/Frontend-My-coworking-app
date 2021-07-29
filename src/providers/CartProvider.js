@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartContext = React.createContext();
 const CartConsumer = CartContext.Consumer;
@@ -15,8 +17,12 @@ export const withCart = Comp => {
 							cart={value.cart}
 							quantity={value.quantity}
 							prices={value.prices}
+							_id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
+							resetCart={value.resetCart}
+							moreQuantity={value.moreQuantity}
+							lessQuantity={value.lessQuantity}
 						/>
 					)}
 				</CartConsumer>
@@ -31,7 +37,6 @@ class CartProvider extends Component {
 		this.state = {
 			cart: [],
 			prices: [],
-			quantity: 1,
 			totalAmount: undefined,
 		};
 	}
@@ -47,13 +52,58 @@ class CartProvider extends Component {
 	addItemToCart = (item, price) => {
 		const cartItems = this.state.cart;
 		const cartPrices = this.state.prices;
-		cartItems.push(item);
-		cartPrices.push(price);
+
+		const index = cartItems.findIndex(
+			x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
+		);
+		if (index === -1) {
+			cartItems.push(item);
+			cartPrices.push(price);
+		}
+		toast('Item added to cart');
 		const totalAmount = cartPrices.reduce((a, b) => a + b, 0);
 		this.setState({
 			cart: cartItems,
 			prices: cartPrices,
-			totalAmount,
+			totalAmount: totalAmount,
+		});
+	};
+
+	moreQuantity = item => {
+		const cartPrices = this.state.prices;
+		const cartItems = this.state.cart;
+		item.quantity = item.quantity + 1;
+
+		const finalPrice = cartPrices.map((item, index) => {
+			return item * cartItems[index].quantity;
+		});
+
+		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
+		this.setState({
+			totalAmount: totalAmountQuantity,
+		});
+	};
+
+	lessQuantity = item => {
+		const cartPrices = this.state.prices;
+		const cartItems = this.state.cart;
+		item.quantity = item.quantity - 1;
+
+		const finalPrice = cartPrices.map((item, index) => {
+			return item * cartItems[index].quantity;
+		});
+
+		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
+		this.setState({
+			totalAmount: totalAmountQuantity,
+		});
+	};
+
+	resetCart = () => {
+		this.setState({
+			cart: [],
+			prices: [],
+			totalAmount: undefined,
 		});
 	};
 
@@ -67,6 +117,9 @@ class CartProvider extends Component {
 					prices,
 					totalAmount,
 					addItemToCart: this.addItemToCart,
+					resetCart: this.resetCart,
+					moreQuantity: this.moreQuantity,
+					lessQuantity: this.lessQuantity,
 				}}
 			>
 				{this.props.children}

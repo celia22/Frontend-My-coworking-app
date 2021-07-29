@@ -18,10 +18,9 @@ class SpaceDetails extends Component {
 			daily: '',
 			monthly: '',
 			weekly: '',
-			imgUrlSpace: '',
+			imgUrl: '',
+			quantity: 1,
 			products: [],
-			// productDescription: '',
-			// productPrice: '',
 		};
 	}
 
@@ -29,93 +28,74 @@ class SpaceDetails extends Component {
 		const id = this.props.match.params.id;
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const { spaceName, spaceType, city, daily, weekly, monthly, imgUrlSpace } = singleSpace;
+			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
-			// const { productDescription, productPrice } = getProducts;
 			this.setState({
+				_id,
+				spaceParams,
 				spaceName,
 				spaceType,
 				city,
 				daily,
 				weekly,
 				monthly,
-				imgUrlSpace,
+				imgUrl,
 				products: getProducts,
-				// productDescription,
-				// productPrice,
 			});
 		} catch (error) {
 			console.log(error);
-		} finally {
-			console.log(this.state);
 		}
 	}
 
-	// handleDailyChange = event => {
-	// 	this.setState({ price: { daily: event.target.value } });
-	// 	console.log('state', this.state);
-	// };
-
-	// handleWeeklyChange = event => {
-	// 	this.setState({ weekly: event.target.value });
-	// };
-
-	// handleMonthlyChange = event => {
-	// 	this.setState({ monthly: event.target.value });
-	// };
-
-	// handleChange = event => {
-	// 	this.setState({
-	// 		name: event.target.value,
-	// 	});
-	// };
-
 	render() {
-		const { spaceName, spaceType, daily, weekly, monthly, products } = this.state;
+		console.log('props en details', this.props.match.params.id);
+		//	const spaceId = this.props.match.params.id;
+
+		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
+
 		return (
 			<>
-				<div>
+				<div className="space_details_page">
 					<div className="space_details_header">
-						<button className="back_button">
-							<Link to={'/user/main'} className="back_button">
-								&laquo; Back
-							</Link>
-						</button>
-
+						<Link to={'/user/main'}>&laquo; Back</Link>
 						<h4>
 							{spaceName} Type: {spaceType}
 						</h4>
 					</div>
 
-					{/* <img className="space_details_image" src={}></img> */}
+					<img className="space_details_image" src={imgUrl}></img>
 
-					<h4 className="space_details_content_title">Price</h4>
+					{/* <h4 className="space_details_content_title">Price</h4> */}
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, daily)}>
+							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, daily)}>
 								{daily} € {element}
 							</button>
+						</div>
+						<div className="space_details_price_details">
 							<p>Weekly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, weekly)}>
+							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, weekly)}>
 								{weekly} € {element}
 							</button>
+						</div>
+						<div className="space_details_price_details">
 							<p>Monthly:</p>
-							<button onClick={() => this.props.addItemToCart(this.state, monthly)}>
+							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, monthly)}>
 								{monthly} € {element}
 							</button>
 						</div>
 					</div>
 
-					<h4 className="space_details_content_title">Services:</h4>
+					<h5 className="space_details_services_title">Add your extra services!</h5>
 					<div className="space_details_services_container">
 						{products.map((item, index) => {
 							return (
 								<div key={index} className="space_details_services_item ">
-									<p>
-										{item.description}: {item.price} €
-									</p>
-									<button onClick={() => this.props.addItemToCart(item.description, item.price)}>{element}</button>
+									<p>{item.productDescription}</p>
+									<button className="add_item_button" onClick={() => this.props.addItemToCart(item, item.productPrice)}>
+										{item.productPrice} € {element}
+									</button>
 								</div>
 							);
 						})}
