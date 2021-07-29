@@ -17,7 +17,8 @@ class ReservationCard extends Component {
 		console.log('products', this.props.cart);
 		try {
 			const allReservations = await apiService.getAllreservations(this.props.user);
-			// const cartItems = await apiService.getSingleproduct(this.props.user);
+			const cartItems = await apiService.getSingleproduct(this.props.user);
+			console.log(cartItems);
 			this.setState({
 				reservations: allReservations,
 			});
@@ -39,7 +40,11 @@ class ReservationCard extends Component {
 							<div key={item._id} className="reservation_card_item ">
 								{/* <Link to={`/space/${item._id}/details`}> */}
 								{item.cart.map((item, index) => {
-									return <p key={index}>{item}</p>;
+									return (
+										<p key={index}>
+											{item.productDescription} {item.quantity}
+										</p>
+									);
 								})}
 								<div>
 									{item.prices.map((item, index) => {

@@ -1,5 +1,5 @@
 import { Component, React } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 import apiService from '../lib/apiService';
 import './styles/AllSpacesToEdit.css';
@@ -39,37 +39,41 @@ class AllSpacesToEdit extends Component {
 		console.log(this.props);
 		return (
 			<>
-				<div className="all_space_card_scroll">
-					<Link to={'/admin'}>&laquo; Back</Link>
+				{this.props.user.role === 'admin' ? (
+					<div className="all_space_card_scroll">
+						<Link to={'/admin'}>&laquo; Back</Link>
 
-					{allSpaces.map(item => {
-						return (
-							<div key={item._id} className="all_space_card_item ">
-								<div className="all_space_card_item_title">
-									<h4>{item.spaceName}</h4>
-									<h4>Type: {item.spaceType}</h4>
-								</div>
-								<img className="all_space_card_item_image" src={item.imgUrl}></img>
-								<div className="all_space_card_item_price">
-									<h4>Price:</h4>
-									<h5>Daily: {item.daily}</h5>
-									<h5>Weekly: {item.weekly}</h5>
-									<h5>Monthly: {item.monthly}</h5>
-								</div>
-								<button className="edit_button">
-									{' '}
-									<Link to={`/space/${item._id}/edit`} className="button_link">
+						{allSpaces.map(item => {
+							return (
+								<div key={item._id} className="all_space_card_item ">
+									<div className="all_space_card_item_title">
+										<h4>{item.spaceName}</h4>
+										<h4>Type: {item.spaceType}</h4>
+									</div>
+									<img className="all_space_card_item_image" src={item.imgUrl}></img>
+									<div className="all_space_card_item_price">
+										<h4>Price:</h4>
+										<h5>Daily: {item.daily}</h5>
+										<h5>Weekly: {item.weekly}</h5>
+										<h5>Monthly: {item.monthly}</h5>
+									</div>
+									<button className="edit_button">
 										{' '}
-										Edit space{' '}
-									</Link>{' '}
-								</button>
-								<button className="delete_button" onClick={() => this.deleteSpace(item._id)}>
-									Delete Space
-								</button>
-							</div>
-						);
-					})}
-				</div>
+										<Link to={`/space/${item._id}/edit`} className="button_link">
+											{' '}
+											Edit space{' '}
+										</Link>{' '}
+									</button>
+									<button className="delete_button" onClick={() => this.deleteSpace(item._id)}>
+										Delete Space
+									</button>
+								</div>
+							);
+						})}
+					</div>
+				) : (
+					<Redirect to="user/main" />
+				)}
 			</>
 		);
 	}

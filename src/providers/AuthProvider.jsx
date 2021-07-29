@@ -14,7 +14,6 @@ export const withAuth = Comp => {
 							isLoggedIn={authProvider.isLoggedIn}
 							isLoggedOut={authProvider.isLoggedOut}
 							user={authProvider.user}
-							isAdmin={authProvider.isAdmin}
 							logout={authProvider.logout}
 							login={authProvider.login}
 							signup={authProvider.signup}
@@ -59,20 +58,10 @@ class AuthProvider extends Component {
 				user: null,
 			});
 			const user = await apiService.login({ email, password });
-			console.log('login', user);
-			if (user.role === 'admin') {
-				this.setState({
-					status: 'loggedIn',
-					user,
-					isAdmin: true,
-				});
-			} else {
-				this.setState({
-					status: 'loggedIn',
-					user,
-					isAdmin: false,
-				});
-			}
+			this.setState({
+				status: 'loggedIn',
+				user,
+			});
 		} catch (e) {
 			this.setState({
 				status: 'loggedOut',
@@ -121,7 +110,6 @@ class AuthProvider extends Component {
 					isLoggedIn: status === 'loggedIn',
 					isLoggedOut: status === 'loggedOut',
 					user,
-					// isAdmin,
 					login: this.login,
 					signup: this.signup,
 					logout: this.logout,

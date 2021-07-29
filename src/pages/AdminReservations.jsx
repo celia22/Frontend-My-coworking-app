@@ -1,6 +1,7 @@
 import { Component, React } from 'react';
 // import './ReservationCard.css';
 import apiService from '../lib/apiService';
+import { Redirect } from 'react-router-dom';
 
 class AdminReservations extends Component {
 	constructor(props) {
@@ -29,27 +30,31 @@ class AdminReservations extends Component {
 		const { reservations } = this.state;
 		return (
 			<>
-				<div className="space_card_scroll">
-					<h2>Your reservations</h2>
+				{this.props.user.role === 'admin' ? (
+					<div className="space_card_scroll">
+						<h2>Your reservations</h2>
 
-					{reservations.map(item => {
-						return (
-							<div key={item._id} className="reservation_card_item ">
-								{/* <Link to={`/space/${item._id}/details`}> */}
-								{item.cart.map((item, index) => {
-									return <p key={index}>{item}</p>;
-								})}
-								<div>
-									{item.prices.map((item, index) => {
-										return <p key={index}>{item} €</p>;
+						{reservations.map(item => {
+							return (
+								<div key={item._id} className="reservation_card_item ">
+									{/* <Link to={`/space/${item._id}/details`}> */}
+									{item.cart.map((item, index) => {
+										return <p key={index}>{item}</p>;
 									})}
-									<h4>Total Amount: {item.totalAmount} €</h4>
+									<div>
+										{item.prices.map((item, index) => {
+											return <p key={index}>{item} €</p>;
+										})}
+										<h4>Total Amount: {item.totalAmount} €</h4>
+									</div>
+									{/* </Link> */}
 								</div>
-								{/* </Link> */}
-							</div>
-						);
-					})}
-				</div>
+							);
+						})}
+					</div>
+				) : (
+					<Redirect to="user/main" />
+				)}
 			</>
 		);
 	}
