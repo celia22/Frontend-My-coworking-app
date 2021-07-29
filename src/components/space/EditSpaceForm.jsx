@@ -4,6 +4,7 @@ import { withAuth } from '../../providers/AuthProvider';
 import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './SpaceForm.css';
 
 const validateForm = errors => {
 	let valid = true;
@@ -60,9 +61,7 @@ class EditSpaceForm extends Component {
 			default:
 				break;
 		}
-		// this.setState({ errors, [name]: value }, () => {
-		// 	console.log(errors);
-		// });
+
 		this.setState({ errors, [name]: value });
 	};
 
@@ -113,23 +112,35 @@ class EditSpaceForm extends Component {
 					<label>
 						<strong>Name: {spaceName}</strong>
 					</label>
-					<input type="text" name="spaceName" value={spaceName} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceName"
+						value={spaceName}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Type:</strong>
 					</label>
-					<input type="text" name="spaceType" value={spaceType} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceType"
+						value={spaceType}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" value={imgUrl} onChange={this.handleFileUpload} />
+					<input type="file" value={imgUrl} onChange={this.handleFileUpload} className="new_edit_form_space" />
 					<div>
 						<table>
 							<tbody>
 								<tr>
-									<th>
-										<label className="new_edit_table_title">
+									<th className="edit_form_space_price">
+										<label>
 											<strong>Price:</strong>
 										</label>
 									</th>
@@ -138,7 +149,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Daily:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="daily"
 											value={daily}
@@ -148,7 +159,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Weekly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="weekly"
 											value={weekly}
@@ -158,7 +169,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Monthly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="monthly"
 											value={monthly}
@@ -173,7 +184,7 @@ class EditSpaceForm extends Component {
 					<label>
 						<strong>City:</strong>
 					</label>
-					<input type="text" name="city" value={city} onChange={this.handleChange} />
+					<input type="text" name="city" value={city} onChange={this.handleChange} className="new_edit_form_space" />
 
 					<input type="submit" value="Edit space" className="new_edit_send" />
 				</form>

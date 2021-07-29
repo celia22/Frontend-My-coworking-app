@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './SpaceForm.css';
 
 const validateForm = errors => {
 	let valid = true;
@@ -24,13 +25,12 @@ class NewSpaceForm extends Component {
 			errors: {
 				spaceName: '',
 				spaceType: '',
-				imgUrl: ' ',
+				imgUrl: '',
 				daily: '',
 				weekly: '',
 				monthly: '',
-				city: ' ',
+				city: '',
 			},
-			formIsValid: false,
 		};
 	}
 
@@ -39,30 +39,28 @@ class NewSpaceForm extends Component {
 		const errors = this.state.errors;
 		switch (name) {
 			case 'spaceName':
-				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.spaceName = value.length === 0;
 				break;
 			case 'spaceType':
-				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.spaceType = value.length === 0;
 				break;
 			case 'imgUrl':
-				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.imgUrl = value.length === 0;
 				break;
 			case 'daily':
-				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.daily = value.length === 0;
 				break;
 			case 'weekly':
-				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.weekly = value.length === 0;
 				break;
 			case 'monthly':
-				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.monthly = value.length === 0;
 				break;
 			default:
 				break;
 		}
 
-		this.setState({ errors, [name]: value }, () => {
-			console.log(errors);
-		});
+		this.setState({ errors, [name]: value });
 	};
 
 	handleFileUpload = event => {
@@ -82,10 +80,10 @@ class NewSpaceForm extends Component {
 
 	createSpaceHandler = async event => {
 		event.preventDefault();
-
-		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
+		console.log('error', this.state.errors);
 		if (validateForm(this.state.errors)) {
 			try {
+				const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 				await apiService.newSpace({
 					spaceName,
 					spaceType,
@@ -119,23 +117,35 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>Name:</strong>
 					</label>
-					<input type="text" name="spaceName" value={spaceName} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceName"
+						value={spaceName}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Type:</strong>
 					</label>
-					<input type="text" name="spaceType" value={spaceType} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceType"
+						value={spaceType}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" onChange={event => this.handleFileUpload(event)} />
+					<input type="file" onChange={event => this.handleFileUpload(event)} className="new_edit_form_space" />
 					<div>
 						<table>
 							<tbody>
-								<tr>
+								<tr className="edit_form_space_price">
 									<th>
-										<label className="new_edit_table_title">
+										<label>
 											<strong>Price:</strong>
 										</label>
 									</th>
@@ -144,7 +154,7 @@ class NewSpaceForm extends Component {
 									<th>
 										Daily:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="daily"
 											value={daily}
@@ -154,7 +164,7 @@ class NewSpaceForm extends Component {
 									<th>
 										Weekly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="weekly"
 											value={weekly}
@@ -164,7 +174,7 @@ class NewSpaceForm extends Component {
 									<th>
 										Monthly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="monthly"
 											value={monthly}
@@ -179,9 +189,9 @@ class NewSpaceForm extends Component {
 					<label>
 						<strong>City:</strong>
 					</label>
-					<input type="text" name="city" value={city} onChange={this.handleChange} />
+					<input type="text" name="city" value={city} onChange={this.handleChange} className="new_edit_form_space" />
 
-					<input type="submit" value="Add new space" className="new_edit_send" />
+					<input type="submit" value="Add space" className="new_edit_send" />
 				</form>
 			</div>
 		);

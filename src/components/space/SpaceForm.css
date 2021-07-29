@@ -1,0 +1,42 @@
+.login_signup_container {
+	margin: 20% 15%;
+}
+
+.new_edit_form {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin: 1rem 3rem;
+}
+
+.new_edit_form > label {
+	font-weight: 800;
+}
+.new_edit_form_space {
+	height: 20px;
+	margin: 1vh;
+	padding-left: 1rem;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+
+.new_edit_table_title {
+	text-align: center;
+}
+
+.new_edit_table_input {
+	width: 60%;
+	margin: 2vh 0;
+}
+
+.new_edit_form_space_price {
+	width: 30%;
+	border-radius: 10px;
+	border: 2px solid black;
+	margin-left: 2vh;
+}
+
+.edit_form_space_price {
+	margin: 10vh;
+	text-align: center;
+}

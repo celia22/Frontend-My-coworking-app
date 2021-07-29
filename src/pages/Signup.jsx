@@ -27,7 +27,6 @@ class Signup extends Component {
 				email: '',
 				password: '',
 			},
-			formIsValid: false,
 		};
 	}
 
@@ -41,13 +40,13 @@ class Signup extends Component {
 
 		switch (name) {
 			case 'fullName':
-				errors.firstName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.firstName = value.length === 0;
 				break;
 			case 'lastName':
-				errors.lastName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.lastName = value.length === 0;
 				break;
 			case 'city':
-				errors.city = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.city = value.length === 0;
 				break;
 			case 'email':
 				errors.email = regexEmail.test(value) ? '' : toast.error('Email is not valid!');
@@ -73,9 +72,8 @@ class Signup extends Component {
 		if (validateForm(this.state.errors)) {
 			const { email, password, firstName, lastName, city } = this.state;
 			this.props.signup({ email, password, firstName, lastName, city });
-			console.info('Valid Form');
 		} else {
-			console.error('Invalid Form');
+			toast.warn('You have to fill all the fields');
 		}
 	};
 
