@@ -48,7 +48,7 @@ class SpaceDetails extends Component {
 	}
 
 	render() {
-		console.log('props en details', this.props.match.params.id);
+		// console.log('props en details', this.props.match.params.id);
 		// const spaceId = this.props.match.params.id;
 
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
@@ -108,7 +108,7 @@ class SpaceDetails extends Component {
 									<button
 										className="add_item_button"
 										// 	onClick={() => this.props.addItemToCart(item, item.productPrice)}
-										onClick={() => this.props.addItemToCart({ type: 'products', products: item }, item.productPrice)}
+										onClick={() => this.props.addItemToCart({ type: 'product', product: item }, item.productPrice)}
 									>
 										{item.productPrice} € {element}
 									</button>

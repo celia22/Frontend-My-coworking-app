@@ -11,36 +11,68 @@ class Cart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cart: this.props.cart,
-			prices: this.props.prices,
+			spaces: this.props.spaces,
+			products: this.props.products,
+			spacePrices: this.props.spacePrices,
+			productPrices: this.props.productPrices,
+			// prices: this.props.prices,
 			totalAmount: this.props.totalAmount,
-			quantity: this.props.quantity,
+			// quantity: this.props.quantity,
 		};
 	}
 
-	componentDidMount = () => {
-		console.log('Cart props', this.props);
-	};
+	// componentDidMount = () => {
+	// 	const cartSpaces = this.props.cart.filter(item => item.type === 'space');
+	// 	const cartProducts = this.props.cart.filter(item => item.type === 'product');
+	// 	this.setState({
+	// 		spaces: cartSpaces,
+	// 		products: cartProducts,
+	// 	});
+	// };
 
 	handleFormSubmit = async event => {
 		event.preventDefault();
-		const { cart, prices, totalAmount } = this.state;
+		const { spaces, products, totalAmount } = this.state;
 		try {
-			const id = this.props.user._id;
-			await apiService.newReservation({ cart, prices, totalAmount }, id);
+			// const id = this.props.user._id;
+			await apiService.newReservation({ spaces, products, totalAmount });
 			toast.success('Your reservation is confirmed');
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.props.resetCart(cart, prices, totalAmount);
+			// this.props.resetCart(cart, prices, totalAmount);
 			this.props.history.push({ pathname: `/user/menu` });
 		}
 	};
 
 	render() {
-		const { cart, prices } = this.state;
-		console.log('props en cart', this.props);
+		const { spaces, spacePrices, products, productPrices } = this.state;
+		// console.log('Cart state on render:', this.state);
 		return (
+			<>
+				<h2>Cart items:</h2>
+				<div className="cart_container">
+					<div className="left-column">
+						<h5>Your spaces</h5>
+						{spaces.map((item, index) => {
+							return <p key={index}>{item.spaceName}</p>;
+						})}
+						<h5>Your products</h5>
+						{products.map((item, index) => {
+							return <p key={index}>{item.productDescription}</p>;
+						})}
+					</div>
+					<div className="right-column">
+						<h5>Space prices:</h5>
+						{spacePrices.map((item, index) => {
+							return <p key={index}>{item} €</p>;
+						})}
+						<h5>Product prices:</h5>
+						{productPrices.map((item, index) => {
+							return <p key={index}>{item} €</p>;
+						})}
+					</div>
+					{/* CODIGO ANTERIOR
 			<div className="cart_container">
 				<h3> Your reservation</h3>
 				<table>
@@ -51,18 +83,17 @@ class Cart extends Component {
 							<th>Quantity</th>
 							<th>Total</th>
 						</tr>
-						{cart.map((item, index) => {
+						{spaces.map((item, index) => {
 							return (
 								<tr key={index}>
 									<td className="cart_itemname_container">
-										{item.type === 'space' ? item.space.spaceName : item.products.productDescription}
+										 {item.type === 'space' ? console.log('blooo') : ' '} 
+
+										<p>{item.spaceName}</p>
 									</td>
-									<td>{prices[index]} € </td>
-									<td>
-										<button
-											onClick={() => this.props.lessQuantity(item.space, item.products)}
-											className="cart_less_button"
-										>
+									 <td>{prices[index]} € </td> 
+									 <td>
+										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
 											-
 										</button>
 										{item.type === 'space' ? item.space.quantity : item.products.quantity}
@@ -82,14 +113,34 @@ class Cart extends Component {
 								</tr>
 							);
 						})}
-					</tbody>
-				</table>
-
+						{products.map((item, index) => {
+							return (
+								<tr key={index}>
+									<td className="cart_itemname_container">
+										<p>{item.productDescription}</p>
+									</td>
+									<td>{prices[index]} € </td> 
+							    <td>
+										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
+											-
+										</button>
+										{item.quantity}
+										<button onClick={() => this.props.moreQuantity(item)} className="cart_more_button">
+											+
+										</button>
+									</td>
+									<td>{prices[index] * item.quantity} € </td> 
+								</tr>
+							);
+						})}
+					 </tbody>
+				</table> */}
+				</div>
 				<p>Total Amount: {this.props.totalAmount} €</p>
 				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
 					Confirm reservation
 				</button>
-			</div>
+			</>
 		);
 	}
 }
