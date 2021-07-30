@@ -55,25 +55,30 @@ class Cart extends Component {
 							return (
 								<tr key={index}>
 									<td className="cart_itemname_container">
-										{console.log('item', item.type)}
-										{item.type === 'space' ? console.log('blooo') : ' '}
-
-										{/* {console.log('type', item.space.spaceType)} */}
-										{/* <p>
-													{item.space.spaceName} {item.space.spaceType} {item.products.productDescription} 
-												</p> */}
+										{item.type === 'space' ? item.space.spaceName : item.products.productDescription}
 									</td>
 									<td>{prices[index]} € </td>
 									<td>
-										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
+										<button
+											onClick={() => this.props.lessQuantity(item.space, item.products)}
+											className="cart_less_button"
+										>
 											-
 										</button>
-										{item.quantity}
-										<button onClick={() => this.props.moreQuantity(item)} className="cart_more_button">
+										{item.type === 'space' ? item.space.quantity : item.products.quantity}
+										<button
+											onClick={() => this.props.moreQuantity(item.space, item.products)}
+											className="cart_more_button"
+										>
 											+
 										</button>
 									</td>
-									<td>{prices[index] * item.quantity} € </td>
+									<td>
+										{item.type === 'space'
+											? prices[index] * item.space.quantity
+											: prices[index] * item.products.quantity}
+										€{' '}
+									</td>
 								</tr>
 							);
 						})}

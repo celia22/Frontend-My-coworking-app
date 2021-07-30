@@ -72,10 +72,17 @@ class CartProvider extends Component {
 		});
 	};
 
-	moreQuantity = item => {
+	moreQuantity = cart => {
 		const cartPrices = this.state.prices;
 		const cartItems = this.state.cart;
-		item.quantity = item.quantity + 1;
+
+		console.log('item', cart.space.quantity);
+
+		cart.type === 'space'
+			? (cart.space.quantity = cart.space.quantity + 1)
+			: (cart.products.quantity = cart.products.quantity + 1);
+
+		// item.quantity = item.quantity + 1;
 
 		const finalPrice = cartPrices.map((item, index) => {
 			return item * cartItems[index].quantity;
