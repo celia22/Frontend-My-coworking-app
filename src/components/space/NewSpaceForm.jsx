@@ -197,5 +197,4 @@ class NewSpaceForm extends Component {
 		);
 	}
 }
-
 export default NewSpaceForm;
