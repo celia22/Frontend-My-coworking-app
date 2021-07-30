@@ -53,13 +53,16 @@ class CartProvider extends Component {
 		const cartItems = this.state.cart;
 		const cartPrices = this.state.prices;
 		console.log('CartI', cartItems);
-		const index = cartItems.findIndex(
-			x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
-		);
-		if (index === -1) {
-			cartItems.push(item);
-			cartPrices.push(price);
-		}
+
+		cartItems.push(item);
+		cartPrices.push(price);
+		// const index = cartItems.findIndex(
+		// 	x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
+		// );
+		// if (index === -1) {
+		// 	cartItems.push(item);
+		// 	cartPrices.push(price);
+		// }
 		toast('Item added to cart');
 		const totalAmount = cartPrices.reduce((a, b) => a + b, 0);
 		this.setState({

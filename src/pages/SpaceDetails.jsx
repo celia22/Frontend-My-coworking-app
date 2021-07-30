@@ -49,7 +49,7 @@ class SpaceDetails extends Component {
 
 	render() {
 		console.log('props en details', this.props.match.params.id);
-		const spaceId = this.props.match.params.id;
+		// const spaceId = this.props.match.params.id;
 
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
 
@@ -73,7 +73,7 @@ class SpaceDetails extends Component {
 							<p>Daily:</p>
 							<button
 								className="add_item_button"
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily, spaceId)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily)}
 							>
 								{daily} € {element}
 							</button>
@@ -82,7 +82,7 @@ class SpaceDetails extends Component {
 							<p>Weekly:</p>
 							<button
 								className="add_item_button"
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly, spaceId)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly)}
 							>
 								{weekly} € {element}
 							</button>
@@ -92,7 +92,7 @@ class SpaceDetails extends Component {
 							<button
 								className="add_item_button"
 								// onClick={() => this.props.addItemToCart(this.state, monthly)}
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly, spaceId)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly)}
 							>
 								{monthly} € {element}
 							</button>
@@ -107,8 +107,8 @@ class SpaceDetails extends Component {
 									<p>{item.productDescription}</p>
 									<button
 										className="add_item_button"
-										onClick={() => this.props.addItemToCart(item, item.productPrice)}
-										// onClick={() => this.props.addItemToCart({ type: 'products', products: item }, item.productPrice)}
+										// 	onClick={() => this.props.addItemToCart(item, item.productPrice)}
+										onClick={() => this.props.addItemToCart({ type: 'products', products: item }, item.productPrice)}
 									>
 										{item.productPrice} € {element}
 									</button>

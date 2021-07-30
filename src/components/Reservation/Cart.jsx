@@ -55,9 +55,13 @@ class Cart extends Component {
 							return (
 								<tr key={index}>
 									<td className="cart_itemname_container">
-										<p>
-											{item.spaceName} {item.spaceType} {item.productDescription}
-										</p>
+										{console.log('item', item.type)}
+										{item.type === 'space' ? console.log('blooo') : ' '}
+
+										{/* {console.log('type', item.space.spaceType)} */}
+										{/* <p>
+													{item.space.spaceName} {item.space.spaceType} {item.products.productDescription} 
+												</p> */}
 									</td>
 									<td>{prices[index]} € </td>
 									<td>
