@@ -33,9 +33,6 @@ class Cart extends Component {
 		}
 	};
 
-	// NO BORRA EL CART CUANDO HAGO LA RESERVA, LO MISMO QUE CON UPDATE DELETE COSAS, MIRAR DE
-	// HACER EL COMPONENT DID UPDATE Y PREV PROPS
-
 	render() {
 		const { cart, prices } = this.state;
 		console.log('props en cart', this.props);
@@ -83,5 +80,4 @@ class Cart extends Component {
 		);
 	}
 }
-
 export default withAuth(withCart(Cart));

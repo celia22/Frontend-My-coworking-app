@@ -79,5 +79,4 @@ class AllSpacesToEdit extends Component {
 		);
 	}
 }
-
 export default withAuth(AllSpacesToEdit);

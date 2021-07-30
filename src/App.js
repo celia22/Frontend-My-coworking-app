@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './components/Navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
-// import AdminRoute from './components/AdminRoute';
 import AnonRoute from './components/AnonRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';

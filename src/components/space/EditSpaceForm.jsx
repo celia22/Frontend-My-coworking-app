@@ -5,12 +5,15 @@ import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SpaceForm.css';
+<<<<<<< HEAD
 
 const validateForm = errors => {
 	let valid = true;
 	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
 	return valid;
 };
+=======
+>>>>>>> validations
 
 class EditSpaceForm extends Component {
 	constructor(props) {
@@ -18,26 +21,17 @@ class EditSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			// imgUrl: ' ',
+			imgUrl: '',
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
-			city: ' ',
-			errors: {
-				spaceName: '',
-				spaceType: '',
-				// imgUrl: ' ',
-				daily: '',
-				weekly: '',
-				monthly: '',
-				city: ' ',
-			},
-			formIsValid: false,
+			city: '',
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
+<<<<<<< HEAD
 		const errors = this.state.errors;
 		switch (name) {
 			case 'spaceName':
@@ -63,6 +57,9 @@ class EditSpaceForm extends Component {
 		}
 
 		this.setState({ errors, [name]: value });
+=======
+		this.setState({ [name]: value });
+>>>>>>> validations
 	};
 
 	// handleFileUpload = event => {
@@ -83,17 +80,13 @@ class EditSpaceForm extends Component {
 	editSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
-		if (validateForm(this.state.errors)) {
-			try {
-				await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
-				toast.success('Space sucessfully edited');
-			} catch (e) {
-				console.log(e);
-			} finally {
-				this.props.history.push({ pathname: '/admin' });
-			}
-		} else {
-			toast.error('You have to fill all the fields');
+		try {
+			await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
+			toast.success('Space sucessfully edited');
+		} catch (e) {
+			console.log(e);
+		} finally {
+			this.props.history.push({ pathname: '/admin' });
 		}
 	};
 
@@ -192,5 +185,4 @@ class EditSpaceForm extends Component {
 		);
 	}
 }
-
 export default withAuth(EditSpaceForm);
