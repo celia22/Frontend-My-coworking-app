@@ -6,12 +6,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SpaceForm.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
-
 class EditSpaceForm extends Component {
 	constructor(props) {
 		super(props);

@@ -33,7 +33,7 @@ class Cart extends Component {
 			console.log(e);
 		} finally {
 			this.props.resetCart(cart, prices, totalAmount);
-			this.props.history.push({ pathname: `/user/:id/menu` });
+			this.props.history.push({ pathname: `/user/menu` });
 		}
 	};
 

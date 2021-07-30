@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
-import ReservationCard from '../components/Reservation/ReservationCard';
+// import ReservationCard from '../components/Reservation/ReservationCard';
 import './styles/UserMenu.css';
 import apiService from '../lib/apiService';
 
@@ -44,15 +44,13 @@ class UserMenu extends Component {
 
 					<button className="user_menu_button">
 						{' '}
-						<Link to="/user/:id/update-profile" className="button_link">
+						<Link to="/user/update-profile" className="button_link">
 							Edit or Delete Account{' '}
 						</Link>{' '}
 					</button>
 				</div>
 
-				<div className="reservation_cards_container">
-					<ReservationCard user={this.props.user._id} />
-				</div>
+				<div className="reservation_cards_container">{/* <ReservationCard user={this.props.user._id} /> */}</div>
 
 				{/* call my payments (BG) */}
 			</div>

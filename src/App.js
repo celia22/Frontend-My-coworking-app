@@ -38,14 +38,14 @@ class App extends Component {
 				<Navbar />
 				<Switch>
 					<PrivateRoute path="/reservations/admin/all" component={AdminReservations} />
-					<PrivateRoute path="/reservations/:id/new" component={Cart} />
+					<PrivateRoute path="/reservations/new" component={Cart} />
 					<PrivateRoute path="/product/all/edit" component={AllProductsToEdit} />
 					<PrivateRoute path="/space/all/edit" component={AllSpacesToEdit} />
 					<PrivateRoute path="/product/:id/edit" component={EditProductForm} />
 					<PrivateRoute path="/space/:id/edit" component={EditSpaceForm} />
 					<PrivateRoute path="/space/:id/details" component={SpaceDetails} />
-					<PrivateRoute exact path="/user/:id/update-profile" component={EditUserAccount} />
-					<PrivateRoute exact path="/user/:id/menu" component={UserMenu} />
+					<PrivateRoute exact path="/user/update-profile" component={EditUserAccount} />
+					<PrivateRoute exact path="/user/menu" component={UserMenu} />
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
 					<PrivateRoute path="/space/new" component={NewSpaceForm} />
 					<PrivateRoute exact path="/product/new" component={NewProductForm} />

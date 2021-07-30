@@ -97,11 +97,10 @@ class ApiService {
 	}
 
 	// RESERVATION METHODS
-	newReservation(reservation, id) {
+	newReservation(reservation) {
 		const { space, cart, prices, user, status, totalAmount } = reservation;
-		console.log('id en api', id);
 		return this.apiService
-			.post(`/reservation/${id}/new`, { space, cart, prices, user, status, totalAmount })
+			.post(`/reservation/new`, { space, cart, prices, user, status, totalAmount })
 			.then(({ data }) => data);
 	}
 

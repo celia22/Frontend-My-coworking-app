@@ -49,7 +49,7 @@ class SpaceDetails extends Component {
 
 	render() {
 		console.log('props en details', this.props.match.params.id);
-		//	const spaceId = this.props.match.params.id;
+		const spaceId = this.props.match.params.id;
 
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
 
@@ -73,7 +73,7 @@ class SpaceDetails extends Component {
 							<p>Daily:</p>
 							<button
 								className="add_item_button"
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily, spaceId)}
 							>
 								{daily} € {element}
 							</button>
@@ -82,7 +82,7 @@ class SpaceDetails extends Component {
 							<p>Weekly:</p>
 							<button
 								className="add_item_button"
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly, spaceId)}
 							>
 								{weekly} € {element}
 							</button>
@@ -91,7 +91,8 @@ class SpaceDetails extends Component {
 							<p>Monthly:</p>
 							<button
 								className="add_item_button"
-								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly)}
+								// onClick={() => this.props.addItemToCart(this.state, monthly)}
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly, spaceId)}
 							>
 								{monthly} € {element}
 							</button>
@@ -106,7 +107,8 @@ class SpaceDetails extends Component {
 									<p>{item.productDescription}</p>
 									<button
 										className="add_item_button"
-										onClick={() => this.props.addItemToCart({ type: 'product', product: item }, item.productPrice)}
+										onClick={() => this.props.addItemToCart(item, item.productPrice)}
+										// onClick={() => this.props.addItemToCart({ type: 'products', products: item }, item.productPrice)}
 									>
 										{item.productPrice} € {element}
 									</button>

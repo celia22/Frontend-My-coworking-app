@@ -77,7 +77,7 @@ class EditUserAccount extends Component {
 			} catch (e) {
 				console.log(e);
 			} finally {
-				this.props.history.push({ pathname: '/user/:id/menu' });
+				this.props.history.push({ pathname: '/user/menu' });
 			}
 		} else {
 			console.error('Invalid Form');

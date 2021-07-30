@@ -52,7 +52,7 @@ class CartProvider extends Component {
 	addItemToCart = (item, price) => {
 		const cartItems = this.state.cart;
 		const cartPrices = this.state.prices;
-
+		console.log('CartI', cartItems);
 		const index = cartItems.findIndex(
 			x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
 		);

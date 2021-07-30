@@ -10,7 +10,7 @@ class Admin extends Component {
 			<>
 				{this.props.user.role === 'admin' ? (
 					<div className="admin_page_container">
-						<Link to={'/user/:id/menu'} className="back_button">
+						<Link to={'/user/menu'} className="back_button">
 							{' '}
 							&laquo; Back{' '}
 						</Link>
