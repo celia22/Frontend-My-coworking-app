@@ -14,15 +14,19 @@ export const withCart = Comp => {
 					{value => (
 						<Comp
 							{...this.props}
-							cart={value.cart}
-							quantity={value.quantity}
-							prices={value.prices}
-							_id={value._id}
+							spaces={value.spaces}
+							products={value.products}
+							spacePrices={value.spacePrices}
+							productPrices={value.productPrices}
+							// cart={value.cart}
+							// quantity={value.quantity}
+							// prices={value.prices}
+							// _id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
-							resetCart={value.resetCart}
-							moreQuantity={value.moreQuantity}
-							lessQuantity={value.lessQuantity}
+							// resetCart={value.resetCart}
+							// moreQuantity={value.moreQuantity}
+							// lessQuantity={value.lessQuantity}
 						/>
 					)}
 				</CartConsumer>
@@ -35,27 +39,53 @@ class CartProvider extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			spaces: [],
+			spacePrices: [],
+			products: [],
+			productPrices: [],
 			cart: [],
-			prices: [],
 			totalAmount: undefined,
 		};
 	}
 
 	componentDidMount() {
-		console.log('did mount', this.state);
+		console.log('cart did mount', this.state);
 	}
 
 	componentDidUpdate() {
-		console.log('did update', this.state);
+		console.log('cart did update', this.state);
 	}
 
 	addItemToCart = (item, price) => {
-		const cartItems = this.state.cart;
-		const cartPrices = this.state.prices;
-		console.log('CartI', cartItems);
+		const cartSpaces = [...this.state.spaces];
+		const cartSpacePrices = [...this.state.spacePrices];
+		const cartProducts = [...this.state.products];
+		const cartProductPrices = [...this.state.productPrices]
+		// const prices = [...this.state.prices];
+		if (item.type === "space"){
+			cartSpaces.push(item.space);
+			cartSpacePrices.push(price);
+			console.log('Adding space to cart')
+		} else if (item.type === "product"){
+			cartProducts.push(item.product)
+			cartProductPrices.push(price)
+			console.log('Adding product to cart')
+		}
+		const totalAmount = (cartSpacePrices.reduce((a, b) => a + b, 0)) + (cartProductPrices.reduce((a, b) => a + b, 0));
+		this.setState({
+			spaces: cartSpaces,
+			spacePrices: cartSpacePrices,
+			products: cartProducts,
+			productPrices: cartProductPrices,
+			totalAmount
+		})
+		
+		// const cartItems = this.state.cart;
+		// const cartPrices = this.state.prices;
+		// console.log('CartI', cartItems);
 
-		cartItems.push(item);
-		cartPrices.push(price);
+		// cartItems.push(item);
+		// cartPrices.push(price);
 		// const index = cartItems.findIndex(
 		// 	x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
 		// );
@@ -64,12 +94,12 @@ class CartProvider extends Component {
 		// 	cartPrices.push(price);
 		// }
 		toast('Item added to cart');
-		const totalAmount = cartPrices.reduce((a, b) => a + b, 0);
-		this.setState({
-			cart: cartItems,
-			prices: cartPrices,
-			totalAmount: totalAmount,
-		});
+		
+		// this.setState({
+		// 	cart: cartItems,
+		// 	prices: cartPrices,
+		// 	totalAmount: totalAmount,
+		// });
 	};
 
 	moreQuantity = item => {
@@ -114,18 +144,19 @@ class CartProvider extends Component {
 	};
 
 	render() {
-		const { cart, quantity, prices, totalAmount } = this.state;
+		const { spaces, products, spacePrices, productPrices, totalAmount } = this.state;
 		return (
 			<Provider
 				value={{
-					cart,
-					quantity,
-					prices,
+					spaces,
+					products,
+					spacePrices,
+					productPrices,
 					totalAmount,
 					addItemToCart: this.addItemToCart,
-					resetCart: this.resetCart,
-					moreQuantity: this.moreQuantity,
-					lessQuantity: this.lessQuantity,
+					// resetCart: this.resetCart,
+					// moreQuantity: this.moreQuantity,
+					// lessQuantity: this.lessQuantity,
 				}}
 			>
 				{this.props.children}

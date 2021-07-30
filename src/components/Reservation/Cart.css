@@ -1,8 +1,18 @@
 .cart_container {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	/* flex-direction: column;
+	justify-content: center; */
 	margin: 8vh 10%;
+}
+
+/* CSS ALE*/
+.left-column {
+	width: 50%;
+}
+
+.right-column {
+	width: 50%;
+	float:right;
 }
 
 .cart_container > h3 {
@@ -53,6 +63,7 @@
 	border-radius: 10px;
 	display: block;
 	border: none;
+	margin: 0 auto;
 }
 
 .cart_confirm_button:hover {

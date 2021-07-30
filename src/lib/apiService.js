@@ -98,10 +98,8 @@ class ApiService {
 
 	// RESERVATION METHODS
 	newReservation(reservation) {
-		const { space, cart, prices, user, status, totalAmount } = reservation;
-		return this.apiService
-			.post(`/reservation/new`, { space, cart, prices, user, status, totalAmount })
-			.then(({ data }) => data);
+		// const { spaces, products, totalAmount } = reservation;
+		return this.apiService.post(`/reservation/new`, reservation).then(({ data }) => data);
 	}
 
 	getAllReservations() {
