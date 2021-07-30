@@ -7,12 +7,18 @@
 
 /* CSS ALE*/
 .left-column {
-	width: 50%;
+	width: 60%;
+}
+
+.button_container {
+	width: 30%;
+	display: flex;
 }
 
 .right-column {
-	width: 50%;
-	float:right;
+	width: 30%;
+	float: right;
+	margin-right: 10vh;
 }
 
 .cart_container > h3 {
@@ -28,7 +34,8 @@
 }
 
 .cart_less_button {
-	width: 1.5rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	margin-right: 2vh;
 	font-weight: bolder;
@@ -36,7 +43,8 @@
 }
 
 .cart_more_button {
-	width: 1.5rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	margin-left: 2vh;
 	font-weight: bolder;

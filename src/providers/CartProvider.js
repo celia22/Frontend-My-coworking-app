@@ -18,15 +18,12 @@ export const withCart = Comp => {
 							products={value.products}
 							spacePrices={value.spacePrices}
 							productPrices={value.productPrices}
-							// cart={value.cart}
-							// quantity={value.quantity}
-							// prices={value.prices}
-							// _id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
 							resetCart={value.resetCart}
-							// moreQuantity={value.moreQuantity}
-							// lessQuantity={value.lessQuantity}
+							moreSpaces={value.moreSpaces}
+							moreProducts={value.moreProducts}
+							lessProducts={value.lessProducts}
 						/>
 					)}
 				</CartConsumer>
@@ -61,7 +58,7 @@ class CartProvider extends Component {
 		const cartSpacePrices = [...this.state.spacePrices];
 		const cartProducts = [...this.state.products];
 		const cartProductPrices = [...this.state.productPrices];
-		// const prices = [...this.state.prices];
+
 		if (item.type === 'space') {
 			cartSpaces.push(item.space);
 			cartSpacePrices.push(price);
@@ -80,69 +77,66 @@ class CartProvider extends Component {
 			totalAmount,
 		});
 
-		// const cartItems = this.state.cart;
-		// const cartPrices = this.state.prices;
-		// console.log('CartI', cartItems);
-
-		// cartItems.push(item);
-		// cartPrices.push(price);
-		// const index = cartItems.findIndex(
-		// 	x => x.spaceName === item.spaceName && x.productDescription === item.productDescription
-		// );
-		// if (index === -1) {
-		// 	cartItems.push(item);
-		// 	cartPrices.push(price);
-		// }
 		toast('Item added to cart');
-
-		// this.setState({
-		// 	cart: cartItems,
-		// 	prices: cartPrices,
-		// 	totalAmount: totalAmount,
-		// });
 	};
 
-	moreQuantity = cart => {
-		const cartPrices = this.state.prices;
-		const cartItems = this.state.cart;
-
-		console.log('item', cart.space.quantity);
-
-		cart.type === 'space'
-			? (cart.space.quantity = cart.space.quantity + 1)
-			: (cart.products.quantity = cart.products.quantity + 1);
-
-		// item.quantity = item.quantity + 1;
-
-		const finalPrice = cartPrices.map((item, index) => {
-			return item * cartItems[index].quantity;
-		});
-
-		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
-		this.setState({
-			totalAmount: totalAmountQuantity,
-		});
+	moreSpaces = item => {
+		item.quantity = item.quantity + 1;
+		// this.updatePrice()
 	};
 
-	lessQuantity = item => {
-		const cartPrices = this.state.prices;
-		const cartItems = this.state.cart;
+	moreProducts = item => {
+		item.quantity = item.quantity + 1;
+		console.log('moreprod', item, item.quantity);
+		// this.updatePrice()
+	};
+
+	lessProducts = item => {
 		if (item.quantity < 1) {
 			item.quantity = 1;
 		}
 		item.quantity = item.quantity - 1;
-
-		const finalPrice = cartPrices.map((item, index) => {
-			return item * cartItems[index].quantity;
-		});
-
-		const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
-		this.setState({
-			totalAmount: totalAmountQuantity,
-		});
+		console.log('lessprod', item, item.quantity);
+		// this.updatePrice()
 	};
 
-	resetCart = (spaces, products, spacePrices, productPrice, totalAmount) => {
+	updatePrice = () => {
+		// const cartSpaces = [...this.state.spaces];
+		const cartSpacePrices = [...this.state.spacePrices];
+		const cartProducts = [...this.state.products];
+		const cartProductPrices = [...this.state.productPrices];
+
+		const finalPrice = cartProductPrices.map((item, index) => {
+			return item * cartProducts[index].quantity;
+		});
+		const totalMultiplied = finalPrice.reduce((a, b) => a + b, 0);
+		console.log('finalprice', totalMultiplied);
+		console.log('spaces array', cartSpacePrices);
+		const totalMultProds = parseInt(totalMultiplied) + cartSpacePrices.reduce((a, b) => a + b, 0);
+
+		this.setState({
+			totalAmount: totalMultProds,
+		});
+		console.log('total Amoutn', this.state.totalAmount);
+	};
+
+	lessQuantity = item => {
+		// const cartPrices = this.state.prices;
+		// const cartItems = this.state.cart;
+		// if (item.quantity < 1) {
+		// 	item.quantity = 1;
+		// }
+		// item.quantity = item.quantity - 1;
+		// const finalPrice = cartPrices.map((item, index) => {
+		// 	return item * cartItems[index].quantity;
+		// });
+		// const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
+		// this.setState({
+		// 	totalAmount: totalAmountQuantity,
+		// });
+	};
+
+	resetCart = () => {
 		console.log('reset called');
 		this.setState({
 			spaces: [],
@@ -165,8 +159,9 @@ class CartProvider extends Component {
 					totalAmount,
 					addItemToCart: this.addItemToCart,
 					resetCart: this.resetCart,
-					// moreQuantity: this.moreQuantity,
-					// lessQuantity: this.lessQuantity,
+					moreSpaces: this.moreSpaces,
+					moreProducts: this.moreProducts,
+					lessProducts: this.lessProducts,
 				}}
 			>
 				{this.props.children}

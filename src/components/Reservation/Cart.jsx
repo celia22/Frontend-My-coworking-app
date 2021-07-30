@@ -53,17 +53,38 @@ class Cart extends Component {
 				<h2>Cart items:</h2>
 				<div className="cart_container">
 					<div className="left-column">
-						<h5>Your spaces</h5>
+						<h5>Your items: </h5>
 						{spaces.map((item, index) => {
-							return <p key={index}>{item.spaceName}</p>;
+							return (
+								<div key={index} className="button_container">
+									<p>{item.spaceName}</p>
+									<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
+										-
+									</button>
+
+									<button onClick={() => this.props.moreSpaces(item)} className="cart_more_button">
+										+
+									</button>
+								</div>
+							);
 						})}
-						{/* <h5>Your products</h5> */}
 						{products.map((item, index) => {
-							return <p key={index}>{item.productDescription}</p>;
+							return (
+								<div key={index} className="button_container">
+									<p>{item.productDescription}</p>
+									<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
+										-
+									</button>
+
+									<button onClick={() => this.props.moreProducts(item)} className="cart_more_button">
+										+
+									</button>
+								</div>
+							);
 						})}
 					</div>
 					<div className="right-column">
-						<h5>Space prices:</h5>
+						<h5>Prices: </h5>
 						{spacePrices.map((item, index) => {
 							return <p key={index}>{item} €</p>;
 						})}
