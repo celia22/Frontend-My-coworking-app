@@ -18,18 +18,22 @@ class Cart extends Component {
 		};
 	}
 
+	componentDidMount = () => {
+		console.log('Cart props', this.props);
+	};
+
 	handleFormSubmit = async event => {
 		event.preventDefault();
 		const { cart, prices, totalAmount } = this.state;
 		try {
 			const id = this.props.user._id;
-			apiService.newReservation({ cart, prices, totalAmount }, id);
+			await apiService.newReservation({ cart, prices, totalAmount }, id);
 			toast.success('Your reservation is confirmed');
 		} catch (e) {
 			console.log(e);
 		} finally {
 			this.props.resetCart(cart, prices, totalAmount);
-			this.props.history.push({ pathname: '/user/:id/menu' });
+			this.props.history.push({ pathname: `/user/:id/menu` });
 		}
 	};
 
