@@ -40,7 +40,7 @@ class Cart extends Component {
 		} catch (e) {
 			console.log(e);
 		} finally {
-			// this.props.resetCart(cart, prices, totalAmount);
+			this.props.resetCart();
 			this.props.history.push({ pathname: `/user/menu` });
 		}
 	};
@@ -57,7 +57,7 @@ class Cart extends Component {
 						{spaces.map((item, index) => {
 							return <p key={index}>{item.spaceName}</p>;
 						})}
-						<h5>Your products</h5>
+						{/* <h5>Your products</h5> */}
 						{products.map((item, index) => {
 							return <p key={index}>{item.productDescription}</p>;
 						})}
@@ -67,7 +67,6 @@ class Cart extends Component {
 						{spacePrices.map((item, index) => {
 							return <p key={index}>{item} €</p>;
 						})}
-						<h5>Product prices:</h5>
 						{productPrices.map((item, index) => {
 							return <p key={index}>{item} €</p>;
 						})}

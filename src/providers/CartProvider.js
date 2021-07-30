@@ -24,7 +24,7 @@ export const withCart = Comp => {
 							// _id={value._id}
 							totalAmount={value.totalAmount}
 							addItemToCart={value.addItemToCart}
-							// resetCart={value.resetCart}
+							resetCart={value.resetCart}
 							// moreQuantity={value.moreQuantity}
 							// lessQuantity={value.lessQuantity}
 						/>
@@ -60,26 +60,26 @@ class CartProvider extends Component {
 		const cartSpaces = [...this.state.spaces];
 		const cartSpacePrices = [...this.state.spacePrices];
 		const cartProducts = [...this.state.products];
-		const cartProductPrices = [...this.state.productPrices]
+		const cartProductPrices = [...this.state.productPrices];
 		// const prices = [...this.state.prices];
-		if (item.type === "space"){
+		if (item.type === 'space') {
 			cartSpaces.push(item.space);
 			cartSpacePrices.push(price);
-			console.log('Adding space to cart')
-		} else if (item.type === "product"){
-			cartProducts.push(item.product)
-			cartProductPrices.push(price)
-			console.log('Adding product to cart')
+			console.log('Adding space to cart');
+		} else if (item.type === 'product') {
+			cartProducts.push(item.product);
+			cartProductPrices.push(price);
+			console.log('Adding product to cart');
 		}
-		const totalAmount = (cartSpacePrices.reduce((a, b) => a + b, 0)) + (cartProductPrices.reduce((a, b) => a + b, 0));
+		const totalAmount = cartSpacePrices.reduce((a, b) => a + b, 0) + cartProductPrices.reduce((a, b) => a + b, 0);
 		this.setState({
 			spaces: cartSpaces,
 			spacePrices: cartSpacePrices,
 			products: cartProducts,
 			productPrices: cartProductPrices,
-			totalAmount
-		})
-		
+			totalAmount,
+		});
+
 		// const cartItems = this.state.cart;
 		// const cartPrices = this.state.prices;
 		// console.log('CartI', cartItems);
@@ -94,7 +94,7 @@ class CartProvider extends Component {
 		// 	cartPrices.push(price);
 		// }
 		toast('Item added to cart');
-		
+
 		// this.setState({
 		// 	cart: cartItems,
 		// 	prices: cartPrices,
@@ -142,10 +142,13 @@ class CartProvider extends Component {
 		});
 	};
 
-	resetCart = () => {
+	resetCart = (spaces, products, spacePrices, productPrice, totalAmount) => {
+		console.log('reset called');
 		this.setState({
-			cart: [],
-			prices: [],
+			spaces: [],
+			spacePrices: [],
+			products: [],
+			productPrices: [],
 			totalAmount: undefined,
 		});
 	};
@@ -161,7 +164,7 @@ class CartProvider extends Component {
 					productPrices,
 					totalAmount,
 					addItemToCart: this.addItemToCart,
-					// resetCart: this.resetCart,
+					resetCart: this.resetCart,
 					// moreQuantity: this.moreQuantity,
 					// lessQuantity: this.lessQuantity,
 				}}
