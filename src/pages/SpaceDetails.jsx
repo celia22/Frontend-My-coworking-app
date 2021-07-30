@@ -57,7 +57,9 @@ class SpaceDetails extends Component {
 			<>
 				<div className="space_details_page">
 					<div className="space_details_header">
-						<Link to={'/user/main'}>&laquo; Back</Link>
+						<Link to={'/user/main'} className="space_details_back">
+							&laquo; Back
+						</Link>
 						<h4>
 							{spaceName} Type: {spaceType}
 						</h4>
@@ -69,19 +71,28 @@ class SpaceDetails extends Component {
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
-							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, daily)}>
+							<button
+								className="add_item_button"
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily)}
+							>
 								{daily} € {element}
 							</button>
 						</div>
 						<div className="space_details_price_details">
 							<p>Weekly:</p>
-							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, weekly)}>
+							<button
+								className="add_item_button"
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly)}
+							>
 								{weekly} € {element}
 							</button>
 						</div>
 						<div className="space_details_price_details">
 							<p>Monthly:</p>
-							<button className="add_item_button" onClick={() => this.props.addItemToCart(this.state, monthly)}>
+							<button
+								className="add_item_button"
+								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly)}
+							>
 								{monthly} € {element}
 							</button>
 						</div>
@@ -93,7 +104,10 @@ class SpaceDetails extends Component {
 							return (
 								<div key={index} className="space_details_services_item ">
 									<p>{item.productDescription}</p>
-									<button className="add_item_button" onClick={() => this.props.addItemToCart(item, item.productPrice)}>
+									<button
+										className="add_item_button"
+										onClick={() => this.props.addItemToCart({ type: 'product', product: item }, item.productPrice)}
+									>
 										{item.productPrice} € {element}
 									</button>
 								</div>

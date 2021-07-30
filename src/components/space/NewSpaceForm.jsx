@@ -25,13 +25,12 @@ class NewSpaceForm extends Component {
 			errors: {
 				spaceName: '',
 				spaceType: '',
-				imgUrl: ' ',
+				imgUrl: '',
 				daily: '',
 				weekly: '',
 				monthly: '',
-				city: ' ',
+				city: '',
 			},
-			formIsValid: false,
 		};
 	}
 
@@ -40,30 +39,28 @@ class NewSpaceForm extends Component {
 		const errors = this.state.errors;
 		switch (name) {
 			case 'spaceName':
-				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.spaceName = value.length === 0;
 				break;
 			case 'spaceType':
-				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.spaceType = value.length === 0;
 				break;
 			case 'imgUrl':
-				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.imgUrl = value.length === 0;
 				break;
 			case 'daily':
-				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.daily = value.length === 0;
 				break;
 			case 'weekly':
-				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.weekly = value.length === 0;
 				break;
 			case 'monthly':
-				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
+				errors.monthly = value.length === 0;
 				break;
 			default:
 				break;
 		}
 
-		this.setState({ errors, [name]: value }, () => {
-			console.log(errors);
-		});
+		this.setState({ errors, [name]: value });
 	};
 
 	handleFileUpload = event => {
@@ -83,10 +80,10 @@ class NewSpaceForm extends Component {
 
 	createSpaceHandler = async event => {
 		event.preventDefault();
-
-		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
+		console.log('error', this.state.errors);
 		if (validateForm(this.state.errors)) {
 			try {
+				const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 				await apiService.newSpace({
 					spaceName,
 					spaceType,

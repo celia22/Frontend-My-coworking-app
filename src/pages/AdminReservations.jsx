@@ -2,6 +2,7 @@ import { Component, React } from 'react';
 // import './ReservationCard.css';
 import apiService from '../lib/apiService';
 import { Redirect } from 'react-router-dom';
+import { withAuth } from '../providers/AuthProvider';
 
 class AdminReservations extends Component {
 	constructor(props) {
@@ -60,4 +61,4 @@ class AdminReservations extends Component {
 	}
 }
 
-export default AdminReservations;
+export default withAuth(AdminReservations);

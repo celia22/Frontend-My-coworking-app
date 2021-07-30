@@ -145,10 +145,10 @@ class EditUserAccount extends Component {
 						<input type="text" name="city" value={city} onChange={this.handleChange} className="new_edit_form_input" />
 						<input className="new_edit_send" type="submit" value="Edit" />
 					</form>
+					<button className="delete_button" onClick={() => this.deleteAccount()}>
+						Delete Account
+					</button>
 				</div>
-				<button className="delete_button" onClick={() => this.deleteAccount()}>
-					Delete Account
-				</button>
 			</div>
 		);
 	}

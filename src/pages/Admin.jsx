@@ -14,7 +14,7 @@ class Admin extends Component {
 							{' '}
 							&laquo; Back{' '}
 						</Link>
-						<h1>Welcome to your admin page</h1>
+						<h1>Admin Dashboard</h1>
 						<div className="admin_page_button_container">
 							<button className="new_button">
 								<Link to="/product/new" className="admin_button_link">

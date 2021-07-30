@@ -1,6 +1,7 @@
 .new_edit_form_container {
 	width: 100%;
 	height: 80vh;
+	margin-top: 5vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -21,7 +22,7 @@
 	font-weight: 800;
 }
 .new_edit_form_input {
-	height: 35px;
+	height: 20px;
 	margin: 1vh;
 	padding-left: 1rem;
 	border-radius: 10px;
@@ -41,8 +42,9 @@
 	background-image: linear-gradient(to right, #ff512f 0%, #dd2476 51%, #ff512f 100%);
 }
 .new_edit_send {
-	margin: 4vh 25%;
-	padding: 3vh 3vh;
+	margin: 2vh 35%;
+	width: 30%;
+	padding: 2.5vh 2vh;
 	text-align: center;
 	font-weight: bold;
 	transition: 0.5s;
@@ -63,4 +65,24 @@
 
 .button_link {
 	text-decoration: none;
+}
+
+.back_button {
+	text-decoration: none;
+	color: black;
+	font-weight: bolder;
+	position: absolute;
+	left: 8%;
+	top: 10%;
+}
+
+.delete_button {
+	margin: 0 35%;
+	width: 30%;
+	padding: 2.5vh 2vh;
+	color: black;
+	font-weight: bolder;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
 }

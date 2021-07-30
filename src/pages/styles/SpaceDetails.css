@@ -5,8 +5,18 @@
 
 .space_details_header {
 	display: flex;
+	height: 5%;
 	justify-content: space-between;
 	margin: 0 3vh;
+}
+.space_details_header > h4 {
+	align-self: center;
+}
+
+.space_details_back {
+	text-decoration: none;
+	color: black;
+	font-weight: bolder;
 }
 
 .space_details_image {
@@ -24,16 +34,19 @@
 	border: 2px solid black;
 	background-color: white;
 	padding: 1vh 2vh;
-	font-size: 11px;
+	font-size: 12px;
+	border-radius: 10px;
 }
 
 .space_details_price_details {
 	margin: 0 2vh 2vh;
 	font-size: 11px;
+	font-weight: bold;
 }
 
 .space_details_services_title {
-	margin: 1vh;
+	margin-top: 3vh;
+	margin-bottom: 1.5vh;
 }
 
 .space_details_services_container {
@@ -42,11 +55,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	/* flex-flow: column wrap; */
-	font-size: 11px;
 }
 
 .space_details_services_item {
 	margin: 1vh 3vh;
-	font-size: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }

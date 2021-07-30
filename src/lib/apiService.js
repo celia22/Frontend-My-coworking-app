@@ -105,8 +105,8 @@ class ApiService {
 			.then(({ data }) => data);
 	}
 
-	getAllreservations(id) {
-		return this.apiService.get(`/reservation/${id}/all`).then(({ data }) => data);
+	getAllReservations() {
+		return this.apiService.get(`/reservation/all`).then(({ data }) => data);
 	}
 
 	getAllReservationsAdmin() {

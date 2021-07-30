@@ -20,7 +20,6 @@ class NewProductForm extends Component {
 				productDescription: ' ',
 				productPrice: ' ',
 			},
-			formIsValid: false,
 		};
 	}
 
@@ -43,6 +42,7 @@ class NewProductForm extends Component {
 
 	createNewProduct = async event => {
 		event.preventDefault();
+		console.log('error', this.state.errors);
 		const { productDescription, productPrice } = this.state;
 		if (validateForm(this.state.errors)) {
 			try {
@@ -72,14 +72,26 @@ class NewProductForm extends Component {
 					<label>
 						<strong>Description:</strong>
 					</label>
-					<input type="text" name="productDescription" value={productDescription} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="productDescription"
+						value={productDescription}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 
 					<label>
 						<strong>Price:</strong>
 					</label>
-					<input type="number" name="productPrice" value={productPrice} onChange={this.handleChange} />
+					<input
+						type="number"
+						name="productPrice"
+						value={productPrice}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 
-					<input type="submit" value="Add new product" className="new_edit_send" />
+					<input type="submit" value="Add product" className="new_edit_send" />
 				</form>
 			</div>
 		);
