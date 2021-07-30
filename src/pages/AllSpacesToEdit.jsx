@@ -27,10 +27,17 @@ class AllSpacesToEdit extends Component {
 
 	async deleteSpace(id) {
 		try {
-			apiService.deleteSpace(id);
+			await apiService.deleteSpace(id);
 			console.log('user deleted??', id);
 		} catch (e) {
 			console.log(e);
+		} finally {
+			const allSpaces = [...this.state.allSpaces].filter(item => {
+				return item._id !== id;
+			});
+			this.setState({
+				allSpaces,
+			});
 		}
 	}
 
@@ -40,23 +47,17 @@ class AllSpacesToEdit extends Component {
 		return (
 			<>
 				{this.props.user.role === 'admin' ? (
-					<div className="all_space_card_scroll">
+					<div className="space_card_scroll">
 						<Link to={'/admin'}>&laquo; Back</Link>
 
 						{allSpaces.map(item => {
 							return (
-								<div key={item._id} className="all_space_card_item ">
-									<div className="all_space_card_item_title">
+								<div key={item._id} className="space_card_item ">
+									<div className="space_card_title">
 										<h4>{item.spaceName}</h4>
 										<h4>Type: {item.spaceType}</h4>
 									</div>
-									<img className="all_space_card_item_image" src={item.imgUrl}></img>
-									<div className="all_space_card_item_price">
-										<h4>Price:</h4>
-										<h5>Daily: {item.daily}</h5>
-										<h5>Weekly: {item.weekly}</h5>
-										<h5>Monthly: {item.monthly}</h5>
-									</div>
+									<img className="space_card_item_image" src={item.imgUrl}></img>
 									<button className="edit_button">
 										{' '}
 										<Link to={`/space/${item._id}/edit`} className="button_link">
@@ -78,5 +79,4 @@ class AllSpacesToEdit extends Component {
 		);
 	}
 }
-
 export default withAuth(AllSpacesToEdit);

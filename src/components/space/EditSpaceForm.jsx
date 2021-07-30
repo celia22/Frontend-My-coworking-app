@@ -4,12 +4,7 @@ import { withAuth } from '../../providers/AuthProvider';
 import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
+import './SpaceForm.css';
 
 class EditSpaceForm extends Component {
 	constructor(props) {
@@ -17,53 +12,17 @@ class EditSpaceForm extends Component {
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			// imgUrl: ' ',
+			imgUrl: '',
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
-			city: ' ',
-			errors: {
-				spaceName: '',
-				spaceType: '',
-				// imgUrl: ' ',
-				daily: '',
-				weekly: '',
-				monthly: '',
-				city: ' ',
-			},
-			formIsValid: false,
+			city: '',
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-		switch (name) {
-			case 'spaceName':
-				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'spaceType':
-				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'imgUrl':
-				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'daily':
-				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'weekly':
-				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'monthly':
-				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			default:
-				break;
-		}
-		// this.setState({ errors, [name]: value }, () => {
-		// 	console.log(errors);
-		// });
-		this.setState({ errors, [name]: value });
+		this.setState({ [name]: value });
 	};
 
 	// handleFileUpload = event => {
@@ -84,17 +43,13 @@ class EditSpaceForm extends Component {
 	editSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
-		if (validateForm(this.state.errors)) {
-			try {
-				await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
-				toast.success('Space sucessfully edited');
-			} catch (e) {
-				console.log(e);
-			} finally {
-				this.props.history.push({ pathname: '/admin' });
-			}
-		} else {
-			toast.error('You have to fill all the fields');
+		try {
+			await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
+			toast.success('Space sucessfully edited');
+		} catch (e) {
+			console.log(e);
+		} finally {
+			this.props.history.push({ pathname: '/admin' });
 		}
 	};
 
@@ -113,23 +68,35 @@ class EditSpaceForm extends Component {
 					<label>
 						<strong>Name: {spaceName}</strong>
 					</label>
-					<input type="text" name="spaceName" value={spaceName} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceName"
+						value={spaceName}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Type:</strong>
 					</label>
-					<input type="text" name="spaceType" value={spaceType} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="spaceType"
+						value={spaceType}
+						onChange={this.handleChange}
+						className="new_edit_form_space"
+					/>
 
 					<label>
 						<strong>Image:</strong>
 					</label>
-					<input type="file" value={imgUrl} onChange={this.handleFileUpload} />
+					<input type="file" value={imgUrl} onChange={this.handleFileUpload} className="new_edit_form_space" />
 					<div>
 						<table>
 							<tbody>
 								<tr>
-									<th>
-										<label className="new_edit_table_title">
+									<th className="edit_form_space_price">
+										<label>
 											<strong>Price:</strong>
 										</label>
 									</th>
@@ -138,7 +105,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Daily:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="daily"
 											value={daily}
@@ -148,7 +115,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Weekly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="weekly"
 											value={weekly}
@@ -158,7 +125,7 @@ class EditSpaceForm extends Component {
 									<th>
 										Monthly:
 										<input
-											className="new_edit_table_input"
+											className="new_edit_form_space_price"
 											type="number"
 											name="monthly"
 											value={monthly}
@@ -173,7 +140,7 @@ class EditSpaceForm extends Component {
 					<label>
 						<strong>City:</strong>
 					</label>
-					<input type="text" name="city" value={city} onChange={this.handleChange} />
+					<input type="text" name="city" value={city} onChange={this.handleChange} className="new_edit_form_space" />
 
 					<input type="submit" value="Edit space" className="new_edit_send" />
 				</form>
@@ -181,5 +148,4 @@ class EditSpaceForm extends Component {
 		);
 	}
 }
-
 export default withAuth(EditSpaceForm);

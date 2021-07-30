@@ -2,11 +2,35 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 8vh 5%;
+	margin: 8vh 10%;
 }
 
-.cart_container_name_column {
-	padding-right: 16vh;
+.cart_container > h3 {
+	margin-bottom: 6vh;
+}
+
+/* .cart_container > td {
+	border-bottom: 1px dashed gray;
+} */
+
+.cart_itemname_container {
+	text-align: left;
+}
+
+.cart_less_button {
+	width: 1.5rem;
+	border-radius: 50%;
+	margin-right: 2vh;
+	font-weight: bolder;
+	background-color: white;
+}
+
+.cart_more_button {
+	width: 1.5rem;
+	border-radius: 50%;
+	margin-left: 2vh;
+	font-weight: bolder;
+	background-color: white;
 }
 
 .cart_plus_button_container {

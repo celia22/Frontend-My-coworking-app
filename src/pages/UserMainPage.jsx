@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SpacesCards from '../components/Space/SpacesCards';
+import SpacesCards from '../components/space/SpacesCards';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { withAuth } from '../providers/AuthProvider';
 import apiService from '../lib/apiService';
