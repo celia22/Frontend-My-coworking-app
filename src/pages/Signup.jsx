@@ -4,13 +4,6 @@ import { withAuth } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
-// pilla los valores del key erros, si es mayor a 0 invalida el form. Si es 0 hace que el handleformsubmit se complete
-
 class Signup extends Component {
 	constructor(props) {
 		super(props);
@@ -20,60 +13,33 @@ class Signup extends Component {
 			firstName: '',
 			lastName: '',
 			city: '',
-			errors: {
-				firstName: '',
-				lastName: '',
-				city: '',
-				email: '',
-				password: '',
-			},
 		};
 	}
 
 	handleChange = event => {
 		event.preventDefault();
-		const regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-		const regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-
-		switch (name) {
-			case 'fullName':
-				errors.firstName = value.length === 0;
-				break;
-			case 'lastName':
-				errors.lastName = value.length === 0;
-				break;
-			case 'city':
-				errors.city = value.length === 0;
-				break;
-			case 'email':
-				errors.email = regexEmail.test(value) ? '' : toast.error('Email is not valid!');
-				break;
-			case 'password':
-				errors.password = regexPassword.test(value)
-					? ''
-					: toast.error(
-							'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
-					  );
-				break;
-			default:
-				break;
-		}
-
-		this.setState({ errors, [name]: value }, () => {
-			console.log(errors);
+		this.setState({
+			[name]: value,
 		});
 	};
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-		if (validateForm(this.state.errors)) {
-			const { email, password, firstName, lastName, city } = this.state;
-			this.props.signup({ email, password, firstName, lastName, city });
+		const { email, password, firstName, lastName, city } = this.state;
+		const regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+		const regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+
+		if (firstName === '' || lastName === '' || email === '' || password === '' || city === '') {
+			toast.error('Please, fill all the fields');
+		} else if (!regexEmail.test(email)) {
+			toast.error('Email is not valid!');
+		} else if (!regexPassword.test(password)) {
+			toast.error(
+				'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
+			);
 		} else {
-			toast.warn('You have to fill all the fields');
+			this.props.signup({ email, password, firstName, lastName, city });
 		}
 	};
 
