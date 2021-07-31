@@ -22,9 +22,9 @@ export const withCart = Comp => {
 							addItemToCart={value.addItemToCart}
 							resetCart={value.resetCart}
 							moreSpaces={value.moreSpaces}
+							lessSpaces={value.lessSpaces}
 							moreProducts={value.moreProducts}
 							lessProducts={value.lessProducts}
-							lessSpaces={value.lessSpaces}
 						/>
 					)}
 				</CartConsumer>
@@ -83,22 +83,8 @@ class CartProvider extends Component {
 
 	moreSpaces = item => {
 		item.quantity = item.quantity + 1;
+		console.log('more spaces', item, item.quantity);
 		this.updatePrice();
-	};
-
-	moreProducts = item => {
-		item.quantity = item.quantity + 1;
-		console.log('moreprod', item, item.quantity);
-		this.updatePrice(item);
-	};
-
-	lessProducts = item => {
-		if (item.quantity < 1) {
-			item.quantity = 1;
-		}
-		item.quantity = item.quantity - 1;
-		console.log('lessprod', item, item.quantity);
-		this.updatePrice(item);
 	};
 
 	lessSpaces = item => {
@@ -106,8 +92,23 @@ class CartProvider extends Component {
 			item.quantity = 1;
 		}
 		item.quantity = item.quantity - 1;
-		console.log('lessprod', item, item.quantity);
-		this.updatePrice(item);
+		console.log('less spaces', item, item.quantity);
+		this.updatePrice();
+	};
+
+	moreProducts = item => {
+		item.quantity = item.quantity + 1;
+		console.log('moreprod', item, item.quantity);
+		this.updatePrice();
+	};
+
+	lessProducts = item => {
+		if (item.quantity < 1) {
+			item.quantity = 1;
+		}
+		item.quantity = item.quantity - 1;
+		//	console.log('lessprod', item, item.quantity);
+		this.updatePrice();
 	};
 
 	updatePrice = () => {
@@ -126,18 +127,12 @@ class CartProvider extends Component {
 		});
 		console.log('updateSpaces', updateSpaces);
 
-		const totalAmount = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
-		console.log('update Total', totalAmount);
+		const totalAmount2 = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
+		console.log('update Total', totalAmount2);
 
-		// const totalMultiplied = upadeProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
-		// console.log('Total Multiplied', totalMultiplied);
-		// console.log('finalprice', totalMultiplied);
-		// console.log('spaces array', cartSpacePrices);
-		// const totalMultProds = parseInt(totalMultiplied) + cartSpacePrices.reduce((a, b) => a + b, 0);
-
-		// this.setState({
-		// 	totalAmount,
-		// });
+		this.setState({
+			totalAmount: totalAmount2,
+		});
 		console.log('total Amoutn', this.state.totalAmount);
 	};
 
@@ -165,9 +160,9 @@ class CartProvider extends Component {
 					addItemToCart: this.addItemToCart,
 					resetCart: this.resetCart,
 					moreSpaces: this.moreSpaces,
+					lessSpaces: this.lessSpaces,
 					moreProducts: this.moreProducts,
 					lessProducts: this.lessProducts,
-					lessSpaces: this.lessSpaces,
 				}}
 			>
 				{this.props.children}
