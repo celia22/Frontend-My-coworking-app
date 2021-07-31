@@ -83,7 +83,6 @@ class CartProvider extends Component {
 
 	moreSpaces = item => {
 		item.quantity = item.quantity + 1;
-		console.log('more spaces', item, item.quantity);
 		this.updatePrice();
 	};
 
@@ -92,13 +91,12 @@ class CartProvider extends Component {
 			item.quantity = 1;
 		}
 		item.quantity = item.quantity - 1;
-		console.log('less spaces', item, item.quantity);
+
 		this.updatePrice();
 	};
 
 	moreProducts = item => {
 		item.quantity = item.quantity + 1;
-		console.log('moreprod', item, item.quantity);
 		this.updatePrice();
 	};
 
@@ -107,7 +105,6 @@ class CartProvider extends Component {
 			item.quantity = 1;
 		}
 		item.quantity = item.quantity - 1;
-		//	console.log('lessprod', item, item.quantity);
 		this.updatePrice();
 	};
 
@@ -120,24 +117,19 @@ class CartProvider extends Component {
 		const updateProds = cartProductPrices.map((item, index) => {
 			return item * cartProducts[index].quantity;
 		});
-		console.log('updatePRods', updateProds);
 
 		const updateSpaces = cartSpacePrices.map((item, index) => {
 			return item * cartSpaces[index].quantity;
 		});
-		console.log('updateSpaces', updateSpaces);
 
 		const totalAmount2 = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
-		console.log('update Total', totalAmount2);
 
 		this.setState({
 			totalAmount: totalAmount2,
 		});
-		console.log('total Amoutn', this.state.totalAmount);
 	};
 
 	resetCart = () => {
-		console.log('reset called');
 		this.setState({
 			spaces: [],
 			spacePrices: [],
