@@ -24,6 +24,7 @@ export const withCart = Comp => {
 							moreSpaces={value.moreSpaces}
 							moreProducts={value.moreProducts}
 							lessProducts={value.lessProducts}
+							lessSpaces={value.lessSpaces}
 						/>
 					)}
 				</CartConsumer>
@@ -82,13 +83,13 @@ class CartProvider extends Component {
 
 	moreSpaces = item => {
 		item.quantity = item.quantity + 1;
-		// this.updatePrice()
+		this.updatePrice();
 	};
 
 	moreProducts = item => {
 		item.quantity = item.quantity + 1;
 		console.log('moreprod', item, item.quantity);
-		// this.updatePrice()
+		this.updatePrice(item);
 	};
 
 	lessProducts = item => {
@@ -97,43 +98,47 @@ class CartProvider extends Component {
 		}
 		item.quantity = item.quantity - 1;
 		console.log('lessprod', item, item.quantity);
-		// this.updatePrice()
+		this.updatePrice(item);
+	};
+
+	lessSpaces = item => {
+		if (item.quantity < 1) {
+			item.quantity = 1;
+		}
+		item.quantity = item.quantity - 1;
+		console.log('lessprod', item, item.quantity);
+		this.updatePrice(item);
 	};
 
 	updatePrice = () => {
-		// const cartSpaces = [...this.state.spaces];
+		const cartSpaces = [...this.state.spaces];
 		const cartSpacePrices = [...this.state.spacePrices];
 		const cartProducts = [...this.state.products];
 		const cartProductPrices = [...this.state.productPrices];
 
-		const finalPrice = cartProductPrices.map((item, index) => {
+		const updateProds = cartProductPrices.map((item, index) => {
 			return item * cartProducts[index].quantity;
 		});
-		const totalMultiplied = finalPrice.reduce((a, b) => a + b, 0);
-		console.log('finalprice', totalMultiplied);
-		console.log('spaces array', cartSpacePrices);
-		const totalMultProds = parseInt(totalMultiplied) + cartSpacePrices.reduce((a, b) => a + b, 0);
+		console.log('updatePRods', updateProds);
 
-		this.setState({
-			totalAmount: totalMultProds,
+		const updateSpaces = cartSpacePrices.map((item, index) => {
+			return item * cartSpaces[index].quantity;
 		});
-		console.log('total Amoutn', this.state.totalAmount);
-	};
+		console.log('updateSpaces', updateSpaces);
 
-	lessQuantity = item => {
-		// const cartPrices = this.state.prices;
-		// const cartItems = this.state.cart;
-		// if (item.quantity < 1) {
-		// 	item.quantity = 1;
-		// }
-		// item.quantity = item.quantity - 1;
-		// const finalPrice = cartPrices.map((item, index) => {
-		// 	return item * cartItems[index].quantity;
-		// });
-		// const totalAmountQuantity = finalPrice.reduce((a, b) => a + b, 0);
+		const totalAmount = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
+		console.log('update Total', totalAmount);
+
+		// const totalMultiplied = upadeProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
+		// console.log('Total Multiplied', totalMultiplied);
+		// console.log('finalprice', totalMultiplied);
+		// console.log('spaces array', cartSpacePrices);
+		// const totalMultProds = parseInt(totalMultiplied) + cartSpacePrices.reduce((a, b) => a + b, 0);
+
 		// this.setState({
-		// 	totalAmount: totalAmountQuantity,
+		// 	totalAmount,
 		// });
+		console.log('total Amoutn', this.state.totalAmount);
 	};
 
 	resetCart = () => {
@@ -162,6 +167,7 @@ class CartProvider extends Component {
 					moreSpaces: this.moreSpaces,
 					moreProducts: this.moreProducts,
 					lessProducts: this.lessProducts,
+					lessSpaces: this.lessSpaces,
 				}}
 			>
 				{this.props.children}

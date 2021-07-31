@@ -11,7 +11,7 @@
 	width: 60%;
 	height: 4vh;
 	margin: 5vh 0;
-	border: 2px solid gray;
+	border: 3px solid rgb(0, 0, 0);
 	border-radius: 10px;
 	z-index: 1;
 }
@@ -21,6 +21,7 @@
 	position: relative;
 	top: 10%;
 	border: transparent;
+	background-color: transparent;
 }
 
 .searchbar_icon {

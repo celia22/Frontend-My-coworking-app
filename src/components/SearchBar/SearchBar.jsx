@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './SearchBar.css';
 
-const search = <FontAwesomeIcon icon={faSearch} color="gray" />;
+const search = <FontAwesomeIcon icon={faSearch} color="black" />;
 
 class SearchBar extends Component {
 	constructor(props) {

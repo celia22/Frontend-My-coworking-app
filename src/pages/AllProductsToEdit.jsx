@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiService from '../lib/apiService';
 import { Link, Redirect } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
+import './styles/AllProductsToEdit.css';
 
 class AllProductsToEdit extends Component {
 	constructor(props) {
@@ -44,7 +45,9 @@ class AllProductsToEdit extends Component {
 			<>
 				{this.props.user.role === 'admin' ? (
 					<div>
-						<Link to={'/admin'}>&laquo; Back</Link>
+						<Link to={'/admin'} className="edit_prods_back">
+							&laquo; Back
+						</Link>
 
 						<h4 className="space_details_content_title">Services:</h4>
 						<div className="space_details_services_container">
@@ -53,13 +56,13 @@ class AllProductsToEdit extends Component {
 									<div key={index} className="space_details_services_item ">
 										<p>
 											{item.productDescription}: {item.productPrice}
-											<button className="edit_button">
+											<button className="edit_prods_button">
 												<Link to={`/product/${item._id}/edit`} className="button_link">
 													Edit product
 												</Link>
 											</button>
 										</p>
-										<button className="delete_button" onClick={() => this.deleteProduct(item._id)}>
+										<button className="edit_prods_delete_button" onClick={() => this.deleteProduct(item._id)}>
 											Delete
 										</button>
 									</div>

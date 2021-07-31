@@ -15,15 +15,14 @@ class Cart extends Component {
 			products: this.props.products,
 			spacePrices: this.props.spacePrices,
 			productPrices: this.props.productPrices,
-			// prices: this.props.prices,
 			totalAmount: this.props.totalAmount,
 			// quantity: this.props.quantity,
 		};
 	}
 
 	// componentDidMount = () => {
-	// 	const cartSpaces = this.props.cart.filter(item => item.type === 'space');
-	// 	const cartProducts = this.props.cart.filter(item => item.type === 'product');
+	// 	const cartSpaces = this.props.spaces.filter(item => item.type === 'space');
+	// 	const cartProducts = this.props.products.filter(item => item.type === 'product');
 	// 	this.setState({
 	// 		spaces: cartSpaces,
 	// 		products: cartProducts,
@@ -61,8 +60,8 @@ class Cart extends Component {
 									<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
 										-
 									</button>
-
-									<button onClick={() => this.props.moreSpaces(item)} className="cart_more_button">
+									{item.quantity}
+									<button onClick={this.props.moreSpaces(item)} className="cart_more_button">
 										+
 									</button>
 								</div>
@@ -75,7 +74,7 @@ class Cart extends Component {
 									<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
 										-
 									</button>
-
+									{item.quantity}
 									<button onClick={() => this.props.moreProducts(item)} className="cart_more_button">
 										+
 									</button>

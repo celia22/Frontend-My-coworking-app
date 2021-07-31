@@ -47,3 +47,43 @@
 	color: white;
 	text-decoration: none;
 }
+
+.reservation_card_item {
+	width: 70%;
+	height: 80%;
+	border: 1px solid rgba(128, 128, 128, 0.119);
+	-webkit-box-shadow: 6px 7px 15px -2px #727272;
+	box-shadow: 6px 7px 15px -2px #727272;
+	color: rgb(2, 8, 59);
+	margin: 4%;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	background-color: white;
+	font-size: 12px;
+}
+.reservation_card_products {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0 3vh;
+	justify-content: center;
+}
+
+.reservation_card_item_title {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding-top: 3vh;
+	margin: 0;
+	height: 20%;
+	background-color: black;
+	color: white;
+	margin: none;
+}
+
+.reservation_card_scroll {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	height: 40vh;
+}
