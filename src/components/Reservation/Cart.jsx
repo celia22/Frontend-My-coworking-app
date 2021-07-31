@@ -16,22 +16,16 @@ class Cart extends Component {
 			spacePrices: this.props.spacePrices,
 			productPrices: this.props.productPrices,
 			totalAmount: this.props.totalAmount,
-			// quantity: this.props.quantity,
 		};
 	}
-
-	// componentDidMount = () => {
-	// 	const cartSpaces = this.props.spaces.filter(item => item.type === 'space');
-	// 	const cartProducts = this.props.products.filter(item => item.type === 'product');
-	// 	this.setState({
-	// 		spaces: cartSpaces,
-	// 		products: cartProducts,
-	// 	});
-	// };
 
 	handleFormSubmit = async event => {
 		event.preventDefault();
 		const { spaces, products, totalAmount } = this.state;
+
+		console.log('state', this.state.totalAmount);
+		console.log('props', this.props.totalAmount);
+
 		try {
 			await apiService.newReservation({ spaces, products, totalAmount });
 			toast.success('Your reservation is confirmed');
@@ -42,6 +36,14 @@ class Cart extends Component {
 			this.props.history.push({ pathname: `/user/menu` });
 		}
 	};
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.totalAmount !== this.state.totalAmount) {
+			this.setState({
+				totalAmount: this.props.totalAmount,
+			});
+		}
+	}
 
 	render() {
 		const { spaces, products, productPrices, spacePrices } = this.state;
