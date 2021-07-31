@@ -44,53 +44,65 @@ class Cart extends Component {
 	};
 
 	render() {
-		const { spaces, spacePrices, products, productPrices } = this.state;
+		const { spaces, products, productPrices, spacePrices } = this.state;
 
 		return (
 			<>
-				<h2>Cart items:</h2>
-				<div className="cart_container">
-					<div className="left-column">
-						<h5>Your items: </h5>
+				<table>
+					<tbody>
+						<tr>
+							<th>Item</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Total</th>
+						</tr>
+
 						{spaces.map((item, index) => {
 							return (
-								<div key={index} className="button_container">
-									<p>{item.spaceName}</p>
-									<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
-										-
-									</button>
-									{item.quantity}
-									<button className="cart_more_button" onClick={() => this.props.moreSpaces(item)}>
-										+
-									</button>
-								</div>
+								<tr key={index}>
+									<td className="cart_item_name_container">
+										<p>{item.spaceName}</p>
+									</td>
+									<td>
+										<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
+											-
+										</button>
+										{item.quantity}
+										<button className="cart_more_button" onClick={() => this.props.moreSpaces(item)}>
+											+
+										</button>
+									</td>
+
+									<td>{spacePrices[index]}</td>
+									<td>{spacePrices[index] * item.quantity}</td>
+								</tr>
 							);
 						})}
+
 						{products.map((item, index) => {
 							return (
-								<div key={index} className="button_container">
-									<p>{item.productDescription}</p>
-									<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
-										-
-									</button>
-									{item.quantity}
-									<button onClick={() => this.props.moreProducts(item)} className="cart_more_button">
-										+
-									</button>
-								</div>
+								<tr key={index}>
+									<td className="cart_item_name_container">
+										<p>{item.productDescription}</p>
+									</td>
+									<td>
+										<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
+											-
+										</button>
+										{item.quantity}
+										<button className="cart_more_button" onClick={() => this.props.moreProducts(item)}>
+											+
+										</button>
+									</td>
+
+									<td>{productPrices[index]}</td>
+									<td>{productPrices[index] * item.quantity}</td>
+								</tr>
 							);
 						})}
-					</div>
-					<div className="right-column">
-						<h5>Prices: </h5>
-						{spacePrices.map((item, index) => {
-							return <p key={index}>{item} €</p>;
-						})}
-						{productPrices.map((item, index) => {
-							return <p key={index}>{item} €</p>;
-						})}
-					</div>
-				</div>
+					</tbody>
+				</table>
+
 				<p>Total Amount: {this.props.totalAmount} €</p>
 				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
 					Confirm reservation
