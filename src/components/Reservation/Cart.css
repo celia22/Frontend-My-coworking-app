@@ -1,8 +1,24 @@
 .cart_container {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	/* flex-direction: column;
+	justify-content: center; */
 	margin: 8vh 10%;
+}
+
+/* CSS ALE*/
+.left-column {
+	width: 60%;
+}
+
+.button_container {
+	width: 30%;
+	display: flex;
+}
+
+.right-column {
+	width: 30%;
+	float: right;
+	margin-right: 10vh;
 }
 
 .cart_container > h3 {
@@ -18,7 +34,8 @@
 }
 
 .cart_less_button {
-	width: 1.5rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	margin-right: 2vh;
 	font-weight: bolder;
@@ -26,7 +43,8 @@
 }
 
 .cart_more_button {
-	width: 1.5rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	margin-left: 2vh;
 	font-weight: bolder;
@@ -53,6 +71,7 @@
 	border-radius: 10px;
 	display: block;
 	border: none;
+	margin: 0 auto;
 }
 
 .cart_confirm_button:hover {

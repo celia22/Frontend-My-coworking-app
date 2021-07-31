@@ -16,7 +16,7 @@ class ReservationCard extends Component {
 	async componentDidMount() {
 		console.log('products', this.props.cart);
 		try {
-			const allReservations = await apiService.getAllreservations(this.props.user);
+			const allReservations = await apiService.getAllReservations(this.props.user);
 			const cartItems = await apiService.getSingleproduct(this.props.user);
 			console.log(cartItems);
 			this.setState({

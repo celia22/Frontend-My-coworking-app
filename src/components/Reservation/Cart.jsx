@@ -11,35 +11,87 @@ class Cart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cart: this.props.cart,
-			prices: this.props.prices,
+			spaces: this.props.spaces,
+			products: this.props.products,
+			spacePrices: this.props.spacePrices,
+			productPrices: this.props.productPrices,
 			totalAmount: this.props.totalAmount,
-			quantity: this.props.quantity,
+			// quantity: this.props.quantity,
 		};
 	}
 
+	// componentDidMount = () => {
+	// 	const cartSpaces = this.props.spaces.filter(item => item.type === 'space');
+	// 	const cartProducts = this.props.products.filter(item => item.type === 'product');
+	// 	this.setState({
+	// 		spaces: cartSpaces,
+	// 		products: cartProducts,
+	// 	});
+	// };
+
 	handleFormSubmit = async event => {
 		event.preventDefault();
-		const { cart, prices, totalAmount } = this.state;
+		const { spaces, products, totalAmount } = this.state;
 		try {
-			const id = this.props.user._id;
-			apiService.newReservation({ cart, prices, totalAmount }, id);
+			// const id = this.props.user._id;
+			await apiService.newReservation({ spaces, products, totalAmount });
 			toast.success('Your reservation is confirmed');
 		} catch (e) {
 			console.log(e);
 		} finally {
-			this.props.resetCart(cart, prices, totalAmount);
-			this.props.history.push({ pathname: '/user/:id/menu' });
+			this.props.resetCart();
+			this.props.history.push({ pathname: `/user/menu` });
 		}
 	};
 
-	// NO BORRA EL CART CUANDO HAGO LA RESERVA, LO MISMO QUE CON UPDATE DELETE COSAS, MIRAR DE
-	// HACER EL COMPONENT DID UPDATE Y PREV PROPS
-
 	render() {
-		const { cart, prices } = this.state;
-		console.log('props en cart', this.props);
+		const { spaces, spacePrices, products, productPrices } = this.state;
+		// console.log('Cart state on render:', this.state);
 		return (
+			<>
+				<h2>Cart items:</h2>
+				<div className="cart_container">
+					<div className="left-column">
+						<h5>Your items: </h5>
+						{spaces.map((item, index) => {
+							return (
+								<div key={index} className="button_container">
+									<p>{item.spaceName}</p>
+									<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
+										-
+									</button>
+									{item.quantity}
+									<button onClick={this.props.moreSpaces(item)} className="cart_more_button">
+										+
+									</button>
+								</div>
+							);
+						})}
+						{products.map((item, index) => {
+							return (
+								<div key={index} className="button_container">
+									<p>{item.productDescription}</p>
+									<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
+										-
+									</button>
+									{item.quantity}
+									<button onClick={() => this.props.moreProducts(item)} className="cart_more_button">
+										+
+									</button>
+								</div>
+							);
+						})}
+					</div>
+					<div className="right-column">
+						<h5>Prices: </h5>
+						{spacePrices.map((item, index) => {
+							return <p key={index}>{item} €</p>;
+						})}
+						{productPrices.map((item, index) => {
+							return <p key={index}>{item} €</p>;
+						})}
+					</div>
+					{/* CODIGO ANTERIOR
 			<div className="cart_container">
 				<h3> Your reservation</h3>
 				<table>
@@ -50,16 +102,44 @@ class Cart extends Component {
 							<th>Quantity</th>
 							<th>Total</th>
 						</tr>
-						{cart.map((item, index) => {
+						{spaces.map((item, index) => {
 							return (
 								<tr key={index}>
 									<td className="cart_itemname_container">
-										<p>
-											{item.spaceName} {item.spaceType} {item.productDescription}
-										</p>
+										 {item.type === 'space' ? console.log('blooo') : ' '} 
+
+										<p>{item.spaceName}</p>
 									</td>
-									<td>{prices[index]} € </td>
+									 <td>{prices[index]} € </td> 
+									 <td>
+										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
+											-
+										</button>
+										{item.type === 'space' ? item.space.quantity : item.products.quantity}
+										<button
+											onClick={() => this.props.moreQuantity(item.space, item.products)}
+											className="cart_more_button"
+										>
+											+
+										</button>
+									</td>
 									<td>
+										{item.type === 'space'
+											? prices[index] * item.space.quantity
+											: prices[index] * item.products.quantity}
+										€{' '}
+									</td>
+								</tr>
+							);
+						})}
+						{products.map((item, index) => {
+							return (
+								<tr key={index}>
+									<td className="cart_itemname_container">
+										<p>{item.productDescription}</p>
+									</td>
+									<td>{prices[index]} € </td> 
+							    <td>
 										<button onClick={() => this.props.lessQuantity(item)} className="cart_less_button">
 											-
 										</button>
@@ -68,20 +148,19 @@ class Cart extends Component {
 											+
 										</button>
 									</td>
-									<td>{prices[index] * item.quantity} € </td>
+									<td>{prices[index] * item.quantity} € </td> 
 								</tr>
 							);
 						})}
-					</tbody>
-				</table>
-
+					 </tbody>
+				</table> */}
+				</div>
 				<p>Total Amount: {this.props.totalAmount} €</p>
 				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
 					Confirm reservation
 				</button>
-			</div>
+			</>
 		);
 	}
 }
-
 export default withAuth(withCart(Cart));

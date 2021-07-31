@@ -6,63 +6,24 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SpaceForm.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
-
 class EditSpaceForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			spaceName: '',
 			spaceType: '',
-			// imgUrl: ' ',
+			imgUrl: '',
 			daily: 0,
 			weekly: 0,
 			monthly: 0,
-			city: ' ',
-			errors: {
-				spaceName: '',
-				spaceType: '',
-				// imgUrl: ' ',
-				daily: '',
-				weekly: '',
-				monthly: '',
-				city: ' ',
-			},
-			formIsValid: false,
+			city: '',
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-		switch (name) {
-			case 'spaceName':
-				errors.spaceName = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'spaceType':
-				errors.spaceType = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'imgUrl':
-				errors.imgUrl = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'daily':
-				errors.daily = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'weekly':
-				errors.weekly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			case 'monthly':
-				errors.monthly = value.length === 0 ? toast.warn('You have to fill all the fields') : '';
-				break;
-			default:
-				break;
-		}
 
-		this.setState({ errors, [name]: value });
+		this.setState({ [name]: value });
 	};
 
 	// handleFileUpload = event => {
@@ -83,17 +44,13 @@ class EditSpaceForm extends Component {
 	editSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
-		if (validateForm(this.state.errors)) {
-			try {
-				await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
-				toast.success('Space sucessfully edited');
-			} catch (e) {
-				console.log(e);
-			} finally {
-				this.props.history.push({ pathname: '/admin' });
-			}
-		} else {
-			toast.error('You have to fill all the fields');
+		try {
+			await apiService.newSpace({ spaceName, spaceType, imgUrl, daily, weekly, monthly, city });
+			toast.success('Space sucessfully edited');
+		} catch (e) {
+			console.log(e);
+		} finally {
+			this.props.history.push({ pathname: '/admin' });
 		}
 	};
 
@@ -192,5 +149,4 @@ class EditSpaceForm extends Component {
 		);
 	}
 }
-
 export default withAuth(EditSpaceForm);

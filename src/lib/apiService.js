@@ -97,16 +97,13 @@ class ApiService {
 	}
 
 	// RESERVATION METHODS
-	newReservation(reservation, id) {
-		const { space, cart, prices, user, status, totalAmount } = reservation;
-		console.log('id en api', id);
-		return this.apiService
-			.post(`/reservation/${id}/new`, { space, cart, prices, user, status, totalAmount })
-			.then(({ data }) => data);
+	newReservation(reservation) {
+		// const { spaces, products, totalAmount } = reservation;
+		return this.apiService.post(`/reservation/new`, reservation).then(({ data }) => data);
 	}
 
-	getAllreservations(id) {
-		return this.apiService.get(`/reservation/${id}/all`).then(({ data }) => data);
+	getAllReservations() {
+		return this.apiService.get(`/reservation/all`).then(({ data }) => data);
 	}
 
 	getAllReservationsAdmin() {

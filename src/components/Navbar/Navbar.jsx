@@ -17,10 +17,10 @@ class Navbar extends Component {
 				{isLoggedIn ? (
 					<div className="navbar_container">
 						<div className="navbar_top">
-							<Link to="/user/:id/menu" className="navbar_burguer">
+							<Link to="/user/menu" className="navbar_burguer">
 								{burger}
 							</Link>
-							<Link className="navbar_cart" to="/reservations/:id/new">
+							<Link className="navbar_cart" to="/reservations/new">
 								{cart}
 							</Link>
 						</div>
