@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { withCart } from '../providers/CartProvider';
 import { withAuth } from '../providers/AuthProvider';
-import Favourites from '../components/Favourites/Favourites';
 import './styles/SpaceDetails.css';
 
 const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
@@ -23,14 +22,13 @@ class SpaceDetails extends Component {
 			imgUrl: '',
 			quantity: 1,
 			products: [],
-			favouritesArr: [],
 			heartIsClicked: false,
-			singleSpace: [],
 		};
 	}
 
 	async componentDidMount() {
 		const id = this.props.match.params.id;
+		console.log('id', this.props);
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
 			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
@@ -57,17 +55,31 @@ class SpaceDetails extends Component {
 		this.setState({
 			heartIsClicked: !this.state.heartIsClicked,
 		});
-		console.log(this.state.heartIsClicked);
 	};
 
 	addFav = () => {
-		const { singleSpace } = this.state;
-		this.props.handleFavs(singleSpace);
-		console.log('favArr', singleSpace);
+		const id = this.props.match.params.id;
+		apiService.favSpace(id);
 	};
 
+	// handleDelete = recipe => {
+	// 	try {
+	// 		recipeClient.deleteRecipeFromFav(recipe._id);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	} finally {
+	// 		const favourites = [...this.state.favouriteList].filter(item => {
+	// 			return item._id !== recipe._id;
+	// 		});
+	// 		this.setState({
+	// 			favouriteList: favourites,
+	// 		});
+	// 	}
+	// };
+
 	render() {
-		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
+		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products, heartIsClicked } = this.state;
+		console.log('heart', this.state.heartIsClicked);
 
 		return (
 			<>
@@ -83,11 +95,11 @@ class SpaceDetails extends Component {
 
 					<img className="space_details_image" src={imgUrl}></img>
 
-					{!this.state.heartIsClicked ? (
+					{!heartIsClicked ? (
 						<img
 							className="heart_black"
 							src="/images/hearts/heart.png"
-							alt="page not found"
+							alt="heart icon"
 							onClick={() => {
 								this.handleLike();
 								this.addFav();
@@ -97,10 +109,10 @@ class SpaceDetails extends Component {
 						<img
 							className="heart_black"
 							src="/images/hearts/red-heart.png"
-							alt="page not found"
+							alt="heart icon"
 							onClick={() => {
 								this.handleLike();
-								this.addFav();
+								//	this.deleteFav();
 							}}
 						/>
 					)}
@@ -153,7 +165,6 @@ class SpaceDetails extends Component {
 						})}
 					</div>
 				</div>
-				<Favourites favArr={this.state.favouritesArr} />
 			</>
 		);
 	}

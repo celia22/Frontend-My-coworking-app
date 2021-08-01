@@ -41,7 +41,7 @@ class CartProvider extends Component {
 			spacePrices: [],
 			products: [],
 			productPrices: [],
-			cart: [],
+			// cart: [], TO DELETE ?¿?
 			totalAmount: undefined,
 		};
 	}

@@ -43,7 +43,6 @@ class Cart extends Component {
 
 	render() {
 		const { spaces, products, productPrices, spacePrices } = this.state;
-		console.log('length', spaces.length);
 
 		return (
 			<>

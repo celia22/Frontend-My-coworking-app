@@ -11,7 +11,6 @@ class UserMainPage extends Component {
 		this.state = {
 			allSpaces: [],
 			searchSpaces: [],
-			favouritesArr: '',
 		};
 	}
 
@@ -52,8 +51,6 @@ class UserMainPage extends Component {
 	render() {
 		const { searchSpaces } = this.state;
 
-		// console.log('usermainpage', user.role);
-		// console.log('spaces', this.state.searchSpaces);
 		return (
 			<div className="user_main_page_container">
 				<SearchBar search={this.searchProductQuery} />

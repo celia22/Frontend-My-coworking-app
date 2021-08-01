@@ -39,6 +39,10 @@ class ApiService {
 		return this.apiService.delete(`/user/${id}/delete`).then(({ data }) => data);
 	}
 
+	getUserFavSpaces(id) {
+		return this.apiService.get('/user/favourites').then(({ data }) => data);
+	}
+
 	// SPACES METHODS
 
 	newSpace(space) {
@@ -73,6 +77,14 @@ class ApiService {
 		return this.apiService.delete(`/space/${id}/delete`).then(({ data }) => data);
 	}
 
+	favSpace(id) {
+		return this.apiService.post(`/space/${id}/details`).then(({ data }) => data);
+	}
+
+	deletefavSpace(id) {
+		return this.apiService.put(`/space/favourites/${id}`).then(({ data }) => data);
+	}
+
 	// PRODUCTS METHODS
 	newProduct(product) {
 		const { productPrice, productDescription } = product;
@@ -98,7 +110,6 @@ class ApiService {
 
 	// RESERVATION METHODS
 	newReservation(reservation) {
-		// const { spaces, products, totalAmount } = reservation;
 		return this.apiService.post(`/reservation/new`, reservation).then(({ data }) => data);
 	}
 

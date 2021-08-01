@@ -17,7 +17,9 @@ export const withAuth = Comp => {
 							logout={authProvider.logout}
 							login={authProvider.login}
 							signup={authProvider.signup}
-							handleFavs={authProvider.handleFavs}
+							// addFav={authProvider.addFav}
+							// favouritesArr={authProvider.favouritesArr}
+							// deleteFav={authProvider.deleteFav}
 							{...this.props}
 						/>
 					)}
@@ -33,7 +35,7 @@ class AuthProvider extends Component {
 		this.state = {
 			status: 'loading',
 			user: null,
-			favouritesArr: [],
+			isFavourite: false,
 		};
 	}
 
@@ -102,18 +104,17 @@ class AuthProvider extends Component {
 		} catch (e) {}
 	};
 
-	handleFavs = favouritesArr => {
-		const favArr = [...this.state.favouritesArr];
-		favArr.push(favouritesArr);
-		this.setState({
-			favouritesArr: favArr,
-		});
-		console.log('favs from authProv', favouritesArr);
-	};
+	// addFav = item => {
+	// 	const favArr = [...this.state.favouritesArr];
+	// 	favArr.push(item);
+	// 	this.setState({
+	// 		favouritesArr: favArr,
+	// 	});
+	// };
 
 	render() {
-		const { user, status, favouritesArr } = this.state;
-
+		const { user, status } = this.state;
+		console.log('user in auth', user);
 		return (
 			<Provider
 				value={{
@@ -121,11 +122,9 @@ class AuthProvider extends Component {
 					isLoggedIn: status === 'loggedIn',
 					isLoggedOut: status === 'loggedOut',
 					user,
-					favouritesArr,
 					login: this.login,
 					signup: this.signup,
 					logout: this.logout,
-					handleFavs: this.handleFavs,
 				}}
 			>
 				{this.props.children}

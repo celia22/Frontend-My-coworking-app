@@ -4,7 +4,6 @@ import './SpaceCards.css';
 
 const SpacesCards = props => {
 	const searchSpaces = props.searchSpaces;
-	// console.log('allspaces space card', searchSpaces);
 
 	return (
 		<div className="space_card_container">
