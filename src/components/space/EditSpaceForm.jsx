@@ -26,21 +26,6 @@ class EditSpaceForm extends Component {
 		this.setState({ [name]: value });
 	};
 
-	// handleFileUpload = event => {
-	// 	console.log('The file to be uploaded is: ', event.target.files[0]);
-	// 	const uploadData = new FormData();
-	// 	uploadData.append('imgUrl', event.target.files[0]);
-	// 	apiService
-	// 		.handleUpload(uploadData)
-	// 		.then(response => {
-	// 			console.log('response is: ', response);
-	// 			this.setState({ imgUrl: response.secure_url });
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('Error while uploading the file: ', err);
-	// 		});
-	// };
-
 	editSpaceHandler = async event => {
 		event.preventDefault();
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
@@ -55,7 +40,7 @@ class EditSpaceForm extends Component {
 	};
 
 	render() {
-		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
+		const { spaceName, spaceType, daily, weekly, monthly, city } = this.state;
 		console.log(this.props);
 
 		return (
@@ -88,10 +73,6 @@ class EditSpaceForm extends Component {
 						className="new_edit_form_space"
 					/>
 
-					<label>
-						<strong>Image:</strong>
-					</label>
-					<input type="file" value={imgUrl} onChange={this.handleFileUpload} className="new_edit_form_space" />
 					<div>
 						<table>
 							<tbody>

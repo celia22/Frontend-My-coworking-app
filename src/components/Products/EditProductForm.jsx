@@ -4,47 +4,30 @@ import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
 class EditProductForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			productDescription: ' ',
 			productPrice: ' ',
-			errors: {
-				productDescription: ' ',
-				productPrice: ' ',
-			},
-			formIsValid: false,
 		};
 	}
 
 	handleChange = event => {
+		event.preventDefault();
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-		switch (name) {
-			case 'productDescription':
-				errors.productDescription = value.length === 0;
-				break;
-			case 'productPrice':
-				errors.productPrice = value.length === 0;
-				break;
-			default:
-				break;
-		}
-
-		this.setState({ errors, [name]: value });
+		this.setState({
+			[name]: value,
+		});
 	};
 
 	editProduct = async event => {
 		event.preventDefault();
 		const { id } = this.props.match.params;
 		const { productDescription, productPrice } = this.state;
-		if (validateForm(this.state.errors)) {
+		if (productDescription === ' ' || productPrice === ' ') {
+			toast.error('You have to fill all the fields');
+		} else {
 			try {
 				await apiService.editProduct({ productDescription, productPrice }, id);
 				this.setState({
@@ -57,8 +40,6 @@ class EditProductForm extends Component {
 			} finally {
 				this.props.history.push({ pathname: '/admin' });
 			}
-		} else {
-			toast.error('You have to fill all the fields');
 		}
 	};
 

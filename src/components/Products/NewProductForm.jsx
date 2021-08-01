@@ -4,11 +4,6 @@ import apiService from '../../lib/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
 class NewProductForm extends Component {
 	constructor(props) {
 		super(props);
@@ -16,35 +11,22 @@ class NewProductForm extends Component {
 			productDescription: ' ',
 			productPrice: ' ',
 			quantity: 1,
-			errors: {
-				productDescription: ' ',
-				productPrice: ' ',
-			},
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-		switch (name) {
-			case 'productDescription':
-				errors.productDescription = value.length === 0;
-				break;
-			case 'productPrice':
-				errors.productPrice = value.length === 0;
-				break;
-			default:
-				break;
-		}
 
-		this.setState({ errors, [name]: value });
+		this.setState({ [name]: value });
 	};
 
 	createNewProduct = async event => {
 		event.preventDefault();
 		console.log('error', this.state.errors);
 		const { productDescription, productPrice } = this.state;
-		if (validateForm(this.state.errors)) {
+		if (productDescription === ' ' || productPrice === ' ') {
+			toast.error('You have to fill all the fields');
+		} else {
 			try {
 				await apiService.newProduct({ productDescription, productPrice });
 				toast.success('New product added');
@@ -53,8 +35,6 @@ class NewProductForm extends Component {
 			} finally {
 				this.props.history.push({ pathname: '/admin' });
 			}
-		} else {
-			toast.error('You have to fill all the fields');
 		}
 	};
 

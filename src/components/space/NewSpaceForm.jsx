@@ -5,12 +5,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SpaceForm.css';
 
-const validateForm = errors => {
-	let valid = true;
-	Object.values(errors).forEach(item => item.length > 0 && (valid = false));
-	return valid;
-};
-
 class NewSpaceForm extends Component {
 	constructor(props) {
 		super(props);
@@ -22,45 +16,14 @@ class NewSpaceForm extends Component {
 			weekly: '',
 			monthly: '',
 			city: ' ',
-			errors: {
-				spaceName: '',
-				spaceType: '',
-				imgUrl: '',
-				daily: '',
-				weekly: '',
-				monthly: '',
-				city: '',
-			},
 		};
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-		const errors = this.state.errors;
-		switch (name) {
-			case 'spaceName':
-				errors.spaceName = value.length === 0;
-				break;
-			case 'spaceType':
-				errors.spaceType = value.length === 0;
-				break;
-			case 'imgUrl':
-				errors.imgUrl = value.length === 0;
-				break;
-			case 'daily':
-				errors.daily = value.length === 0;
-				break;
-			case 'weekly':
-				errors.weekly = value.length === 0;
-				break;
-			case 'monthly':
-				errors.monthly = value.length === 0;
-				break;
-			default:
-				break;
-		}
-
-		this.setState({ errors, [name]: value });
+		this.setState({
+			[name]: value,
+		});
 	};
 
 	handleFileUpload = event => {
@@ -80,10 +43,19 @@ class NewSpaceForm extends Component {
 
 	createSpaceHandler = async event => {
 		event.preventDefault();
-		console.log('error', this.state.errors);
-		if (validateForm(this.state.errors)) {
+		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
+		if (
+			spaceName === '' ||
+			spaceType === '' ||
+			imgUrl === '' ||
+			daily === '' ||
+			weekly === '' ||
+			monthly === '' ||
+			city
+		) {
+			toast.error('You have to fill all the fields');
+		} else {
 			try {
-				const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = this.state;
 				await apiService.newSpace({
 					spaceName,
 					spaceType,
@@ -99,8 +71,6 @@ class NewSpaceForm extends Component {
 			} finally {
 				this.props.history.push({ pathname: '/admin' });
 			}
-		} else {
-			toast.error('You have to fill all the fields');
 		}
 	};
 

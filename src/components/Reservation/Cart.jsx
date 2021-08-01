@@ -22,10 +22,6 @@ class Cart extends Component {
 	handleFormSubmit = async event => {
 		event.preventDefault();
 		const { spaces, products, totalAmount } = this.state;
-
-		console.log('state', this.state.totalAmount);
-		console.log('props', this.props.totalAmount);
-
 		try {
 			await apiService.newReservation({ spaces, products, totalAmount });
 			toast.success('Your reservation is confirmed');
@@ -47,68 +43,75 @@ class Cart extends Component {
 
 	render() {
 		const { spaces, products, productPrices, spacePrices } = this.state;
+		console.log('length', spaces.length);
 
 		return (
 			<>
-				<table>
-					<tbody>
-						<tr>
-							<th>Item</th>
-							<th>Quantity</th>
-							<th>Price</th>
-							<th>Total</th>
-						</tr>
-
-						{spaces.map((item, index) => {
-							return (
-								<tr key={index}>
-									<td className="cart_item_name_container">
-										<p>{item.spaceName}</p>
-									</td>
-									<td>
-										<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
-											-
-										</button>
-										{item.quantity}
-										<button className="cart_more_button" onClick={() => this.props.moreSpaces(item)}>
-											+
-										</button>
-									</td>
-
-									<td>{spacePrices[index]}</td>
-									<td>{spacePrices[index] * item.quantity}</td>
+				{spaces.length === 0 || products.length === 0 ? (
+					<h1> Your cart is empty</h1>
+				) : (
+					<>
+						<table>
+							<tbody>
+								<tr>
+									<th>Item</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th>Total</th>
 								</tr>
-							);
-						})}
 
-						{products.map((item, index) => {
-							return (
-								<tr key={index}>
-									<td className="cart_item_name_container">
-										<p>{item.productDescription}</p>
-									</td>
-									<td>
-										<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
-											-
-										</button>
-										{item.quantity}
-										<button className="cart_more_button" onClick={() => this.props.moreProducts(item)}>
-											+
-										</button>
-									</td>
+								{spaces.map((item, index) => {
+									return (
+										<tr key={index}>
+											<td className="cart_item_name_container">
+												<p>{item.spaceName}</p>
+											</td>
+											<td>
+												<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
+													-
+												</button>
+												{item.quantity}
+												<button className="cart_more_button" onClick={() => this.props.moreSpaces(item)}>
+													+
+												</button>
+											</td>
 
-									<td>{productPrices[index]}</td>
-									<td>{productPrices[index] * item.quantity}</td>
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+											<td>{spacePrices[index]}</td>
+											<td>{spacePrices[index] * item.quantity}</td>
+										</tr>
+									);
+								})}
 
-				<p>Total Amount: {this.props.totalAmount} €</p>
-				<button onClick={this.handleFormSubmit} className="cart_confirm_button">
-					Confirm reservation
-				</button>
+								{products.map((item, index) => {
+									return (
+										<tr key={index}>
+											<td className="cart_item_name_container">
+												<p>{item.productDescription}</p>
+											</td>
+											<td>
+												<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
+													-
+												</button>
+												{item.quantity}
+												<button className="cart_more_button" onClick={() => this.props.moreProducts(item)}>
+													+
+												</button>
+											</td>
+
+											<td>{productPrices[index]}</td>
+											<td>{productPrices[index] * item.quantity}</td>
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+
+						<p>Total Amount: {this.props.totalAmount} €</p>
+						<button onClick={this.handleFormSubmit} className="cart_confirm_button">
+							Confirm reservation
+						</button>
+					</>
+				)}
 			</>
 		);
 	}
