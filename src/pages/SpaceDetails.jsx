@@ -28,11 +28,20 @@ class SpaceDetails extends Component {
 
 	async componentDidMount() {
 		const id = this.props.match.params.id;
-		console.log('id', this.props);
+		const userFavs = this.props.user.favSpaces;
+		console.log('userf', userFavs);
+
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
 			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
+			let heartClicked = false;
+
+			if (userFavs.map(item => item.includes(singleSpace._id))) {
+				console.log('true', singleSpace._id);
+				heartClicked = true;
+			}
+
 			this.setState({
 				_id,
 				spaceParams,
@@ -45,6 +54,7 @@ class SpaceDetails extends Component {
 				imgUrl,
 				products: getProducts,
 				singleSpace,
+				heartIsClicked: heartClicked,
 			});
 		} catch (error) {
 			console.log(error);
@@ -62,20 +72,10 @@ class SpaceDetails extends Component {
 		apiService.favSpace(id);
 	};
 
-	// handleDelete = recipe => {
-	// 	try {
-	// 		recipeClient.deleteRecipeFromFav(recipe._id);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	} finally {
-	// 		const favourites = [...this.state.favouriteList].filter(item => {
-	// 			return item._id !== recipe._id;
-	// 		});
-	// 		this.setState({
-	// 			favouriteList: favourites,
-	// 		});
-	// 	}
-	// };
+	deleteFav = () => {
+		const id = this.props.match.params.id;
+		apiService.deletefavSpace(id);
+	};
 
 	render() {
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products, heartIsClicked } = this.state;
@@ -112,7 +112,7 @@ class SpaceDetails extends Component {
 							alt="heart icon"
 							onClick={() => {
 								this.handleLike();
-								//	this.deleteFav();
+								this.deleteFav();
 							}}
 						/>
 					)}
