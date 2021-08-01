@@ -17,6 +17,7 @@ export const withAuth = Comp => {
 							logout={authProvider.logout}
 							login={authProvider.login}
 							signup={authProvider.signup}
+							handleFavs={authProvider.handleFavs}
 							{...this.props}
 						/>
 					)}
@@ -32,6 +33,7 @@ class AuthProvider extends Component {
 		this.state = {
 			status: 'loading',
 			user: null,
+			favouritesArr: [],
 		};
 	}
 
@@ -100,8 +102,17 @@ class AuthProvider extends Component {
 		} catch (e) {}
 	};
 
+	handleFavs = favouritesArr => {
+		const favArr = [...this.state.favouritesArr];
+		favArr.push(favouritesArr);
+		this.setState({
+			favouritesArr: favArr,
+		});
+		console.log('favs from authProv', favouritesArr);
+	};
+
 	render() {
-		const { user, status } = this.state;
+		const { user, status, favouritesArr } = this.state;
 
 		return (
 			<Provider
@@ -110,9 +121,11 @@ class AuthProvider extends Component {
 					isLoggedIn: status === 'loggedIn',
 					isLoggedOut: status === 'loggedOut',
 					user,
+					favouritesArr,
 					login: this.login,
 					signup: this.signup,
 					logout: this.logout,
+					handleFavs: this.handleFavs,
 				}}
 			>
 				{this.props.children}

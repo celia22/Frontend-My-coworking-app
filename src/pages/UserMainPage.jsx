@@ -11,6 +11,7 @@ class UserMainPage extends Component {
 		this.state = {
 			allSpaces: [],
 			searchSpaces: [],
+			favouritesArr: '',
 		};
 	}
 
@@ -39,6 +40,13 @@ class UserMainPage extends Component {
 				searchSpaces: searchSpace,
 			});
 		}
+	};
+
+	handleFavs = favouritesArr => {
+		this.setState({
+			favouritesArr: favouritesArr,
+		});
+		console.log('favs from user menu', favouritesArr);
 	};
 
 	render() {

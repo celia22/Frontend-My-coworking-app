@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { withCart } from '../providers/CartProvider';
+import { withAuth } from '../providers/AuthProvider';
+import Favourites from '../components/Favourites/Favourites';
 import './styles/SpaceDetails.css';
 
 const element = <FontAwesomeIcon icon={faCartArrowDown} color="black" />;
@@ -21,6 +23,9 @@ class SpaceDetails extends Component {
 			imgUrl: '',
 			quantity: 1,
 			products: [],
+			favouritesArr: [],
+			heartIsClicked: false,
+			singleSpace: [],
 		};
 	}
 
@@ -41,16 +46,27 @@ class SpaceDetails extends Component {
 				monthly,
 				imgUrl,
 				products: getProducts,
+				singleSpace,
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	render() {
-		// console.log('props en details', this.props.match.params.id);
-		// const spaceId = this.props.match.params.id;
+	handleLike = () => {
+		this.setState({
+			heartIsClicked: !this.state.heartIsClicked,
+		});
+		console.log(this.state.heartIsClicked);
+	};
 
+	addFav = () => {
+		const { singleSpace } = this.state;
+		this.props.handleFavs(singleSpace);
+		console.log('favArr', singleSpace);
+	};
+
+	render() {
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products } = this.state;
 
 		return (
@@ -67,7 +83,28 @@ class SpaceDetails extends Component {
 
 					<img className="space_details_image" src={imgUrl}></img>
 
-					{/* <h4 className="space_details_content_title">Price</h4> */}
+					{!this.state.heartIsClicked ? (
+						<img
+							className="heart_black"
+							src="/images/hearts/heart.png"
+							alt="page not found"
+							onClick={() => {
+								this.handleLike();
+								this.addFav();
+							}}
+						/>
+					) : (
+						<img
+							className="heart_black"
+							src="/images/hearts/red-heart.png"
+							alt="page not found"
+							onClick={() => {
+								this.handleLike();
+								this.addFav();
+							}}
+						/>
+					)}
+
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
@@ -107,7 +144,6 @@ class SpaceDetails extends Component {
 									<p>{item.productDescription}</p>
 									<button
 										className="add_item_button"
-										// 	onClick={() => this.props.addItemToCart(item, item.productPrice)}
 										onClick={() => this.props.addItemToCart({ type: 'product', product: item }, item.productPrice)}
 									>
 										{item.productPrice} € {element}
@@ -117,9 +153,10 @@ class SpaceDetails extends Component {
 						})}
 					</div>
 				</div>
+				<Favourites favArr={this.state.favouritesArr} />
 			</>
 		);
 	}
 }
 
-export default withCart(SpaceDetails);
+export default withAuth(withCart(SpaceDetails));
