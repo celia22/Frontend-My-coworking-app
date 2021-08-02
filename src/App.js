@@ -23,7 +23,6 @@ import AllSpacesToEdit from './pages/AllSpacesToEdit';
 import AllProductsToEdit from './pages/AllProductsToEdit';
 import EditProductForm from './components/Products/EditProductForm';
 import Cart from './components/Reservation/Cart';
-import AdminReservations from './pages/AdminReservations';
 import ReservationCard from './components/Reservation/ReservationCard';
 
 toast.configure();
@@ -38,7 +37,6 @@ class App extends Component {
 				<ToastContainer autoClose={1000} />
 				<Navbar />
 				<Switch>
-					<PrivateRoute path="/reservations/admin/all" component={AdminReservations} />
 					<PrivateRoute path="/reservations/new" component={Cart} />
 					<PrivateRoute path="/product/all/edit" component={AllProductsToEdit} />
 					<PrivateRoute path="/space/all/edit" component={AllSpacesToEdit} />

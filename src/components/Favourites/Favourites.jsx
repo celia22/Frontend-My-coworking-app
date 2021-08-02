@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '../../providers/AuthProvider';
 import apiService from '../../lib/apiService';
 import { Link } from 'react-router-dom';
+import './Favourites.css';
 class Favourites extends Component {
 	constructor(props) {
 		super(props);
@@ -28,14 +29,14 @@ class Favourites extends Component {
 		const { favouritesArr } = this.state;
 		console.log('favs', favouritesArr);
 		return (
-			<div className="space_card_container">
+			<div className="favourites_card_container">
 				<h2>Your favourite spaces </h2>
-				<div className="space_card_scroll">
-					{favouritesArr.map(item => {
+				<div className="favourites_space_card_scroll">
+					{favouritesArr.map((item, index) => {
 						return (
-							<>
+							<div key={index}>
 								<Link to={`/space/${item._id}/details`}>
-									<div key={item._id} className="space_card_item ">
+									<div className="fav_space_card_item">
 										<div className="space_card_title">
 											<h4>{item.spaceName}</h4>
 											<h4>
@@ -43,10 +44,10 @@ class Favourites extends Component {
 											</h4>
 											<h5>Prices from {item.daily} € </h5>
 										</div>
-										<img className="space_card_item_image" src={item.imgUrl}></img>
+										<img className="fav_space_card_item_image" src={item.imgUrl}></img>
 									</div>
 								</Link>
-							</>
+							</div>
 						);
 					})}
 				</div>

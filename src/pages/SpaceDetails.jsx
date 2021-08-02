@@ -37,9 +37,13 @@ class SpaceDetails extends Component {
 			const getProducts = await apiService.getAllproducts();
 			let heartClicked = false;
 
-			if (userFavs.map(item => item.includes(singleSpace._id))) {
+			// const searchProduct = [...products].filter(item => item.name.toLowerCase().includes(value));
+			// esta mal hecha, mirar condicion
+			if (userFavs.filter(item => item.includes(singleSpace._id))) {
 				console.log('true', singleSpace._id);
 				heartClicked = true;
+			} else {
+				console.log('false');
 			}
 
 			this.setState({

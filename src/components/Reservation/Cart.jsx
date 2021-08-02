@@ -47,16 +47,16 @@ class Cart extends Component {
 		return (
 			<>
 				{spaces.length === 0 || products.length === 0 ? (
-					<h1> Your cart is empty</h1>
+					<h1 className="cart_empty"> Your cart is empty</h1>
 				) : (
-					<>
+					<div className="cart_container">
 						<table>
 							<tbody>
 								<tr>
 									<th>Item</th>
 									<th>Quantity</th>
 									<th>Price</th>
-									<th>Total</th>
+									<th>Subtotal</th>
 								</tr>
 
 								{spaces.map((item, index) => {
@@ -65,7 +65,7 @@ class Cart extends Component {
 											<td className="cart_item_name_container">
 												<p>{item.spaceName}</p>
 											</td>
-											<td>
+											<td className="cart_buttons_container">
 												<button onClick={() => this.props.lessSpaces(item)} className="cart_less_button">
 													-
 												</button>
@@ -75,7 +75,7 @@ class Cart extends Component {
 												</button>
 											</td>
 
-											<td>{spacePrices[index]}</td>
+											<td className="cart_price">{spacePrices[index]}</td>
 											<td>{spacePrices[index] * item.quantity}</td>
 										</tr>
 									);
@@ -87,7 +87,7 @@ class Cart extends Component {
 											<td className="cart_item_name_container">
 												<p>{item.productDescription}</p>
 											</td>
-											<td>
+											<td className="cart_buttons_container">
 												<button onClick={() => this.props.lessProducts(item)} className="cart_less_button">
 													-
 												</button>
@@ -109,7 +109,7 @@ class Cart extends Component {
 						<button onClick={this.handleFormSubmit} className="cart_confirm_button">
 							Confirm reservation
 						</button>
-					</>
+					</div>
 				)}
 			</>
 		);

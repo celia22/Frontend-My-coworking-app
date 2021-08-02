@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '../providers/AuthProvider';
 import './styles/UserMenu.css';
 import Favourites from '../components/Favourites/Favourites';
+import AdminReservations from '../components/Reservation/AdminReservations';
 
 class UserMenu extends Component {
 	constructor(props) {
@@ -20,33 +21,44 @@ class UserMenu extends Component {
 					{' '}
 					&laquo; Back{' '}
 				</Link>
-				<div className="user_menu_buttons_container">
-					{this.props.user.role === 'admin' ? (
-						<button className="user_menu_button">
-							<Link className="button_link" to={'/admin'}>
-								Admin Options
-							</Link>
-						</button>
-					) : (
-						' '
-					)}
 
-					<button className="user_menu_button">
-						{' '}
-						<Link to="/user/update-profile" className="button_link">
-							Edit or Delete Account{' '}
-						</Link>{' '}
-					</button>
+				{this.props.user.role === 'admin' ? (
+					<>
+						<div className="admin_menu_buttons_container">
+							<button className="user_menu_button">
+								<Link className="button_link" to={'/admin'}>
+									Admin Options
+								</Link>
+							</button>
+							<button className="user_menu_button">
+								{' '}
+								<Link to="/user/update-profile" className="button_link">
+									Edit or Delete Account{' '}
+								</Link>{' '}
+							</button>
+						</div>
+						<AdminReservations />
+					</>
+				) : (
+					<>
+						<div className="user_menu_buttons_container">
+							<button className="user_menu_button">
+								{' '}
+								<Link to="/user/update-profile" className="button_link">
+									Edit or Delete Account{' '}
+								</Link>{' '}
+							</button>
 
-					<button className="user_menu_button">
-						{' '}
-						<Link to="/user/myreservations" className="button_link">
-							Check my reservations{' '}
-						</Link>{' '}
-					</button>
-				</div>
-
-				<Favourites />
+							<button className="user_menu_button">
+								{' '}
+								<Link to="/user/myreservations" className="button_link">
+									Check my reservations{' '}
+								</Link>{' '}
+							</button>
+						</div>
+						<Favourites />
+					</>
+				)}
 			</div>
 		);
 	}
