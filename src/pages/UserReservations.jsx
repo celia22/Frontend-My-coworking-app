@@ -1,9 +1,10 @@
 import { Component, React } from 'react';
-import './ReservationCard.css';
-import apiService from '../../lib/apiService';
-import Dates from '../../helpers/Dates';
+import { Link } from 'react-router-dom';
+import './styles/UserReservations.css';
+import apiService from '../lib/apiService';
+import Dates from '../helpers/Dates';
 
-class ReservationCard extends Component {
+class UserReservations extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,6 +28,9 @@ class ReservationCard extends Component {
 		const { reservations } = this.state;
 		return (
 			<div className="reservation_cards_container">
+				<Link to="/user/menu" className="back_button">
+					&laquo; Back
+				</Link>
 				<h2>Your reservations</h2>
 				<div className="reservation_card_scroll">
 					{reservations.map((reservation, index) => {
@@ -57,4 +61,4 @@ class ReservationCard extends Component {
 	}
 }
 
-export default ReservationCard;
+export default UserReservations;

@@ -1,0 +1,52 @@
+.reservation_cards_container {
+	height: 100vh;
+}
+
+.reservation_cards_container > h2 {
+	margin-top: 10vh;
+}
+
+.reservation_card_item {
+	width: 70%;
+	height: 60%;
+	border: 1px solid rgba(128, 128, 128, 0.119);
+	-webkit-box-shadow: 6px 7px 15px -2px #727272;
+	box-shadow: 6px 7px 15px -2px #727272;
+	color: rgb(2, 8, 59);
+	margin: 4%;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	background-color: white;
+	font-size: 14px;
+}
+.reservation_card_products {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0 3vh;
+	justify-content: center;
+}
+
+.reservation_card_item_title {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding-top: 3vh;
+	margin: 0;
+	height: 20%;
+	background-color: black;
+	color: white;
+	margin: none;
+}
+
+.reservation_card_scroll {
+	margin-top: 6vh;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	height: 80vh;
+}
+
+.admin_reservations_container {
+	margin-top: 5vh;
+}

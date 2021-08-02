@@ -23,7 +23,7 @@ import AllSpacesToEdit from './pages/AllSpacesToEdit';
 import AllProductsToEdit from './pages/AllProductsToEdit';
 import EditProductForm from './components/Products/EditProductForm';
 import Cart from './components/Reservation/Cart';
-import ReservationCard from './components/Reservation/ReservationCard';
+import UserReservations from './pages/UserReservations';
 
 toast.configure();
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
 					<PrivateRoute path="/space/:id/edit" component={EditSpaceForm} />
 					<PrivateRoute path="/space/:id/details" component={SpaceDetails} />
 					<PrivateRoute exact path="/user/update-profile" component={EditUserAccount} />
-					<PrivateRoute exact path="/user/myreservations" component={ReservationCard} />
+					<PrivateRoute exact path="/user/myreservations" component={UserReservations} />
 					<PrivateRoute exact path="/user/menu" component={UserMenu} />
 					<PrivateRoute exact path="/user/main" component={UserMainPage} />
 					<PrivateRoute path="/space/new" component={NewSpaceForm} />

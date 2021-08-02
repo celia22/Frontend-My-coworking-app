@@ -9,12 +9,12 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	white-space: wrap;
-	height: 60vh;
+	height: 70vh;
 }
 
 .fav_space_card_item {
 	width: 70%;
-	height: 70%;
+	height: 80%;
 	border: 1px solid rgba(128, 128, 128, 0.119);
 	-webkit-box-shadow: 6px 7px 15px -2px #727272;
 	box-shadow: 6px 7px 15px -2px #727272;
