@@ -49,16 +49,15 @@ class AllProductsToEdit extends Component {
 							&laquo; Back
 						</Link>
 
-						<h4 className="space_details_content_title">Services:</h4>
-						<div className="space_details_services_container">
+						<div className="edit_products_container">
 							{products.map((item, index) => {
 								return (
 									<div key={index} className="space_details_services_item ">
-										<p>
-											{item.productDescription}: {item.productPrice}
+										<p className="edit_products_item">
+											{item.productDescription}:&nbsp;&nbsp; {item.productPrice} €
 											<button className="edit_prods_button">
-												<Link to={`/product/${item._id}/edit`} className="button_link">
-													Edit product
+												<Link to={`/product/${item._id}/edit`} className="edit_button_link">
+													Edit
 												</Link>
 											</button>
 										</p>

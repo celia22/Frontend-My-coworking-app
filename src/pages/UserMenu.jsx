@@ -24,7 +24,7 @@ class UserMenu extends Component {
 
 				{this.props.user.role === 'admin' ? (
 					<>
-						<div className="admin_menu_buttons_container">
+						<div className="user_menu_buttons_container">
 							<button className="user_menu_button">
 								<Link className="button_link" to={'/admin'}>
 									Admin Options

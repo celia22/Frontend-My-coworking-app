@@ -36,11 +36,6 @@ class Admin extends Component {
 									Edit space
 								</Link>
 							</button>
-							<button className="admin_button">
-								<Link to="/reservations/admin/all" className="button_link">
-									View reservations
-								</Link>
-							</button>
 						</div>
 					</div>
 				) : (

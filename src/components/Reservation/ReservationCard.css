@@ -46,3 +46,7 @@
 	flex-wrap: wrap;
 	height: 80vh;
 }
+
+.admin_reservations_container {
+	margin-top: 5vh;
+}

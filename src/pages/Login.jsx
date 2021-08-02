@@ -32,57 +32,7 @@ class Login extends Component {
 		this.setState({ [name]: value });
 	};
 
-	// validate() {
-	// 	const { email, password } = this.state.email;
-	// 	const errors = {};
-	// 	let isValid = true;
-
-	// 	if (!email) {
-	// 		isValid = false;
-	// 		errors.email = toast.warn('Please enter your email Address.');
-	// 	}
-
-	// 	if (typeof email !== 'undefined') {
-	// 		const pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-	// 		if (!pattern.test(email)) {
-	// 			isValid = false;
-	// 			errors.email = 'Please enter valid email address.';
-	// 		}
-	// 	}
-
-	// 	if (!password) {
-	// 		isValid = false;
-	// 		errors.password = 'Please enter your password.';
-	// 	}
-
-	// 	if (!password) {
-	// 		isValid = false;
-	// 		errors.confirm_password = 'Please enter your confirm password.';
-	// 	}
-
-	// 	if (typeof password !== 'undefined') {
-	// 		if (password.length < 6) {
-	// 			isValid = false;
-	// 			errors.password = 'Please add at least 6 charachter.';
-	// 		}
-	// 	}
-
-	// 	if (typeof password !== 'undefined' && typeof password !== 'undefined') {
-	// 		if (password.password !== password.confirm_password) {
-	// 			isValid = false;
-	// 			errors.password = toast.error("Passwords don't match.");
-	// 		}
-	// 	}
-
-	// 	this.setState({
-	// 		errors: errors,
-	// 	});
-
-	// 	return isValid;
-	// }
-
 	render() {
-		// console.log('user', this.props);
 		const { email, password } = this.state;
 		return (
 			<div className="login_signup_container">
