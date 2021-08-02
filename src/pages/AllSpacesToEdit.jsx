@@ -48,26 +48,32 @@ class AllSpacesToEdit extends Component {
 			<>
 				{this.props.user.role === 'admin' ? (
 					<div className="space_card_scroll">
-						<Link to={'/admin'}>&laquo; Back</Link>
+						<Link to={'/admin'} className="back_button">
+							&laquo; Back
+						</Link>
 
 						{allSpaces.map(item => {
 							return (
-								<div key={item._id} className="space_card_item ">
-									<div className="space_card_title">
-										<h4>{item.spaceName}</h4>
-										<h4>Type: {item.spaceType}</h4>
+								<div key={item._id} className="spaces_toedit_card_container">
+									<div className="space_card_item ">
+										<div className="space_card_title">
+											<h4>{item.spaceName}</h4>
+											<h4>Type: {item.spaceType}</h4>
+										</div>
+										<img className="space_card_item_image" src={item.imgUrl}></img>
+										<div className="space_card_button_container">
+											<button className="edit_prods_button">
+												{' '}
+												<Link to={`/space/${item._id}/edit`} className="edit_button_link">
+													{' '}
+													Edit space{' '}
+												</Link>{' '}
+											</button>
+											<button className="edit_prods_delete_button" onClick={() => this.deleteSpace(item._id)}>
+												Delete Space
+											</button>
+										</div>
 									</div>
-									<img className="space_card_item_image" src={item.imgUrl}></img>
-									<button className="edit_button">
-										{' '}
-										<Link to={`/space/${item._id}/edit`} className="button_link">
-											{' '}
-											Edit space{' '}
-										</Link>{' '}
-									</button>
-									<button className="delete_button" onClick={() => this.deleteSpace(item._id)}>
-										Delete Space
-									</button>
 								</div>
 							);
 						})}

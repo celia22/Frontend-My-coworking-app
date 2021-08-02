@@ -25,6 +25,7 @@ class Favourites extends Component {
 	render() {
 		const { favouritesArr } = this.state;
 		console.log('favs', favouritesArr);
+		console.log('user props in favs', this.props.user);
 		return (
 			<div className="favourites_card_container">
 				<h2>Your favourite spaces </h2>
