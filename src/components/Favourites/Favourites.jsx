@@ -12,11 +12,8 @@ class Favourites extends Component {
 	}
 
 	async componentDidMount() {
-		const id = this.props.user._id;
-		console.log(id);
 		try {
-			const favArr = await apiService.getUserFavSpaces(id);
-			console.log('favList: ', favArr);
+			const favArr = await apiService.getUserFavSpaces();
 			this.setState({
 				favouritesArr: favArr,
 			});

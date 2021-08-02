@@ -17,9 +17,6 @@ export const withAuth = Comp => {
 							logout={authProvider.logout}
 							login={authProvider.login}
 							signup={authProvider.signup}
-							// addFav={authProvider.addFav}
-							// favouritesArr={authProvider.favouritesArr}
-							// deleteFav={authProvider.deleteFav}
 							{...this.props}
 						/>
 					)}
@@ -103,14 +100,6 @@ class AuthProvider extends Component {
 			});
 		} catch (e) {}
 	};
-
-	// addFav = item => {
-	// 	const favArr = [...this.state.favouritesArr];
-	// 	favArr.push(item);
-	// 	this.setState({
-	// 		favouritesArr: favArr,
-	// 	});
-	// };
 
 	render() {
 		const { user, status } = this.state;

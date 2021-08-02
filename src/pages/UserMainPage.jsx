@@ -21,7 +21,6 @@ class UserMainPage extends Component {
 				allSpaces,
 				searchSpaces: allSpaces,
 			});
-			console.log('didmount', this.state);
 		} catch (e) {
 			console.log(e);
 		}
@@ -45,7 +44,6 @@ class UserMainPage extends Component {
 		this.setState({
 			favouritesArr: favouritesArr,
 		});
-		console.log('favs from user menu', favouritesArr);
 	};
 
 	render() {

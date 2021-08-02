@@ -46,14 +46,6 @@ class CartProvider extends Component {
 		};
 	}
 
-	componentDidMount() {
-		console.log('cart did mount', this.state);
-	}
-
-	componentDidUpdate() {
-		console.log('cart did update', this.state);
-	}
-
 	addItemToCart = (item, price) => {
 		const cartSpaces = [...this.state.spaces];
 		const cartSpacePrices = [...this.state.spacePrices];
@@ -63,11 +55,9 @@ class CartProvider extends Component {
 		if (item.type === 'space') {
 			cartSpaces.push(item.space);
 			cartSpacePrices.push(price);
-			console.log('Adding space to cart');
 		} else if (item.type === 'product') {
 			cartProducts.push(item.product);
 			cartProductPrices.push(price);
-			console.log('Adding product to cart');
 		}
 		const totalAmount = cartSpacePrices.reduce((a, b) => a + b, 0) + cartProductPrices.reduce((a, b) => a + b, 0);
 		this.setState({

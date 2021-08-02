@@ -39,7 +39,7 @@ class ApiService {
 		return this.apiService.delete(`/user/${id}/delete`).then(({ data }) => data);
 	}
 
-	getUserFavSpaces(id) {
+	getUserFavSpaces() {
 		return this.apiService.get('/user/favourites').then(({ data }) => data);
 	}
 

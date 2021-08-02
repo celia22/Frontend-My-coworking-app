@@ -28,23 +28,24 @@ class SpaceDetails extends Component {
 
 	async componentDidMount() {
 		const id = this.props.match.params.id;
-		const userFavs = this.props.user.favSpaces;
-		console.log('userf', userFavs);
+		//	const userFavs = this.props.user.favSpaces;
+		console.log('userf', this.props.user);
 
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
+			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl, heartIsClicked } =
+				singleSpace;
 			const getProducts = await apiService.getAllproducts();
-			let heartClicked = false;
+			// let heartClicked = false;
 
-			// const searchProduct = [...products].filter(item => item.name.toLowerCase().includes(value));
-			// esta mal hecha, mirar condicion
-			if (userFavs.filter(item => item.includes(singleSpace._id))) {
-				console.log('true', singleSpace._id);
-				heartClicked = true;
-			} else {
-				console.log('false');
-			}
+			// const index = userFavs.findIndex(item => item === singleSpace._id);
+			// if (index === -1) {
+			// 	console.log('false');
+			// 	heartClicked = false;
+			// } else {
+			// 	heartClicked = true;
+			// 	console.log('true', singleSpace._id);
+			// }
 
 			this.setState({
 				_id,
@@ -58,7 +59,7 @@ class SpaceDetails extends Component {
 				imgUrl,
 				products: getProducts,
 				singleSpace,
-				heartIsClicked: heartClicked,
+				heartIsClicked,
 			});
 		} catch (error) {
 			console.log(error);
