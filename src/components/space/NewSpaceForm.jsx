@@ -51,7 +51,7 @@ class NewSpaceForm extends Component {
 			daily === '' ||
 			weekly === '' ||
 			monthly === '' ||
-			city
+			city === ''
 		) {
 			toast.error('You have to fill all the fields');
 		} else {

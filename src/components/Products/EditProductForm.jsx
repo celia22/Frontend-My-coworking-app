@@ -57,12 +57,24 @@ class EditProductForm extends Component {
 					<label>
 						<strong>Description: </strong>
 					</label>
-					<input type="text" name="productDescription" value={productDescription} onChange={this.handleChange} />
+					<input
+						type="text"
+						name="productDescription"
+						value={productDescription}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 
 					<label>
 						<strong>Price:</strong>
 					</label>
-					<input type="number" name="productPrice" value={productPrice} onChange={this.handleChange} />
+					<input
+						type="number"
+						name="productPrice"
+						value={productPrice}
+						onChange={this.handleChange}
+						className="new_edit_form_input"
+					/>
 
 					<input type="submit" value="Edit product" className="new_edit_send" />
 				</form>
