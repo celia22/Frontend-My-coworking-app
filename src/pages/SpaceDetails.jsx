@@ -28,24 +28,13 @@ class SpaceDetails extends Component {
 
 	async componentDidMount() {
 		const id = this.props.match.params.id;
-		//	const userFavs = this.props.user.favSpaces;
-		console.log('userf', this.props.user);
+		const clicked = this.props.user.favSpaces.includes(id);
+		console.log('clicked', clicked);
 
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
-			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl, heartIsClicked } =
-				singleSpace;
+			const { _id, spaceParams, spaceName, spaceType, city, daily, weekly, monthly, imgUrl } = singleSpace;
 			const getProducts = await apiService.getAllproducts();
-			// let heartClicked = false;
-
-			// const index = userFavs.findIndex(item => item === singleSpace._id);
-			// if (index === -1) {
-			// 	console.log('false');
-			// 	heartClicked = false;
-			// } else {
-			// 	heartClicked = true;
-			// 	console.log('true', singleSpace._id);
-			// }
 
 			this.setState({
 				_id,
@@ -59,7 +48,7 @@ class SpaceDetails extends Component {
 				imgUrl,
 				products: getProducts,
 				singleSpace,
-				heartIsClicked,
+				heartIsClicked: clicked,
 			});
 		} catch (error) {
 			console.log(error);

@@ -34,7 +34,7 @@ class Favourites extends Component {
 						return (
 							<div key={index}>
 								<Link to={`/space/${item._id}/details`}>
-									<div className="fav_space_card_item">
+									<div className="space_card_item">
 										<div className="space_card_title">
 											<h4>{item.spaceName}</h4>
 											<h4>
@@ -42,7 +42,7 @@ class Favourites extends Component {
 											</h4>
 											<h5>Prices from {item.daily} € </h5>
 										</div>
-										<img className="fav_space_card_item_image" src={item.imgUrl}></img>
+										<img className="space_card_item_image" src={item.imgUrl}></img>
 									</div>
 								</Link>
 							</div>

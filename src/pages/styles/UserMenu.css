@@ -1,6 +1,6 @@
 .user_menu_container {
 	height: 100vh;
-	justify-content: center;
+	width: 100%;
 }
 
 .user_menu_buttons_container {
