@@ -97,36 +97,36 @@ class SpaceDetails extends Component {
 							{spaceName} Type: {spaceType}
 						</h4>
 					</div>
+					<div className="space_details_image_container">
+						<img className="space_details_image" src={imgUrl}></img>
 
-					<img className="space_details_image" src={imgUrl}></img>
-
-					{!heartIsClicked ? (
-						<img
-							className="heart_black"
-							src="/images/hearts/heart.png"
-							alt="heart icon"
-							onClick={() => {
-								this.handleLike();
-								this.addFav();
-							}}
-						/>
-					) : (
-						<img
-							className="heart_black"
-							src="/images/hearts/red-heart.png"
-							alt="heart icon"
-							onClick={() => {
-								this.handleLike();
-								this.deleteFav();
-							}}
-						/>
-					)}
-
+						{!heartIsClicked ? (
+							<img
+								className="heart_black"
+								src="/images/hearts/heart.png"
+								alt="heart icon"
+								onClick={() => {
+									this.handleLike();
+									this.addFav();
+								}}
+							/>
+						) : (
+							<img
+								className="heart_black"
+								src="/images/hearts/red-heart.png"
+								alt="heart icon"
+								onClick={() => {
+									this.handleLike();
+									this.deleteFav();
+								}}
+							/>
+						)}
+					</div>
 					<div className="space_details_price_container">
 						<div className="space_details_price_details">
 							<p>Daily:</p>
 							<button
-								className="add_item_button"
+								className="add_space_button"
 								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, daily)}
 							>
 								{daily} € {element}
@@ -135,7 +135,7 @@ class SpaceDetails extends Component {
 						<div className="space_details_price_details">
 							<p>Weekly:</p>
 							<button
-								className="add_item_button"
+								className="add_space_button"
 								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, weekly)}
 							>
 								{weekly} € {element}
@@ -144,8 +144,7 @@ class SpaceDetails extends Component {
 						<div className="space_details_price_details">
 							<p>Monthly:</p>
 							<button
-								className="add_item_button"
-								// onClick={() => this.props.addItemToCart(this.state, monthly)}
+								className="add_space_button"
 								onClick={() => this.props.addItemToCart({ type: 'space', space: this.state }, monthly)}
 							>
 								{monthly} € {element}
@@ -160,7 +159,7 @@ class SpaceDetails extends Component {
 								<div key={index} className="space_details_services_item ">
 									<p>{item.productDescription}</p>
 									<button
-										className="add_item_button"
+										className="add_product_button"
 										onClick={() => this.props.addItemToCart({ type: 'product', product: item }, item.productPrice)}
 									>
 										{item.productPrice} € {element}
