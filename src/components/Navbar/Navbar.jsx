@@ -20,7 +20,7 @@ class Navbar extends Component {
 							<Link to="/user/menu" className="navbar_burguer">
 								{home}
 							</Link>
-							<Link className="navbar_cart" to="/reservations/:id/new">
+							<Link className="navbar_cart" to="/reservations/new">
 								{cart}
 							</Link>
 						</div>

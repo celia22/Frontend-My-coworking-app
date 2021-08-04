@@ -17,7 +17,6 @@ class AdminReservations extends Component {
 	async componentDidMount() {
 		try {
 			const allReservations = await apiService.getAllReservationsAdmin();
-			// const cartItems = await apiService.getSingleproduct(this.props.user);
 			this.setState({
 				reservations: allReservations,
 			});

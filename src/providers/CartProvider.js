@@ -41,7 +41,6 @@ class CartProvider extends Component {
 			spacePrices: [],
 			products: [],
 			productPrices: [],
-			// cart: [], TO DELETE ?¿?
 			totalAmount: undefined,
 		};
 	}
@@ -112,10 +111,10 @@ class CartProvider extends Component {
 			return item * cartSpaces[index].quantity;
 		});
 
-		const totalAmount2 = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
+		const totalAmount = updateProds.reduce((a, b) => a + b, 0) + updateSpaces.reduce((a, b) => a + b, 0);
 
 		this.setState({
-			totalAmount: totalAmount2,
+			totalAmount,
 		});
 	};
 

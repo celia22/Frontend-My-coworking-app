@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../providers/AuthProvider';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/New_Edit.css';
 
@@ -10,21 +10,20 @@ class Login extends Component {
 		this.state = {
 			email: '',
 			password: '',
-			errors: {
-				email: '',
-				password: '',
-				confirm_password: ' ',
-			},
 		};
 	}
 
 	handleFormSubmit = event => {
 		event.preventDefault();
 		const { email, password } = this.state;
-		this.props.login({
-			email,
-			password,
-		});
+		if (email === '' || password === '') {
+			toast.error('Please, fill all the fields');
+		} else {
+			this.props.login({
+				email,
+				password,
+			});
+		}
 	};
 
 	handleChange = event => {
