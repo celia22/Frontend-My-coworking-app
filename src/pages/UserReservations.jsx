@@ -24,7 +24,6 @@ class UserReservations extends Component {
 	};
 
 	render() {
-		console.log(this.props);
 		const { reservations } = this.state;
 		return (
 			<div className="reservation_cards_container">

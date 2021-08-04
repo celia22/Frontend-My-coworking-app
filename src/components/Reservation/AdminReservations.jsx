@@ -15,7 +15,6 @@ class AdminReservations extends Component {
 	}
 
 	async componentDidMount() {
-		console.log('products', this.props.cart);
 		try {
 			const allReservations = await apiService.getAllReservationsAdmin();
 			// const cartItems = await apiService.getSingleproduct(this.props.user);
@@ -28,7 +27,6 @@ class AdminReservations extends Component {
 	}
 
 	render() {
-		console.log(this.state.reservations);
 		const { reservations } = this.state;
 		return (
 			<>

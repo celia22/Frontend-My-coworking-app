@@ -8,7 +8,7 @@
 	border: 1px solid rgba(128, 128, 128, 0.119);
 	-webkit-box-shadow: 6px 7px 15px -2px #727272;
 	box-shadow: 6px 7px 15px -2px #727272;
-	color: rgba(0, 0, 0, 0.37);
+	color: #333333;
 	margin: 4vh;
 	margin-bottom: 20px;
 	background-color: transparent;
@@ -27,7 +27,7 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	height: 35%;
-	background-color: rgb(0, 0, 0);
+	background-color: #333333;
 	color: white;
 	margin: 0;
 	padding: 0;

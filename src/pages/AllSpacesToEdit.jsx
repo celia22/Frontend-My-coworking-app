@@ -18,8 +18,6 @@ class AllSpacesToEdit extends Component {
 			this.setState({
 				allSpaces,
 			});
-			console.log(this.state.allSpaces);
-			console.log('didmount');
 		} catch (e) {
 			console.log(e);
 		}
@@ -28,7 +26,6 @@ class AllSpacesToEdit extends Component {
 	async deleteSpace(id) {
 		try {
 			await apiService.deleteSpace(id);
-			console.log('user deleted??', id);
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -43,7 +40,6 @@ class AllSpacesToEdit extends Component {
 
 	render() {
 		const { allSpaces } = this.state;
-		console.log(this.props);
 		return (
 			<>
 				{this.props.user.role === 'admin' ? (

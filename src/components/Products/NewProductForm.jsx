@@ -22,7 +22,7 @@ class NewProductForm extends Component {
 
 	createNewProduct = async event => {
 		event.preventDefault();
-		console.log('error', this.state.errors);
+
 		const { productDescription, productPrice } = this.state;
 		if (productDescription === ' ' || productPrice === ' ') {
 			toast.error('You have to fill all the fields');

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './SearchBar.css';
 
-const search = <FontAwesomeIcon icon={faSearch} color="black" />;
+const search = <FontAwesomeIcon icon={faSearch} color="#333333" />;
 
 class SearchBar extends Component {
 	constructor(props) {
@@ -16,7 +16,6 @@ class SearchBar extends Component {
 	handleChange = x => {
 		this.setState({ query: x.target.value });
 		this.props.search(x.target.value);
-		console.log('searchquery', this.state.query);
 	};
 
 	render() {

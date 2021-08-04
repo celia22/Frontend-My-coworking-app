@@ -1,6 +1,6 @@
 .edit_prods_back {
 	text-decoration: none;
-	color: black;
+	color: #333333;
 	font-weight: bolder;
 	position: absolute;
 	left: 10%;
@@ -30,8 +30,9 @@
 	font-weight: bold;
 	border-radius: 10px;
 	display: block;
-	border: 2px solid black;
+	border: 2px solid #333333;
 	background-color: white;
+	cursor: pointer;
 }
 
 .edit_prods_delete_button {
@@ -44,12 +45,13 @@
 	font-weight: bold;
 	border-radius: 10px;
 	display: block;
-	border: 2px solid black;
+	border: 2px solid #333333;
 	background-color: rgba(218, 54, 54, 0.815);
+	cursor: pointer;
 }
 
 .edit_button_link {
-	color: black;
+	color: #333333;
 	text-decoration: none;
 }
 

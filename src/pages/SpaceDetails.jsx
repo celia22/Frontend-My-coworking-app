@@ -29,7 +29,6 @@ class SpaceDetails extends Component {
 	async componentDidMount() {
 		const id = this.props.match.params.id;
 		const clicked = this.props.user.favSpaces.includes(id);
-		console.log('clicked', clicked);
 
 		try {
 			const singleSpace = await apiService.getSingleSpace(id);
@@ -73,7 +72,6 @@ class SpaceDetails extends Component {
 
 	render() {
 		const { spaceName, spaceType, daily, imgUrl, weekly, monthly, products, heartIsClicked } = this.state;
-		console.log('heart', this.state.heartIsClicked);
 
 		return (
 			<>

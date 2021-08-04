@@ -3,7 +3,7 @@
 	justify-content: space-around;
 	margin: none;
 	height: 8vh;
-	background-color: black;
+	background-color: #333333;
 	-webkit-box-shadow: 0 8px 6px -6px rgba(204, 200, 200, 0.75);
 	-moz-box-shadow: 0 8px 6px -6px rgba(204, 200, 200, 0.75);
 	box-shadow: 0 8px 6px -6px rgba(204, 200, 200, 0.75);
@@ -15,7 +15,7 @@
 	bottom: 0;
 	width: 100%;
 	height: 7vh;
-	background-color: black;
+	background-color: #333333;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;

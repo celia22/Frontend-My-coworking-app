@@ -47,7 +47,6 @@ class ApiService {
 
 	newSpace(space) {
 		const { spaceName, spaceType, imgUrl, daily, weekly, monthly, city } = space;
-		console.log(space);
 		return this.apiService
 			.post('/space/new', { spaceName, spaceType, imgUrl, daily, weekly, monthly, city })
 			.then(({ data }) => data);
@@ -61,7 +60,6 @@ class ApiService {
 	}
 
 	handleUpload(img) {
-		console.log('file in service: ', img);
 		return this.apiService.post('/api/upload', img).then(res => res.data);
 	}
 

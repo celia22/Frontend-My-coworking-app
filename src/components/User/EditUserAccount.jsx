@@ -54,7 +54,6 @@ class EditUserAccount extends Component {
 	async deleteAccount() {
 		try {
 			apiService.deleteAccount(this.props.user._id);
-			console.log('user deleted??');
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -63,8 +62,6 @@ class EditUserAccount extends Component {
 	}
 
 	render() {
-		console.log('props en edit user', this.props);
-
 		const { user } = this.props;
 		const { email, password, firstName, lastName, city } = this.state;
 		return (

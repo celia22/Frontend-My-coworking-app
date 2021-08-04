@@ -27,13 +27,11 @@ class NewSpaceForm extends Component {
 	};
 
 	handleFileUpload = event => {
-		console.log('The file to be uploaded is: ', event.target.files[0]);
 		const uploadData = new FormData();
 		uploadData.append('imgUrl', event.target.files[0]);
 		apiService
 			.handleUpload(uploadData)
 			.then(response => {
-				console.log('response is: ', response);
 				this.setState({ imgUrl: response.secure_url });
 			})
 			.catch(err => {

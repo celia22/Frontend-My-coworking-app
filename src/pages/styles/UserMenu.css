@@ -10,11 +10,12 @@
 }
 .back_button_user_menu {
 	text-decoration: none;
-	color: black;
+	color: #333333;
 	font-weight: bolder;
 	position: absolute;
 	left: 10%;
 	top: 12%;
+	cursor: pointer;
 }
 
 .user_menu_button {
@@ -34,6 +35,7 @@
 	border-radius: 10px;
 	display: block;
 	border: none;
+	cursor: pointer;
 }
 
 .user_menu_button:hover {

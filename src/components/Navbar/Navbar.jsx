@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../../providers/AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faHouseUser, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import './Navbar.css';
 
-const burger = <FontAwesomeIcon icon={faBars} color="white" size="2x" />;
+const home = <FontAwesomeIcon icon={faHouseUser} color="white" size="2x" />;
 const cart = <FontAwesomeIcon icon={faCartArrowDown} color="white" size="2x" />;
 
 class Navbar extends Component {
@@ -18,9 +18,9 @@ class Navbar extends Component {
 					<div className="navbar_container">
 						<div className="navbar_top">
 							<Link to="/user/menu" className="navbar_burguer">
-								{burger}
+								{home}
 							</Link>
-							<Link className="navbar_cart" to="/reservations/new">
+							<Link className="navbar_cart" to="/reservations/:id/new">
 								{cart}
 							</Link>
 						</div>

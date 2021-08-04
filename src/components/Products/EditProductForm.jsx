@@ -45,7 +45,6 @@ class EditProductForm extends Component {
 
 	render() {
 		const { productDescription, productPrice } = this.state;
-		console.log(this.props);
 		return (
 			<div className="new_edit_form_container">
 				<Link to="/admin" className="back_button">

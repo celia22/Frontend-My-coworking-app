@@ -17,7 +17,7 @@
 	margin: 1vh;
 	padding-left: 1rem;
 	border-radius: 10px;
-	border: 2px solid black;
+	border: 2px solid #333333;
 }
 
 .new_edit_table_title {
@@ -32,7 +32,7 @@
 .new_edit_form_space_price {
 	width: 30%;
 	border-radius: 10px;
-	border: 2px solid black;
+	border: 2px solid #333333;
 	margin-left: 2vh;
 }
 

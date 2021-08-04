@@ -24,12 +24,6 @@ class ProductsCard extends Component {
 	async componentDidMount() {
 		try {
 			const getProducts = await apiService.getAllproducts();
-			// const { products:
-			// 	{
-			// 		productDescription,
-			// 		productPrice,
-			// 	},
-			// } = getProducts;
 
 			this.setState({
 				products: getProducts,
@@ -41,7 +35,6 @@ class ProductsCard extends Component {
 
 	render() {
 		const { products } = this.state;
-		console.log('prod card', products);
 		return (
 			<>
 				<h5 className="space_details_services_title">Add your extra services!</h5>

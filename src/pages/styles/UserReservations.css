@@ -32,9 +32,9 @@
 	padding-top: 3vh;
 	margin: 0;
 	height: 20%;
-	background-color: black;
+	background-color: #333333;
 	color: white;
-	margin: none;
+	margin: 0;
 }
 
 .reservation_card_scroll {

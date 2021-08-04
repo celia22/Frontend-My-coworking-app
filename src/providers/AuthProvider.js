@@ -78,7 +78,6 @@ class AuthProvider extends Component {
 				user: null,
 			});
 			const user = await apiService.signup({ email, password, firstName, lastName, city });
-			console.log(user);
 			this.setState({
 				status: 'loggedIn',
 				user,
@@ -103,7 +102,7 @@ class AuthProvider extends Component {
 
 	render() {
 		const { user, status } = this.state;
-		console.log('user in auth', user);
+
 		return (
 			<Provider
 				value={{

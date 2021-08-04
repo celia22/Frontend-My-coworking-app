@@ -14,7 +14,6 @@ class UserMenu extends Component {
 	}
 
 	render() {
-		console.log('user form user menu', this.props);
 		return (
 			<div className="user_menu_container">
 				<Link to={'/user/main'} className="back_button_user_menu">
