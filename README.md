@@ -21,6 +21,8 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 
 **Reservations** - As a user I want to be able to do a reservation and add extra products.
 
+**Favourites** - As a user I want to be able to do add spaces to my favourite list.
+
 **Add spaces** - As a owner I want to add a coworking space.
 
 **Add products** - As a owner I want to add extra commodities to my coworking space.
@@ -67,7 +69,7 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 | Method | Path | Description | Body | |
 | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | My reservations | GET | reservations/:id/details | See my reservations
-| All reservations | GET | reservations/:id/details | See all reservations
+| All reservations | GET | reservations/all | See all reservations
 | Make reservation | POST | /new| Add product to cart | {spaceName, products, user} 
 
 
