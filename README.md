@@ -112,30 +112,30 @@ Auth-service
 Login
 Signup
 Protected-routes
-​
+
 **NAVBAR**
 Home
 Cart
-​
+
 **SPACE**
 Add
 Edit
 Details
 List
-​
+
 **PRODUCTS**
 Add
 List
-​
+
 **USER**
 Edit account
 Manage Space
-​
+
 **RESERVATIONS**
 Add
 Details
 List
-​
+
 **CART**
 Status
 
