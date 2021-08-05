@@ -81,7 +81,7 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 ### File Upload
 | Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
 | --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
-| Upload pictures | POST | /upload | {imageUrl}
+| Upload pictures | POST | /upload | Upload files | {imageUrl}
 
 ### Space
 | Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
