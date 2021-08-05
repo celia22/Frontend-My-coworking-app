@@ -50,15 +50,15 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 | Logout   | GET    | /logout                            | Logout a user                       |        
 
 ### Auth
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | Signup | POST | /signup | Create user | {firstName, lastName, email, password, city } 
 | Login | POST | /login | Login to app | {email, password}    
-| Logout | POST | /logout | Logout app | {} 
+| Logout | POST | /logout | Logout app | 
 
 ### Users
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | User main page | GET | /user/main | 
 | User favourite spaces | GET | /user/favourites |  
 | Edit user | PUT | /user/:id/update-profile | Edit user | {firstName, lastName, email, password, city }    
@@ -66,26 +66,26 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 
 
 ### Reservations
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | My reservations | GET | reservations/:id/details | See my reservations
 | All reservations | GET | reservations/all | See all reservations
 | Make reservation | POST | /new| Add product to cart | {spaceName, products, user} 
 
 
 ### Admin
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | Admin Main Page | GET | /admin | admin menu
 
 ### File Upload
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | Upload pictures | POST | /upload | {imageUrl}
 
 ### Space
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | Add space | POST | /space/new | Send space data to database | {spaceName, spaceType, dialy, weekly, monthly, city, image } 
 | Space get all | GET | /space/all | Get all spaces
 | Space details | GET | /space/:id/details | Get specifig space
@@ -95,8 +95,8 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 
 
 ### Products
-| Method | Path | Description | Body | |
-| ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
+| Name            | Method | Endpoint                      | Description                                      | Body                                  |        |
+| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
 | Add product | POST | /product/new | Add product | {productPrice, productDescription}
 | Get all products | GET | /product/all | See all products | 
 | Edit product | PUT | /product/:id/edit | Edit product | {productPrice, productDescription}
