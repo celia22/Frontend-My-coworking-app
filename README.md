@@ -108,36 +108,36 @@ My Coworking is an app designed to help coworking’s owners to manage their pro
 ## COMPONENTS
 ​
 **AUTH**
-Auth-service
-Login
-Signup
-Protected-routes
+Auth-service.
+Login.
+Signup.
+Protected-routes.
 
 **NAVBAR**
-Home
-Cart
+Home.
+Cart.
 
 **SPACE**
-Add
-Edit
-Details
-List
+Add.
+Edit.
+Details.
+List.
 
 **PRODUCTS**
-Add
-List
+Add.
+List.
 
 **USER**
-Edit account
-Manage Space
+Edit account.
+Manage Space.
 
 **RESERVATIONS**
-Add
-Details
-List
+Add.
+Details.
+List.
 
 **CART**
-Status
+Status.
 
 
 ## MODELS
