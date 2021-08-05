@@ -1,10 +1,9 @@
-# Frontend-My-coworking-app
-
 # Project's name: My-coworking App
 
 ## Description
 
-My-cowoking App is an app that will help you find and compare the bests coworkings in your city.
+My Coworking is an app designed to help coworking’s owners to manage their properties.
+
 
 ## USER STORIES
 
