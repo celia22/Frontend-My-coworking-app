@@ -425,19 +425,19 @@ RESERVATION MODEL
 - https://github.com/celia22/My-coworking-App-Backend
 ​
 ### Deploy links
-​
-- https://my-coworking.netlify.app/()
-​
+
+- https://my-coworking.netlify.app/
+
 ### Project kanban
-- https://github.com/celia22/Frontend-My-coworking-app/projects/1()
-​
+- https://github.com/celia22/Frontend-My-coworking-app/projects/1
+
 ### Wireframes 
-​
-- https://excalidraw.com/#json=5270398597857280,N3-hW5vzP1Y15AptqvefJQ()
-​
+
+- https://excalidraw.com/#json=5270398597857280,N3-hW5vzP1Y15AptqvefJQ
+
 ### Slides
-​
-- https://docs.google.com/presentation/d/1QAfQEa4cdZdrQ9zNPuDmi0zvgMYkVBeTzYZ59GX_4ic/edit#slide=id.gc6f80d1ff_0_5()
+
+- https://docs.google.com/presentation/d/1QAfQEa4cdZdrQ9zNPuDmi0zvgMYkVBeTzYZ59GX_4ic/edit#slide=id.gc6f80d1ff_0_5
 
 
 
